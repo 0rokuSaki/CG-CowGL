@@ -70,7 +70,11 @@ void displayCallback(void)
     glClear(GL_COLOR_BUFFER_BIT);
 
     renderTopMenuScene();
-    renderHelpMenuScene();
+
+    if (displayHelpMenu)
+    {
+        renderHelpMenuScene();
+    }
     
     glFlush();
 }

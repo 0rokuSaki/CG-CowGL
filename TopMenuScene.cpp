@@ -10,6 +10,7 @@
 *          INCLUDES           *
 *******************************/
 #include "TopMenuScene.h"
+#include "HelpMenuScene.h"
 
 /******************************
 *       GLOBAL VARIABLES      *
@@ -73,6 +74,8 @@ void handleMouseEventTopMenu(int button, int state, int x, int y)
         }
         else if (helpBtn.clicked(x, windowHeight - y))
         {
+            displayHelpMenu = true;
+            glutPostRedisplay();
         }
         else if (adjAmbLightBtn.clicked(x, windowHeight - y))
         {

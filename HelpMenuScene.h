@@ -16,6 +16,8 @@
 /******************************
 *          DEFINES            *
 *******************************/
+#define HELP_MENU_ENTER_KEY_VAL 13
+
 #define HELP_MENU_WIDTH 375
 #define HELP_MENU_HEIGHT 300
 #define HELP_MENU_FRAME_WIDTH 7
@@ -37,7 +39,7 @@
 /******************************
 *      EXTERNAL VARIABLES     *
 *******************************/
-extern bool helpMenuOn;
+extern bool displayHelpMenu;
 extern std::vector<std::string> helpMenuTextLines;
 
 /******************************

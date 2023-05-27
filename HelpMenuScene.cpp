@@ -18,7 +18,7 @@
 /******************************
 *       GLOBAL VARIABLES      *
 *******************************/
-bool helpMenuOn = false;
+bool displayHelpMenu = false;
 std::vector<std::string> helpMenuTextLines(HELP_MENU_TEXT);
 
 /******************************
@@ -51,14 +51,14 @@ void renderHelpMenuScene(void)
     glVertex2d(1.0, (GLdouble)HELP_MENU_HEIGHT);
     glEnd();
 
-    /* Render help menu title */
+    /* Render help menu title. */
     glRasterPos2d(HELP_MENU_TITLE_POS);
     for (const auto c : HELP_MENU_TITLE)
     {
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, c);
     }
 
-    /* Render help menu text */
+    /* Render help menu text. */
     GLdouble textRasterPos[2] = { HELP_MENU_TEXT_POS };
     for (auto line : helpMenuTextLines)
     {
@@ -72,7 +72,7 @@ void renderHelpMenuScene(void)
         textRasterPos[1] -= HELP_MENU_TEXT_LINE_OFFSET;
     }
 
-    /* Render help menu footer */
+    /* Render help menu footer. */
     glRasterPos2d(HELP_MENU_FOOTER_POS);
     for (const auto c : HELP_MENU_FOOTER)
     {
@@ -83,5 +83,9 @@ void renderHelpMenuScene(void)
 
 void handleKeyboardEventHelpMenu(unsigned char key, int x, int y)
 {
-    std::cout << "Key pressed: " << key << std::endl;
+    if ((int)key == HELP_MENU_ENTER_KEY_VAL)
+    {
+        displayHelpMenu = false;
+        glutPostRedisplay();
+    }
 }
