@@ -85,10 +85,10 @@ void Button::render() const
     glColor3d(_frameColor.getR(), _frameColor.getG(), _frameColor.getB());
     glLineWidth(FRAME_WIDTH);
     glBegin(GL_LINE_LOOP);
-    glVertex2d(0.0, 0.0);
-    glVertex2d(_width, 0.0);
+    glVertex2d(1.0, 1.0);
+    glVertex2d(_width, 1.0);
     glVertex2d(_width, _height);
-    glVertex2d(0.0, _height);
+    glVertex2d(1.0, _height);
     glEnd();
 
     /* Add label */

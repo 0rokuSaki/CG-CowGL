@@ -18,6 +18,7 @@
 #include <GL/glut.h>
 #include <iostream>
 #include "TopMenuScene.h"
+#include "HelpMenuScene.h"
 
 /******************************
 *          DEFINES            *
@@ -36,6 +37,7 @@ void createWindow(int argc, char** argv);
 void registerCallbacks(void);
 void displayCallback(void);
 void mouseCallback(int button, int state, int x, int y);
+void keyboardCallback(unsigned char key, int x, int y);
 int main(int argc, char** argv);
 
 /******************************
@@ -59,6 +61,7 @@ void registerCallbacks(void)
 {
     glutDisplayFunc(displayCallback);
     glutMouseFunc(mouseCallback);
+    glutKeyboardFunc(keyboardCallback);
 }
 
 
@@ -67,6 +70,7 @@ void displayCallback(void)
     glClear(GL_COLOR_BUFFER_BIT);
 
     renderTopMenuScene();
+    renderHelpMenuScene();
     
     glFlush();
 }
@@ -74,26 +78,13 @@ void displayCallback(void)
 
 void mouseCallback(int button, int state, int x, int y)
 {
-    GLint windowWidth = glutGet(GLUT_WINDOW_WIDTH);
-    GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
+    handleMouseEventTopMenu(button, state, x, y);
+}
 
-    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-    {
-        std::cout << "(x,y) = (" << x << "," << windowHeight - y << ")\n";
 
-        if (exitBtn.clicked(x, windowHeight - y))
-        {
-            std::cout << "Exit button clicked\n";
-        }
-        else if (helpBtn.clicked(x, windowHeight - y))
-        {
-            std::cout << "Help button clicked\n";
-        }
-        else if (adjAmbLightBtn.clicked(x, windowHeight - y))
-        {
-            std::cout << "Adj. Ambient Light button clicked\n";
-        }
-    }
+void keyboardCallback(unsigned char key, int x, int y)
+{
+    handleKeyboardEventHelpMenu(key, x, y);
 }
 
 
