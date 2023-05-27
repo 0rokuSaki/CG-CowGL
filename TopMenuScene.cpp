@@ -10,7 +10,11 @@
 *          INCLUDES           *
 *******************************/
 #include "TopMenuScene.h"
+#include "HelpMenuScene.h"
 
+/******************************
+*       GLOBAL VARIABLES      *
+*******************************/
 Button exitBtn(0, 0, EXIT_BTN_WIDTH, BTN_HEIGHT, "Exit");
 Button helpBtn(0, 0, HELP_BTN_WIDTH, BTN_HEIGHT, "Help");
 Button adjAmbLightBtn(0, 0, ADJ_AMB_LIGHT_BTN_WIDTH, BTN_HEIGHT, "Adj. Ambient Light");
@@ -20,13 +24,13 @@ Button adjAmbLightBtn(0, 0, ADJ_AMB_LIGHT_BTN_WIDTH, BTN_HEIGHT, "Adj. Ambient L
 *******************************/
 void renderTopMenuScene(void)
 {
-    GLint windowWidth = glutGet(GLUT_WINDOW_WIDTH);
-    GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
+    const GLint windowWidth = glutGet(GLUT_WINDOW_WIDTH);
+    const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
 
     /**
      * Render a frame for the top menu.
-     * The frame spans the width of the window, and it's height
-     * is BTN_HEIGHT.
+     * The frame spans the width of the window,
+     * and its height is BTN_HEIGHT.
      */
     glViewport(0, windowHeight - BTN_HEIGHT, windowWidth, BTN_HEIGHT);
     glLoadIdentity();
@@ -34,12 +38,12 @@ void renderTopMenuScene(void)
     gluOrtho2D(0.0, (GLdouble) windowWidth, (GLdouble)(windowHeight - BTN_HEIGHT), (GLdouble) windowHeight);
     
     glColor3d(RGB_COLOR_BLACK);
-    glLineWidth(FRAME_WIDTH);
+    glLineWidth(TOP_MENU_FRAME_WIDTH);
     glBegin(GL_LINE_LOOP);
-    glVertex2d(0.0, windowHeight - BTN_HEIGHT);
-    glVertex2d(windowWidth, windowHeight - BTN_HEIGHT);
+    glVertex2d(1.0, windowHeight - BTN_HEIGHT + 1.0);
+    glVertex2d(windowWidth, windowHeight - BTN_HEIGHT + 1.0);
     glVertex2d(windowWidth, windowHeight);
-    glVertex2d(0.0, windowHeight);
+    glVertex2d(1.0, windowHeight);
     glEnd();
 
     /* Render buttons */
@@ -54,4 +58,27 @@ void renderTopMenuScene(void)
     exitBtn.render();
     helpBtn.render();
     adjAmbLightBtn.render();
+}
+
+
+void handleMouseEventTopMenu(int button, int state, int x, int y)
+{
+    const GLint windowWidth = glutGet(GLUT_WINDOW_WIDTH);
+    const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
+
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+    {
+        if (exitBtn.clicked(x, windowHeight - y))
+        {
+            exit(0);
+        }
+        else if (helpBtn.clicked(x, windowHeight - y))
+        {
+            displayHelpMenu = true;
+            glutPostRedisplay();
+        }
+        else if (adjAmbLightBtn.clicked(x, windowHeight - y))
+        {
+        }
+    }
 }

@@ -16,7 +16,7 @@
 /******************************
 *          DEFINES            *
 *******************************/
-#define FRAME_WIDTH 3
+#define TOP_MENU_FRAME_WIDTH 3
 #define BTN_HEIGHT 30
 #define EXIT_BTN_WIDTH  45
 #define HELP_BTN_WIDTH 50
@@ -33,3 +33,4 @@ extern Button adjAmbLightBtn;
 *     FUNCTION PROTOTYPES     *
 *******************************/
 void renderTopMenuScene(void);
+void handleMouseEventTopMenu(int button, int state, int x, int y);
