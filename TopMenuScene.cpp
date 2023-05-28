@@ -27,21 +27,18 @@ void renderTopMenuScene(void)
     const GLint windowWidth = glutGet(GLUT_WINDOW_WIDTH);
     const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
 
-    /**
-     * Render a frame for the top menu.
-     * The frame spans the width of the window,
-     * and its height is BTN_HEIGHT.
-     */
-    glViewport(0, windowHeight - BTN_HEIGHT, windowWidth, BTN_HEIGHT);
-    glLoadIdentity();
-    glMatrixMode(GL_PROJECTION);
-    gluOrtho2D(0.0, (GLdouble) windowWidth, (GLdouble)(windowHeight - BTN_HEIGHT), (GLdouble) windowHeight);
+    /* Render a frame for the top menu */
+    glViewport(0, windowHeight - TOP_MENU_HEIGHT, windowWidth, TOP_MENU_HEIGHT);
+
+    resetProjectionAndModelviewMatrices();
+
+    gluOrtho2D(0.0, (GLdouble) windowWidth, (GLdouble)(windowHeight - TOP_MENU_HEIGHT), (GLdouble) windowHeight);
     
     glColor3d(RGB_COLOR_BLACK);
     glLineWidth(TOP_MENU_FRAME_WIDTH);
     glBegin(GL_LINE_LOOP);
-    glVertex2d(1.0, windowHeight - BTN_HEIGHT + 1.0);
-    glVertex2d(windowWidth, windowHeight - BTN_HEIGHT + 1.0);
+    glVertex2d(1.0, windowHeight - TOP_MENU_HEIGHT + 1.0);
+    glVertex2d(windowWidth, windowHeight - TOP_MENU_HEIGHT + 1.0);
     glVertex2d(windowWidth, windowHeight);
     glVertex2d(1.0, windowHeight);
     glEnd();

@@ -19,6 +19,7 @@
 #include <iostream>
 #include "TopMenuScene.h"
 #include "HelpMenuScene.h"
+#include "MainScene.h"
 
 /******************************
 *          DEFINES            *
@@ -38,6 +39,7 @@ void registerCallbacks(void);
 void displayCallback(void);
 void mouseCallback(int button, int state, int x, int y);
 void keyboardCallback(unsigned char key, int x, int y);
+void resetProjectionAndModelviewMatrices(void);
 int main(int argc, char** argv);
 
 /******************************
@@ -70,6 +72,7 @@ void displayCallback(void)
     glClear(GL_COLOR_BUFFER_BIT);
 
     renderTopMenuScene();
+    renderMainScene();
 
     if (displayHelpMenu)
     {
@@ -89,6 +92,16 @@ void mouseCallback(int button, int state, int x, int y)
 void keyboardCallback(unsigned char key, int x, int y)
 {
     handleKeyboardEventHelpMenu(key, x, y);
+}
+
+
+void resetProjectionAndModelviewMatrices(void)
+{
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
 }
 
 

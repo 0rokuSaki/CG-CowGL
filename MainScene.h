@@ -1,6 +1,6 @@
 #pragma once
 /*****************************************************************//**
- * \file   TopMenuScene.h
+ * \file   MainScene.h
  * \brief  
  * 
  * \author aaron
@@ -10,28 +10,33 @@
 /******************************
 *          INCLUDES           *
 *******************************/
-#include "Button.h"
 
 /******************************
 *          DEFINES            *
 *******************************/
-#define TOP_MENU_HEIGHT 30
-#define TOP_MENU_FRAME_WIDTH 3
-#define BTN_HEIGHT TOP_MENU_HEIGHT
-#define EXIT_BTN_WIDTH  45
-#define HELP_BTN_WIDTH 50
-#define ADJ_AMB_LIGHT_BTN_WIDTH 165
+#define VIEW_ORIGIN 5.0, 0.0, 5.0
+#define LOOK_AT_POINT 0.0, 0.0, 1.0
+#define UP_VECTOR 0.0, 0.0, 1.0
+
+#define XW_MIN -10
+#define XW_MAX 10
+#define YW_MIN -10
+#define YW_MAX 10
+#define Z_NEAR 0.000001
+#define Z_FAR 100
+
+#define BORDER_PT1 100.0, 100.0, 0.0
+#define BORDER_PT2 -100.0, 100.0, 0.0
+#define BORDER_PT3 -100.0, -100.0, 0.0
+#define BORDER_PT4 100.0, -100.0, 0.0
 
 /******************************
 *      EXTERNAL VARIABLES     *
 *******************************/
-extern Button exitBtn;
-extern Button helpBtn;
-extern Button adjAmbLightBtn;
 
 /******************************
 *     FUNCTION PROTOTYPES     *
 *******************************/
-void renderTopMenuScene(void);
-void handleMouseEventTopMenu(int button, int state, int x, int y);
+void renderMainScene(void);
+void handleKeyboardEventMain(unsigned char key, int x, int y);
 void resetProjectionAndModelviewMatrices(void);

@@ -73,8 +73,13 @@ void Button::render() const
 {
     /* Create viewport for button */
     glViewport(_pos.getX(), _pos.getY(), _width, _height);
+
+    glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+
     glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+
     gluOrtho2D(0.0, (GLdouble)_width, 0.0, (GLdouble)_height);
 
     /* Add background color */

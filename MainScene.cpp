@@ -1,0 +1,53 @@
+/*****************************************************************//**
+ * \file   MainScene.cpp
+ * \brief  
+ * 
+ * \author aaron
+ * \date   May 2023
+ *********************************************************************/
+
+/******************************
+*          INCLUDES           *
+*******************************/
+#include <GL/glut.h>
+#include "MainScene.h"
+#include "TopMenuScene.h"
+#include "RGBColor.h"
+#include "WcPt3D.h"
+
+/******************************
+*       GLOBAL VARIABLES      *
+*******************************/
+
+/******************************
+*     FUNCTION DEFINITIONS    *
+*******************************/
+void renderMainScene(void)
+{
+    const GLint windowWidth = glutGet(GLUT_WINDOW_WIDTH);
+    const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
+
+    glViewport(0, 0, windowWidth, windowHeight - TOP_MENU_HEIGHT);
+    
+    resetProjectionAndModelviewMatrices();
+
+    glMatrixMode(GL_MODELVIEW);
+    gluLookAt(VIEW_ORIGIN, LOOK_AT_POINT, UP_VECTOR);
+
+    glMatrixMode(GL_PROJECTION);
+    glFrustum(XW_MIN, XW_MAX, YW_MIN, YW_MAX, Z_NEAR, Z_FAR);
+
+
+    glColor3d(RGB_COLOR_GRASS_GREEN);
+    glBegin(GL_POLYGON);
+    glVertex3d(BORDER_PT1);
+    glVertex3d(BORDER_PT2);
+    glVertex3d(BORDER_PT3);
+    glVertex3d(BORDER_PT4);
+    glEnd();
+}
+
+
+void handleKeyboardEventMain(unsigned char key, int x, int y)
+{
+}
