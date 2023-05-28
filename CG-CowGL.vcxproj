@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="HelpMenuScene.h" />
+    <ClInclude Include="House.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="PixelPt.h" />
     <ClInclude Include="RGBColor.h" />

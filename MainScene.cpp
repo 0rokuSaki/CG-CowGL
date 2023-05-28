@@ -13,7 +13,8 @@
 #include "MainScene.h"
 #include "TopMenuScene.h"
 #include "RGBColor.h"
-#include "WcPt3D.h"
+
+#include "House.h"
 
 /******************************
 *       GLOBAL VARIABLES      *
@@ -28,6 +29,9 @@ void renderMainScene(void)
     const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
 
     glViewport(0, 0, windowWidth, windowHeight - TOP_MENU_HEIGHT);
+
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
     
     resetProjectionAndModelviewMatrices();
 
@@ -45,6 +49,10 @@ void renderMainScene(void)
     glVertex3d(BORDER_PT3);
     glVertex3d(BORDER_PT4);
     glEnd();
+
+    renderHouse(WcPt3D(0,0,0.0));
+
+    glDisable(GL_DEPTH_TEST);
 }
 
 

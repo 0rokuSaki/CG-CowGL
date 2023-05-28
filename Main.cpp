@@ -70,6 +70,7 @@ void registerCallbacks(void)
 void displayCallback(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
 
     renderTopMenuScene();
     renderMainScene();
