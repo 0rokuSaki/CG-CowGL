@@ -14,16 +14,16 @@
 /******************************
 *          DEFINES            *
 *******************************/
-#define VIEW_ORIGIN 5.0, 0.0, 5.0
+#define VIEW_ORIGIN 7, 7, 5
 #define LOOK_AT_POINT 0.0, 0.0, 1.0
 #define UP_VECTOR 0.0, 0.0, 1.0
 
-#define XW_MIN -10
-#define XW_MAX 10
-#define YW_MIN -10
-#define YW_MAX 10
-#define Z_NEAR 0.000001
-#define Z_FAR 100
+#define XW_MIN -3
+#define XW_MAX 3
+#define YW_MIN -3
+#define YW_MAX 3
+#define Z_NEAR 5
+#define Z_FAR 50
 
 #define BORDER_PT1 100.0, 100.0, 0.0
 #define BORDER_PT2 -100.0, 100.0, 0.0
