@@ -47,3 +47,4 @@ extern std::vector<std::string> helpMenuTextLines;
 *******************************/
 void renderHelpMenuScene(void);
 void handleKeyboardEventHelpMenu(unsigned char key, int x, int y);
+void resetProjectionAndModelviewMatrices(void);

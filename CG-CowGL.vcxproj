@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="HelpMenuScene.h" />
+    <ClInclude Include="MainScene.h" />
     <ClInclude Include="PixelPt.h" />
     <ClInclude Include="RGBColor.h" />
     <ClInclude Include="SceneObject.h" />
@@ -140,6 +141,7 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="HelpMenuScene.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="TopMenuScene.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
