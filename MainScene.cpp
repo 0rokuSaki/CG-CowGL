@@ -13,8 +13,10 @@
 #include "MainScene.h"
 #include "TopMenuScene.h"
 #include "RGBColor.h"
+#include "WcPt3D.h"
 
 #include "House.h"
+#include "Tree.h"
 
 /******************************
 *       GLOBAL VARIABLES      *
@@ -51,6 +53,8 @@ void renderMainScene(void)
     glEnd();
 
     renderHouse(WcPt3D(0,0,0.0));
+    renderTree(WcPt3D(13, 19, 0));
+    renderTree(WcPt3D(8, -18, 0));
 
     glDisable(GL_DEPTH_TEST);
 }
