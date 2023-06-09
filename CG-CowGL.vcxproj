@@ -135,15 +135,18 @@
     <ClInclude Include="RGBColor.h" />
     <ClInclude Include="SceneObject.h" />
     <ClInclude Include="TopMenuScene.h" />
+    <ClInclude Include="Tree.h" />
     <ClInclude Include="WcPt2D.h" />
     <ClInclude Include="WcPt3D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="HelpMenuScene.cpp" />
+    <ClCompile Include="House.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="TopMenuScene.cpp" />
+    <ClCompile Include="Tree.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
