@@ -14,8 +14,8 @@
 /******************************
 *          DEFINES            *
 *******************************/
-#define VIEW_ORIGIN 26, -26, 6
-#define LOOK_AT_POINT 0.0, 0.0, 2.0
+#define VIEW_ORIGIN 30, 30, 10
+#define LOOK_AT_POINT 0.0, 0.0, 10.0
 #define UP_VECTOR 0.0, 0.0, 1.0
 
 #define XW_MIN -3
@@ -23,7 +23,7 @@
 #define YW_MIN -3
 #define YW_MAX 3
 #define Z_NEAR 5
-#define Z_FAR 50
+#define Z_FAR 175
 
 #define BORDER_PT1 100.0, 100.0, 0.0
 #define BORDER_PT2 -100.0, 100.0, 0.0
