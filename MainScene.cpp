@@ -15,6 +15,7 @@
 #include "RGBColor.h"
 #include "WcPt3D.h"
 
+#include "Sky.h"
 #include "House.h"
 #include "Tree.h"
 
@@ -53,8 +54,10 @@ void renderMainScene(void)
     glEnd();
 
     /* Render sky */
-    glColor3d(RGB_COLOR_SKY_BLUE);
-    glutSolidSphere(SKY_SPHERE_PROPERTIES);
+    renderSky();
+
+    /* Render sun */
+
 
     renderHouse(WcPt3D(0,0,0.0));
     renderTree(WcPt3D(13, 19, 0));

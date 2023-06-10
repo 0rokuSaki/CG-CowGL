@@ -14,8 +14,8 @@
 /******************************
 *          DEFINES            *
 *******************************/
-#define VIEW_ORIGIN 26, -26, 6
-#define LOOK_AT_POINT 0.0, 0.0, 2.0
+#define VIEW_ORIGIN 30, 30, 10
+#define LOOK_AT_POINT 0.0, 0.0, 10.0
 #define UP_VECTOR 0.0, 0.0, 1.0
 
 #define XW_MIN -3
@@ -29,8 +29,6 @@
 #define BORDER_PT2 -100.0, 100.0, 0.0
 #define BORDER_PT3 -100.0, -100.0, 0.0
 #define BORDER_PT4 100.0, -100.0, 0.0
-
-#define SKY_SPHERE_PROPERTIES (Z_FAR / 2.0), 50.0, 50.0  // radius, slices, stacks
 
 /******************************
 *      EXTERNAL VARIABLES     *
