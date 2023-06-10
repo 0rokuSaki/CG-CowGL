@@ -23,12 +23,14 @@
 #define YW_MIN -3
 #define YW_MAX 3
 #define Z_NEAR 5
-#define Z_FAR 50
+#define Z_FAR 175
 
 #define BORDER_PT1 100.0, 100.0, 0.0
 #define BORDER_PT2 -100.0, 100.0, 0.0
 #define BORDER_PT3 -100.0, -100.0, 0.0
 #define BORDER_PT4 100.0, -100.0, 0.0
+
+#define SKY_SPHERE_PROPERTIES (Z_FAR / 2.0), 50.0, 50.0  // radius, slices, stacks
 
 /******************************
 *      EXTERNAL VARIABLES     *

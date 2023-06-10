@@ -27,6 +27,7 @@
 #define RGB_COLOR_LIGHT_BROWN 0.8, 0.52, 0.25
 #define RGB_COLOR_DARK_BROWN 0.31, 0.21, 0.14
 #define RGB_COLOR_LIGHT_BLUE 0.62, 0.82, 0.88
+#define RGB_COLOR_SKY_BLUE 0.53, 0.81, 0.92
 
 /**
  * Represents an RGB triplet (r,g,b).

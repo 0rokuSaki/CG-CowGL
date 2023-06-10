@@ -43,7 +43,7 @@ void renderMainScene(void)
     glMatrixMode(GL_PROJECTION);
     glFrustum(XW_MIN, XW_MAX, YW_MIN, YW_MAX, Z_NEAR, Z_FAR);
 
-
+    /* Render plane */
     glColor3d(RGB_COLOR_GRASS_GREEN);
     glBegin(GL_POLYGON);
     glVertex3d(BORDER_PT1);
@@ -51,6 +51,10 @@ void renderMainScene(void)
     glVertex3d(BORDER_PT3);
     glVertex3d(BORDER_PT4);
     glEnd();
+
+    /* Render sky */
+    glColor3d(RGB_COLOR_SKY_BLUE);
+    glutSolidSphere(SKY_SPHERE_PROPERTIES);
 
     renderHouse(WcPt3D(0,0,0.0));
     renderTree(WcPt3D(13, 19, 0));
