@@ -17,7 +17,7 @@
 
 #include "Sky.h"
 #include "House.h"
-#include "Tree.h"
+#include "SimpleTree.h"
 
 /******************************
 *       GLOBAL VARIABLES      *
@@ -59,9 +59,9 @@ void renderMainScene(void)
     /* Render sun */
 
 
-    renderHouse(WcPt3D(0,0,0.0));
-    renderTree(WcPt3D(13, 19, 0));
-    renderTree(WcPt3D(8, -18, 0));
+    //renderHouse(WcPt3D(0,0,0.0));
+    renderSimpleTree(WcPt3D());
+    renderSimpleTree(WcPt3D(3, 0, 0));
 
     glDisable(GL_DEPTH_TEST);
 }
