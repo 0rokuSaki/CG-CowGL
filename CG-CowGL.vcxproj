@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Cow.h" />
     <ClInclude Include="HelpMenuScene.h" />
     <ClInclude Include="House.h" />
     <ClInclude Include="MainScene.h" />
@@ -142,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Cow.cpp" />
     <ClCompile Include="HelpMenuScene.cpp" />
     <ClCompile Include="House.cpp" />
     <ClCompile Include="Main.cpp" />

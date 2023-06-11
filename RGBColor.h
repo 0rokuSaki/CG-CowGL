@@ -21,6 +21,7 @@
 #define RGB_COLOR_GREEN 0.0, 1.0, 0.0
 #define RGB_COLOR_BLUE  0.0, 0.0, 1.0
 #define RGB_COLOR_LIGHT_GRAY 0.8, 0.8, 0.8
+#define RGB_COLOR_DARK_GRAY 0.1, 0.1, 0.1
 #define RGB_COLOR_GRASS_GREEN 0.25, 0.8, 0.25
 #define RGB_COLOR_MEDIUM_GREEN 0.1, 0.45, 0.1 
 #define RGB_COLOR_DARK_GREEN 0.1, 0.29, 0.11
@@ -29,6 +30,8 @@
 #define RGB_COLOR_LIGHT_BLUE 0.62, 0.82, 0.88
 #define RGB_COLOR_SKY_BLUE 0.53, 0.81, 0.92
 #define RGB_COLOR_SUN_YELLOW 0.98, 0.99, 0.06
+#define RGB_COLOR_DARK_TAN 0.75, 0.6, 0.45
+#define RGB_COLOR_PINK 1.0, 0.75, 0.8
 
 /**
  * Represents an RGB triplet (r,g,b).

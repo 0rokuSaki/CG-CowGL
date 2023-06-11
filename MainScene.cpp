@@ -16,12 +16,14 @@
 #include "WcPt3D.h"
 
 #include "Sky.h"
+#include "Cow.h"
 #include "House.h"
 #include "Tree.h"
 
 /******************************
 *       GLOBAL VARIABLES      *
 *******************************/
+Cow cow;
 
 /******************************
 *     FUNCTION DEFINITIONS    *
@@ -56,10 +58,9 @@ void renderMainScene(void)
     /* Render sky */
     renderSky();
 
-    /* Render sun */
+    cow.render();
 
-
-    renderHouse(WcPt3D(0,0,0.0));
+    //renderHouse(WcPt3D(0,0,0.0));
     renderTree(WcPt3D(13, 19, 0));
     renderTree(WcPt3D(8, -18, 0));
 
