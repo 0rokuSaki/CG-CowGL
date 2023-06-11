@@ -14,7 +14,7 @@
 /******************************
 *          DEFINES            *
 *******************************/
-#define VIEW_ORIGIN 10, 10, 10
+#define VIEW_ORIGIN 10, 0, 5
 #define LOOK_AT_POINT 0.0, 0.0, 1.0
 #define UP_VECTOR 0.0, 0.0, 1.0
 

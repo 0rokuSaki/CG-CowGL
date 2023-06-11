@@ -15,4 +15,4 @@ class WcPt3D;
 /******************************
 *     FUNCTION PROTOTYPES     *
 *******************************/
-void renderSimpleTree(WcPt3D center);
+void renderTree(WcPt3D center);

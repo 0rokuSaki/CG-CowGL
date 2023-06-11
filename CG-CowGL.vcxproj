@@ -136,7 +136,7 @@
     <ClInclude Include="SceneObject.h" />
     <ClInclude Include="Sky.h" />
     <ClInclude Include="TopMenuScene.h" />
-    <ClInclude Include="SimpleTree.h" />
+    <ClInclude Include="Tree.h" />
     <ClInclude Include="WcPt3D.h" />
   </ItemGroup>
   <ItemGroup>
@@ -147,7 +147,7 @@
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="Sky.cpp" />
     <ClCompile Include="TopMenuScene.cpp" />
-    <ClCompile Include="SimpleTree.cpp" />
+    <ClCompile Include="Tree.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

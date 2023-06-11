@@ -10,14 +10,14 @@
 *          INCLUDES           *
 *******************************/
 #include <GL/glut.h>
-#include "SimpleTree.h"
+#include "Tree.h"
 #include "WcPt3D.h"
 #include "RGBColor.h"
 
 /******************************
 *     FUNCTION DEFINITIONS    *
 *******************************/
-void renderSimpleTree(WcPt3D pos)
+void renderTree(WcPt3D pos)
 {
     /* Tree stem parameters */
     static const RGBColor TREE_STEM_COLOR(RGB_COLOR_DARK_BROWN);
