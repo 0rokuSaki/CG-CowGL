@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="WcPt2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="WcPt3D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -48,7 +45,7 @@
     <ClInclude Include="Tree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sky.h">
+    <ClInclude Include="WcVector3D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -74,7 +71,7 @@
     <ClCompile Include="House.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sky.cpp">
+    <ClCompile Include="WcVector3D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -7,6 +7,11 @@
  * \date   May 2023
  *********************************************************************/
 
+/******************************
+*          INCLUDES           *
+*******************************/
+#include <GL/glut.h>
+
 /**
  * Class definition for WcPt3D.
  * Represents a 3D world coordinate point.

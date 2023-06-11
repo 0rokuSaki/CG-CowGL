@@ -21,6 +21,9 @@
 #include "HelpMenuScene.h"
 #include "MainScene.h"
 
+#include <chrono>
+#include <thread>
+
 /******************************
 *          DEFINES            *
 *******************************/
@@ -39,6 +42,7 @@ void registerCallbacks(void);
 void displayCallback(void);
 void mouseCallback(int button, int state, int x, int y);
 void keyboardCallback(unsigned char key, int x, int y);
+void idleCallback(void);
 void resetProjectionAndModelviewMatrices(void);
 int main(int argc, char** argv);
 
@@ -64,6 +68,7 @@ void registerCallbacks(void)
     glutDisplayFunc(displayCallback);
     glutMouseFunc(mouseCallback);
     glutKeyboardFunc(keyboardCallback);
+    glutIdleFunc(idleCallback);
 }
 
 
@@ -93,6 +98,28 @@ void mouseCallback(int button, int state, int x, int y)
 void keyboardCallback(unsigned char key, int x, int y)
 {
     handleKeyboardEventHelpMenu(key, x, y);
+}
+
+void idleCallback(void)
+{
+    static GLdouble theta = 0.0;
+    static const GLdouble x = 30.0;
+    static const GLdouble y = 30.0;
+
+    viewOrigin.setX(cos(theta) * x);
+    viewOrigin.setY(sin(theta) * y);
+
+    renderMainScene();
+    glutPostRedisplay();
+
+    theta += 0.01;
+    
+    if (theta >= 360.0)
+    {
+        theta = 0.0;
+    }
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(1));
 }
 
 
