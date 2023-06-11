@@ -18,12 +18,17 @@
 *******************************/
 void renderSky()
 {
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+
+	/* Render sky */
 	glColor3d(RGB_COLOR_SKY_BLUE);
 	glutSolidSphere(SKY_SPHERE_PROPERTIES);
 
-	glPushMatrix();
+	/* Render sun */
 	glTranslated(SKY_SUN_POSITION);
 	glColor3d(RGB_COLOR_SUN_YELLOW);
 	glutSolidSphere(SKY_SUN_SPHERE_PROPERTIES);
+
 	glPopMatrix();
 }
