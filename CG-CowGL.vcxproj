@@ -137,7 +137,6 @@
     <ClInclude Include="Sky.h" />
     <ClInclude Include="TopMenuScene.h" />
     <ClInclude Include="SimpleTree.h" />
-    <ClInclude Include="WcPt2D.h" />
     <ClInclude Include="WcPt3D.h" />
   </ItemGroup>
   <ItemGroup>
