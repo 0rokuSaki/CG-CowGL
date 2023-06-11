@@ -15,6 +15,7 @@ Cow::Cow(WcPt3D pos) : _pos(pos)
 void Cow::render() const
 {
     renderBody();
+    renderHead();
     renderLegs();
     renderUtter();
 }
@@ -95,10 +96,32 @@ void Cow::renderBody() const
     gluDisk(disk, 0.0, COW_BODY_WIDTH, COW_BODY_NUM_SLICES, COW_BODY_NUM_LOOPS);
     glTranslated(0.0, 0.0, COW_BODY_LENGTH);
     gluCylinder(cylinder, COW_BODY_WIDTH, 0.1, 0.25, 20, 20);
-    //gluDisk(disk, 0.0, COW_BODY_WIDTH, COW_BODY_NUM_SLICES, COW_BODY_NUM_LOOPS);
 
     gluDeleteQuadric(cylinder);
     gluDeleteQuadric(disk);
+
+    glPopMatrix();
+}
+
+void Cow::renderHead() const
+{
+    /* Cow head parameters */
+    static const RGBColor COW_HEAD_COLOR(RGB_COLOR_DARK_TAN);
+    static const RGBColor COW_NOSE_COLOR(RGB_COLOR_DARK_GRAY);
+    static const RGBColor COW_EYE_COLOR(RGB_COLOR_BLACK);
+    static const WcPt3D COW_HEAD_TRANSLATION(0.0, -1.65, 1.25);
+    static const GLdouble COW_HEAD_WIDTH = 0.375;
+    static const GLint COW_HEAD_NUM_SLICES = 20;
+    static const GLint COW_HEAD_NUM_STACKS = 20;
+
+    glMatrixMode(GL_MODELVIEW);
+
+    glPushMatrix();
+
+    /* Head */
+    glColor3d(COW_HEAD_COLOR.getR(), COW_HEAD_COLOR.getG(), COW_HEAD_COLOR.getB());
+    glTranslated(COW_HEAD_TRANSLATION.getX(), COW_HEAD_TRANSLATION.getY(), COW_HEAD_TRANSLATION.getZ());
+    glutSolidSphere(COW_HEAD_WIDTH, COW_HEAD_NUM_SLICES, COW_HEAD_NUM_STACKS);
 
     glPopMatrix();
 }

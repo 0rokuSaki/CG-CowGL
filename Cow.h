@@ -29,6 +29,7 @@ private:
     WcPt3D _pos;
 
     void renderBody() const;
+    void renderHead() const;
     void renderUtter() const;
     void renderLegs() const;
 };
