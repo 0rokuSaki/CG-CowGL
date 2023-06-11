@@ -137,6 +137,7 @@
     <ClInclude Include="TopMenuScene.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="WcPt3D.h" />
+    <ClInclude Include="WcVector3D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="TopMenuScene.cpp" />
     <ClCompile Include="Tree.cpp" />
+    <ClCompile Include="WcVector3D.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

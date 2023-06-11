@@ -62,10 +62,10 @@ void renderHouse(WcPt3D position, GLdouble rotationAngle)
     glEnd();
 
     glBegin(GL_POLYGON);
-    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), position.getZ() + HOUSE_EPSILON);
-    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), position.getZ() + HOUSE_EPSILON);
-    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), position.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), position.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
     glEnd();
 
     /* Roof */
@@ -161,10 +161,10 @@ void renderHouse(WcPt3D position, GLdouble rotationAngle)
     glEnd();
 
     glBegin(GL_LINE_LOOP);
-    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), position.getZ() + HOUSE_EPSILON);
-    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), position.getZ() + HOUSE_EPSILON);
-    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), position.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), position.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
     glEnd();
 
     /* Roof frame */

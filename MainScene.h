@@ -10,10 +10,15 @@
 /******************************
 *          INCLUDES           *
 *******************************/
+#include "WcPt3D.h"
+#include "WcVector3D.h"
 
 /******************************
 *      EXTERNAL VARIABLES     *
 *******************************/
+extern WcPt3D viewOrigin;
+extern WcPt3D lookAtPoint;
+extern WcVector3D upVector;
 
 /******************************
 *     FUNCTION PROTOTYPES     *
