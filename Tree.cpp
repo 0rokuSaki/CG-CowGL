@@ -17,66 +17,57 @@
 /******************************
 *     FUNCTION DEFINITIONS    *
 *******************************/
-void renderTree(WcPt3D center)
+void renderTree(WcPt3D pos)
 {
+    /* Tree stem parameters */
+    static const RGBColor TREE_STEM_COLOR(RGB_COLOR_DARK_BROWN);
+    static const GLdouble TREE_STEM_BASE_RADIUS = 0.5;
+    static const GLdouble TREE_STEM_HEIGHT = 8.0;
+    static const GLint TREE_STEM_NUM_SLICES = 10;
+    static const GLint TREE_STEM_NUM_STACKS = 10;
+
+    /* Leaf parameters */
+    static const RGBColor LEAF_COLOR1(RGB_COLOR_DARK_GREEN);
+    static const RGBColor LEAF_COLOR2(RGB_COLOR_MEDIUM_GREEN);
+    static const RGBColor LEAF_COLOR3(RGB_COLOR_FOREST_GREEN);
+    static const GLdouble LEAF_BASE_WIDTH1 = 1.5;
+    static const GLdouble LEAF_BASE_WIDTH2 = 1.25;
+    static const GLdouble LEAF_BASE_WIDTH3 = 1.0;
+    static const GLdouble LEAF_HEIGHT = 2.5;
+    static const GLdouble LEAF_HEIGHT_FROM_GROUND = 2.0;
+    static const GLint LEAF_NUM_SLICES = 25;
+    static const GLint LEAF_NUM_STACKS = 25;
+
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
 
-    glColor3d(RGB_COLOR_DARK_BROWN);
-    /* Base */
-    glTranslated(center.getX(), center.getY(), center.getZ());
-    glutSolidCone(TREE_BASE_RADIUS, TREE_BASE_HEIGHT, TREE_CONE_NUM_SLICES, TREE_CONE_NUM_STACKS);
-    glPopMatrix();
-    glPushMatrix();
+    glTranslated(pos.getX(), pos.getY(), pos.getZ());  // move tree to pos
 
-    /* Branch #1 */
-    glTranslated(center.getX() + TREE_BRANCH1_TRANSLATION_X, center.getY() + TREE_BRANCH1_TRANSLATION_Y, center.getZ() + TREE_BRANCH1_TRANSLATION_Z);
-    glRotated(TREE_BRANCH1_ROTATION_ANGLE, TREE_BRANCH1_ROTATION_VECTOR);
-    glutSolidCone(TREE_BRANCH1_RADIUS, TREE_BRANCH1_LENGTH, TREE_CONE_NUM_SLICES, TREE_CONE_NUM_STACKS);
-    glPopMatrix();
-    glPushMatrix();
+    /* Render tree stem */
+    glColor3d(TREE_STEM_COLOR.getR(), TREE_STEM_COLOR.getG(), TREE_STEM_COLOR.getB());
+    glutSolidCone(TREE_STEM_BASE_RADIUS, TREE_STEM_HEIGHT, TREE_STEM_NUM_SLICES, TREE_STEM_NUM_STACKS);
 
-    /* Branch #2 */
-    glTranslated(center.getX() + TREE_BRANCH2_TRANSLATION_X, center.getY() + TREE_BRANCH2_TRANSLATION_Y, center.getZ() + TREE_BRANCH2_TRANSLATION_Z);
-    glRotated(TREE_BRANCH2_ROTATION_ANGLE, TREE_BRANCH2_ROTATION_VECTOR);
-    glutSolidCone(TREE_BRANCH2_RADIUS, TREE_BRANCH2_LENGTH, TREE_CONE_NUM_SLICES, TREE_CONE_NUM_STACKS);
-    glPopMatrix();
-    glPushMatrix();
+    GLUquadric* disk = gluNewQuadric();
 
-    /* Branch #3 */
-    glTranslated(center.getX() + TREE_BRANCH3_TRANSLATION_X, center.getY() + TREE_BRANCH3_TRANSLATION_Y, center.getZ() + TREE_BRANCH3_TRANSLATION_Z);
-    glRotated(TREE_BRANCH3_ROTATION_ANGLE, TREE_BRANCH3_ROTATION_VECTOR);
-    glutSolidCone(TREE_BRANCH3_RADIUS, TREE_BRANCH3_LENGTH, TREE_CONE_NUM_SLICES, TREE_CONE_NUM_STACKS);
-    glPopMatrix();
-    glPushMatrix();
+    /* Render leaf #1 */
+    glColor3d(LEAF_COLOR1.getR(), LEAF_COLOR1.getG(), LEAF_COLOR1.getB());
+    glTranslatef(0.0, 0.0, LEAF_HEIGHT_FROM_GROUND);
+    gluDisk(disk, 0.0, LEAF_BASE_WIDTH1, LEAF_NUM_SLICES, LEAF_NUM_STACKS);
+    glutSolidCone(LEAF_BASE_WIDTH1, LEAF_HEIGHT, LEAF_NUM_SLICES, LEAF_NUM_STACKS);
 
-    /* Base sphere */
-    glTranslated(center.getX(), center.getY(), center.getZ() + TREE_BASE_HEIGHT);
-    glColor3d(RGB_COLOR_MEDIUM_GREEN);
-    glutSolidSphere(TREE_BASE_SPHERE_RADIUS, TREE_SPHERE_NUM_SLICES, TREE_SPHERE_NUM_STACKS);
-    glPopMatrix();
-    glPushMatrix();
+    /* Render leaf #2 */
+    glColor3d(LEAF_COLOR2.getR(), LEAF_COLOR2.getG(), LEAF_COLOR2.getB());
+    glTranslatef(0.0, 0.0, LEAF_HEIGHT_FROM_GROUND);
+    gluDisk(disk, 0.0, LEAF_BASE_WIDTH2, LEAF_NUM_SLICES, LEAF_NUM_STACKS);
+    glutSolidCone(LEAF_BASE_WIDTH2, LEAF_HEIGHT, LEAF_NUM_SLICES, LEAF_NUM_STACKS);
 
-    /* Branch #1 sphere */
-    glColor3d(RGB_COLOR_DARK_GREEN);
-    glTranslated(center.getX() + TREE_BRANCH1_SPHERE_TRANSLATION_X, center.getY() + TREE_BRANCH1_SPHERE_TRANSLATION_Y, center.getZ() + TREE_BRANCH1_SPHERE_TRANSLATION_Z);
-    glutSolidSphere(TREE_BRANCH1_SPHERE_RADIUS, TREE_SPHERE_NUM_SLICES, TREE_SPHERE_NUM_STACKS);
-    glPopMatrix();
-    glPushMatrix();
+    /* Render leaf #3 */
+    glColor3d(LEAF_COLOR3.getR(), LEAF_COLOR3.getG(), LEAF_COLOR3.getB());
+    glTranslatef(0.0, 0.0, LEAF_HEIGHT_FROM_GROUND);
+    gluDisk(disk, 0.0, LEAF_BASE_WIDTH3, LEAF_NUM_SLICES, LEAF_NUM_STACKS);
+    glutSolidCone(LEAF_BASE_WIDTH3, LEAF_HEIGHT, LEAF_NUM_SLICES, LEAF_NUM_STACKS);
 
-    /* Branch #2 sphere */
-    glColor3d(RGB_COLOR_MEDIUM_GREEN);
-    glTranslated(center.getX() + TREE_BRANCH2_SPHERE_TRANSLATION_X, center.getY() + TREE_BRANCH2_SPHERE_TRANSLATION_Y, center.getZ() + TREE_BRANCH2_SPHERE_TRANSLATION_Z);
-    glutSolidSphere(TREE_BRANCH2_SPHERE_RADIUS, TREE_SPHERE_NUM_SLICES, TREE_SPHERE_NUM_STACKS);
-    glPopMatrix();
-    glPushMatrix();
-
-    /* Branch #3 sphere */
-    glColor3d(RGB_COLOR_DARK_GREEN);
-    glTranslated(center.getX() + TREE_BRANCH3_SPHERE_TRANSLATION_X, center.getY() + TREE_BRANCH3_SPHERE_TRANSLATION_Y, center.getZ() + TREE_BRANCH3_SPHERE_TRANSLATION_Z);
-    glutSolidSphere(TREE_BRANCH3_SPHERE_RADIUS, TREE_SPHERE_NUM_SLICES, TREE_SPHERE_NUM_STACKS);
-    glPopMatrix();
-    glPushMatrix();
+    gluDeleteQuadric(disk);
 
     glPopMatrix();
 }

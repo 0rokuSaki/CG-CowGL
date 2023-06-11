@@ -17,205 +17,219 @@
 /******************************
 *     FUNCTION DEFINITIONS    *
 *******************************/
-
-/**
- * Render a simple grey house with red roof tiles.
- *
- * \param center Coordinates of the centroid of the bottom rectangle ("Floor") of the house.
- */
-void renderHouse(WcPt3D center)
+void renderHouse(WcPt3D position, GLdouble rotationAngle)
 {
+    static const GLdouble HOUSE_WIDTH = 5.0;
+    static const GLdouble HOUSE_LENGTH = 7.0;
+    static const GLdouble HOUSE_WALL_HEIGHT = 3.25;
+    static const GLdouble HOUSE_ROOF_HEIGHT = 2.0;
+    static const GLdouble HOUSE_DOOR_WIDTH = 1.5;
+    static const GLdouble HOUSE_DOOR_HEIGHT = 2.25;
+    static const GLdouble HOUSE_DOOR_KNOB_RADIUS = 0.1;
+    static const GLdouble HOUSE_WINDOW_WIDTH = 0.75;
+    static const GLdouble HOUSE_WINDOW_HEIGHT = 1.5;
+    static const GLdouble HOUSE_WINDOW_HEIGHT_FROM_GROUND = 1.0;
+    static const GLdouble HOUSE_EPSILON = 0.05;
+
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+
+    glRotated(rotationAngle, 0.0, 0.0, 1.0);
+    glTranslated(position.getX(), position.getY(), position.getZ());
+
     /* Walls */
     glColor3d(RGB_COLOR_LIGHT_GRAY);
+
     glBegin(GL_POLYGON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
     glEnd();
 
     glBegin(GL_POLYGON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
     glEnd();
 
     glBegin(GL_POLYGON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
     glEnd();
 
     glBegin(GL_POLYGON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), position.getZ() + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), position.getZ() + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), position.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), position.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
     glEnd();
 
     /* Roof */
     glColor3d(RGB_COLOR_RED);
     glBegin(GL_POLYGON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX(), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(0.0, -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
     glEnd();
 
     glBegin(GL_POLYGON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX(), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(0.0, (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
     glEnd();
 
     glBegin(GL_POLYGON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX(), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX(), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(0.0, (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(0.0, -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
     glEnd();
 
     glBegin(GL_POLYGON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX(), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX(), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(0.0, (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(0.0, -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
     glEnd();
 
     /* Door */
     glColor3d(RGB_COLOR_LIGHT_BROWN);
     glBegin(GL_POLYGON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() + (HOUSE_DOOR_WIDTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() - (HOUSE_DOOR_WIDTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() - (HOUSE_DOOR_WIDTH / 2.0), center.getZ() + HOUSE_DOOR_HEIGHT);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() + (HOUSE_DOOR_WIDTH / 2.0), center.getZ() + HOUSE_DOOR_HEIGHT);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, (HOUSE_DOOR_WIDTH / 2.0), HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, -(HOUSE_DOOR_WIDTH / 2.0), HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, -(HOUSE_DOOR_WIDTH / 2.0), HOUSE_DOOR_HEIGHT);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, (HOUSE_DOOR_WIDTH / 2.0), HOUSE_DOOR_HEIGHT);
     glEnd();
 
     /* Windows */
     glColor3d(RGB_COLOR_LIGHT_BLUE);
     glBegin(GL_POLYGON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() + (HOUSE_LENGTH / 4.0), center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() + (HOUSE_LENGTH / 4.0) + HOUSE_WINDOW_WIDTH, center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() + (HOUSE_LENGTH / 4.0) + HOUSE_WINDOW_WIDTH, center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() + (HOUSE_LENGTH / 4.0), center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, (HOUSE_LENGTH / 4.0), HOUSE_WINDOW_HEIGHT_FROM_GROUND);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, (HOUSE_LENGTH / 4.0) + HOUSE_WINDOW_WIDTH, HOUSE_WINDOW_HEIGHT_FROM_GROUND);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, (HOUSE_LENGTH / 4.0) + HOUSE_WINDOW_WIDTH, HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, (HOUSE_LENGTH / 4.0), HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
     glEnd();
 
     glBegin(GL_POLYGON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() - (HOUSE_LENGTH / 4.0), center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() - (HOUSE_LENGTH / 4.0) - HOUSE_WINDOW_WIDTH, center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() - (HOUSE_LENGTH / 4.0) - HOUSE_WINDOW_WIDTH, center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() - (HOUSE_LENGTH / 4.0), center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, -(HOUSE_LENGTH / 4.0), HOUSE_WINDOW_HEIGHT_FROM_GROUND);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, -(HOUSE_LENGTH / 4.0) - HOUSE_WINDOW_WIDTH, HOUSE_WINDOW_HEIGHT_FROM_GROUND);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, -(HOUSE_LENGTH / 4.0) - HOUSE_WINDOW_WIDTH, HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, -(HOUSE_LENGTH / 4.0), HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
     glEnd();
 
     glColor3d(RGB_COLOR_LIGHT_BLUE);
     glBegin(GL_POLYGON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, center.getY() + (HOUSE_LENGTH / 4.0), center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, center.getY() + (HOUSE_LENGTH / 4.0) + HOUSE_WINDOW_WIDTH, center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, center.getY() + (HOUSE_LENGTH / 4.0) + HOUSE_WINDOW_WIDTH, center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, center.getY() + (HOUSE_LENGTH / 4.0), center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
+    glVertex3d(-(HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, (HOUSE_LENGTH / 4.0), HOUSE_WINDOW_HEIGHT_FROM_GROUND);
+    glVertex3d(-(HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, (HOUSE_LENGTH / 4.0) + HOUSE_WINDOW_WIDTH, HOUSE_WINDOW_HEIGHT_FROM_GROUND);
+    glVertex3d(-(HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, (HOUSE_LENGTH / 4.0) + HOUSE_WINDOW_WIDTH, HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
+    glVertex3d(-(HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, (HOUSE_LENGTH / 4.0), HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
     glEnd();
 
     glBegin(GL_POLYGON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, center.getY() - (HOUSE_LENGTH / 4.0), center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, center.getY() - (HOUSE_LENGTH / 4.0) - HOUSE_WINDOW_WIDTH, center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, center.getY() - (HOUSE_LENGTH / 4.0) - HOUSE_WINDOW_WIDTH, center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, center.getY() - (HOUSE_LENGTH / 4.0), center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
+    glVertex3d(-(HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, -(HOUSE_LENGTH / 4.0), HOUSE_WINDOW_HEIGHT_FROM_GROUND);
+    glVertex3d(-(HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, -(HOUSE_LENGTH / 4.0) - HOUSE_WINDOW_WIDTH, HOUSE_WINDOW_HEIGHT_FROM_GROUND);
+    glVertex3d(-(HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, -(HOUSE_LENGTH / 4.0) - HOUSE_WINDOW_WIDTH, HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
+    glVertex3d(-(HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, -(HOUSE_LENGTH / 4.0), HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
     glEnd();
 
     /* Walls frame */
     glColor3d(RGB_COLOR_BLACK);
+
     glBegin(GL_LINE_LOOP);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
     glEnd();
 
     glBegin(GL_LINE_LOOP);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
     glEnd();
 
     glBegin(GL_LINE_LOOP);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
     glEnd();
 
     glBegin(GL_LINE_LOOP);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), position.getZ() + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), position.getZ() + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), position.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), position.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
     glEnd();
 
     /* Roof frame */
-    glColor3d(RGB_COLOR_BLACK);
     glBegin(GL_LINE_LOOP);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX(), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(0.0, -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
     glEnd();
 
     glBegin(GL_LINE_LOOP);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX(), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(0.0, (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
     glEnd();
 
     glBegin(GL_LINE_LOOP);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX(), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX(), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(0.0, (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(0.0, -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
     glEnd();
 
     glBegin(GL_LINE_LOOP);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX(), center.getY() + (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
-    glVertex3d(center.getX(), center.getY() - (HOUSE_LENGTH / 2.0), center.getZ() + HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(0.0, (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
+    glVertex3d(0.0, -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT + HOUSE_EPSILON);
     glEnd();
 
     /* Door frame */
     glBegin(GL_LINE_LOOP);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() + (HOUSE_DOOR_WIDTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() - (HOUSE_DOOR_WIDTH / 2.0), center.getZ() + HOUSE_EPSILON);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() - (HOUSE_DOOR_WIDTH / 2.0), center.getZ() + HOUSE_DOOR_HEIGHT);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() + (HOUSE_DOOR_WIDTH / 2.0), center.getZ() + HOUSE_DOOR_HEIGHT);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, (HOUSE_DOOR_WIDTH / 2.0), HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, -(HOUSE_DOOR_WIDTH / 2.0), HOUSE_EPSILON);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, -(HOUSE_DOOR_WIDTH / 2.0), HOUSE_DOOR_HEIGHT);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, (HOUSE_DOOR_WIDTH / 2.0), HOUSE_DOOR_HEIGHT);
     glEnd();
 
-    /* Window frames */
-    glColor3d(RGB_COLOR_BLACK);
+    /* Windows frame */
     glBegin(GL_LINE_LOOP);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() + (HOUSE_LENGTH / 4.0), center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() + (HOUSE_LENGTH / 4.0) + HOUSE_WINDOW_WIDTH, center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() + (HOUSE_LENGTH / 4.0) + HOUSE_WINDOW_WIDTH, center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() + (HOUSE_LENGTH / 4.0), center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
-    glEnd();
-
-    glBegin(GL_LINE_LOOP);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() - (HOUSE_LENGTH / 4.0), center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() - (HOUSE_LENGTH / 4.0) - HOUSE_WINDOW_WIDTH, center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() - (HOUSE_LENGTH / 4.0) - HOUSE_WINDOW_WIDTH, center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
-    glVertex3d(center.getX() + (HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, center.getY() - (HOUSE_LENGTH / 4.0), center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, (HOUSE_LENGTH / 4.0), HOUSE_WINDOW_HEIGHT_FROM_GROUND);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, (HOUSE_LENGTH / 4.0) + HOUSE_WINDOW_WIDTH, HOUSE_WINDOW_HEIGHT_FROM_GROUND);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, (HOUSE_LENGTH / 4.0) + HOUSE_WINDOW_WIDTH, HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, (HOUSE_LENGTH / 4.0), HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
     glEnd();
 
     glBegin(GL_LINE_LOOP);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, center.getY() + (HOUSE_LENGTH / 4.0), center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, center.getY() + (HOUSE_LENGTH / 4.0) + HOUSE_WINDOW_WIDTH, center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, center.getY() + (HOUSE_LENGTH / 4.0) + HOUSE_WINDOW_WIDTH, center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, center.getY() + (HOUSE_LENGTH / 4.0), center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, -(HOUSE_LENGTH / 4.0), HOUSE_WINDOW_HEIGHT_FROM_GROUND);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, -(HOUSE_LENGTH / 4.0) - HOUSE_WINDOW_WIDTH, HOUSE_WINDOW_HEIGHT_FROM_GROUND);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, -(HOUSE_LENGTH / 4.0) - HOUSE_WINDOW_WIDTH, HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
+    glVertex3d((HOUSE_WIDTH / 2.0) + HOUSE_EPSILON, -(HOUSE_LENGTH / 4.0), HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
     glEnd();
 
     glBegin(GL_LINE_LOOP);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, center.getY() - (HOUSE_LENGTH / 4.0), center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, center.getY() - (HOUSE_LENGTH / 4.0) - HOUSE_WINDOW_WIDTH, center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, center.getY() - (HOUSE_LENGTH / 4.0) - HOUSE_WINDOW_WIDTH, center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
-    glVertex3d(center.getX() - (HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, center.getY() - (HOUSE_LENGTH / 4.0), center.getZ() + HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
+    glVertex3d(-(HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, (HOUSE_LENGTH / 4.0), HOUSE_WINDOW_HEIGHT_FROM_GROUND);
+    glVertex3d(-(HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, (HOUSE_LENGTH / 4.0) + HOUSE_WINDOW_WIDTH, HOUSE_WINDOW_HEIGHT_FROM_GROUND);
+    glVertex3d(-(HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, (HOUSE_LENGTH / 4.0) + HOUSE_WINDOW_WIDTH, HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
+    glVertex3d(-(HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, (HOUSE_LENGTH / 4.0), HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
     glEnd();
+
+    glBegin(GL_LINE_LOOP);
+    glVertex3d(-(HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, -(HOUSE_LENGTH / 4.0), HOUSE_WINDOW_HEIGHT_FROM_GROUND);
+    glVertex3d(-(HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, -(HOUSE_LENGTH / 4.0) - HOUSE_WINDOW_WIDTH, HOUSE_WINDOW_HEIGHT_FROM_GROUND);
+    glVertex3d(-(HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, -(HOUSE_LENGTH / 4.0) - HOUSE_WINDOW_WIDTH, HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
+    glVertex3d(-(HOUSE_WIDTH / 2.0) - HOUSE_EPSILON, -(HOUSE_LENGTH / 4.0), HOUSE_WINDOW_HEIGHT_FROM_GROUND + HOUSE_WINDOW_HEIGHT);
+    glEnd();
+
+    glPopMatrix();
 }
