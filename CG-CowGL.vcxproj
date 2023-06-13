@@ -134,6 +134,7 @@
     <ClInclude Include="PixelPt.h" />
     <ClInclude Include="RGBColor.h" />
     <ClInclude Include="SceneObject.h" />
+    <ClInclude Include="Shed.h" />
     <ClInclude Include="TopMenuScene.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="WaterTank.h" />
@@ -146,6 +147,7 @@
     <ClCompile Include="House.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainScene.cpp" />
+    <ClCompile Include="Shed.cpp" />
     <ClCompile Include="TopMenuScene.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="WaterTank.cpp" />
