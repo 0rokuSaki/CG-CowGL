@@ -29,16 +29,17 @@ void renderHouse(WcPt3D position, GLdouble rotationAngle)
     static const GLdouble HOUSE_WINDOW_WIDTH = 0.75;
     static const GLdouble HOUSE_WINDOW_HEIGHT = 1.5;
     static const GLdouble HOUSE_WINDOW_HEIGHT_FROM_GROUND = 1.0;
-    static const GLdouble HOUSE_EPSILON = 0.05;
+    static const GLdouble HOUSE_EPSILON = 0.025;
+    static const GLdouble HOUSE_LINE_WIDTH = 1.0;
 
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
 
-    glRotated(rotationAngle, 0.0, 0.0, 1.0);
     glTranslated(position.getX(), position.getY(), position.getZ());
+    glRotated(rotationAngle, 0.0, 0.0, 1.0);
 
     /* Walls */
-    glColor3d(RGB_COLOR_LIGHT_GRAY);
+    glColor3d(RGB_COLOR_CREAM);
 
     glBegin(GL_POLYGON);
     glVertex3d((HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_EPSILON);
@@ -69,7 +70,8 @@ void renderHouse(WcPt3D position, GLdouble rotationAngle)
     glEnd();
 
     /* Roof */
-    glColor3d(RGB_COLOR_RED);
+    glColor3d(RGB_COLOR_CLAY);
+
     glBegin(GL_POLYGON);
     glVertex3d(-(HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
     glVertex3d((HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_EPSILON);
@@ -138,6 +140,7 @@ void renderHouse(WcPt3D position, GLdouble rotationAngle)
 
     /* Walls frame */
     glColor3d(RGB_COLOR_BLACK);
+    glLineWidth(HOUSE_LINE_WIDTH);
 
     glBegin(GL_LINE_LOOP);
     glVertex3d((HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_EPSILON);

@@ -24,5 +24,6 @@ extern WcVector3D upVector;
 *     FUNCTION PROTOTYPES     *
 *******************************/
 void renderMainScene(void);
+void renderAxes(GLdouble height);
 void handleKeyboardEventMain(unsigned char key, int x, int y);
 void resetProjectionAndModelviewMatrices(void);

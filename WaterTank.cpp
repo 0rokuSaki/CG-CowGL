@@ -23,6 +23,7 @@ void renderWaterTank(WcPt3D position, GLdouble rotationAngle)
     static const GLdouble WATER_TANK_LENGTH = 3.0;
     static const GLdouble WATER_TANK_HEIGHT = 0.5;
     static const GLdouble WATER_TANK_WATER_LEVEL = 0.35;
+    static const GLdouble WATER_TANK_LINE_WIDTH = 1.0;
 
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
@@ -69,6 +70,38 @@ void renderWaterTank(WcPt3D position, GLdouble rotationAngle)
     glVertex3d((WATER_TANK_WIDTH / 2.0), -(WATER_TANK_LENGTH / 2.0), WATER_TANK_WATER_LEVEL);
     glVertex3d((WATER_TANK_WIDTH / 2.0), (WATER_TANK_LENGTH / 2.0), WATER_TANK_WATER_LEVEL);
     glVertex3d(-(WATER_TANK_WIDTH / 2.0), (WATER_TANK_LENGTH / 2.0), WATER_TANK_WATER_LEVEL);
+    glEnd();
+
+    /* Water tank walls frame */
+    glColor3d(RGB_COLOR_BLACK);
+    glLineWidth(WATER_TANK_LINE_WIDTH);
+
+    glBegin(GL_LINE_LOOP);
+    glVertex3d((WATER_TANK_WIDTH / 2.0), -(WATER_TANK_LENGTH / 2.0), 0.0);
+    glVertex3d(-(WATER_TANK_WIDTH / 2.0), -(WATER_TANK_LENGTH / 2.0), 0.0);
+    glVertex3d(-(WATER_TANK_WIDTH / 2.0), -(WATER_TANK_LENGTH / 2.0), WATER_TANK_HEIGHT);
+    glVertex3d((WATER_TANK_WIDTH / 2.0), -(WATER_TANK_LENGTH / 2.0), WATER_TANK_HEIGHT);
+    glEnd();
+
+    glBegin(GL_LINE_LOOP);
+    glVertex3d((WATER_TANK_WIDTH / 2.0), -(WATER_TANK_LENGTH / 2.0), 0.0);
+    glVertex3d((WATER_TANK_WIDTH / 2.0), (WATER_TANK_LENGTH / 2.0), 0.0);
+    glVertex3d((WATER_TANK_WIDTH / 2.0), (WATER_TANK_LENGTH / 2.0), WATER_TANK_HEIGHT);
+    glVertex3d((WATER_TANK_WIDTH / 2.0), -(WATER_TANK_LENGTH / 2.0), WATER_TANK_HEIGHT);
+    glEnd();
+
+    glBegin(GL_LINE_LOOP);
+    glVertex3d(-(WATER_TANK_WIDTH / 2.0), -(WATER_TANK_LENGTH / 2.0), 0.0);
+    glVertex3d(-(WATER_TANK_WIDTH / 2.0), (WATER_TANK_LENGTH / 2.0), 0.0);
+    glVertex3d(-(WATER_TANK_WIDTH / 2.0), (WATER_TANK_LENGTH / 2.0), WATER_TANK_HEIGHT);
+    glVertex3d(-(WATER_TANK_WIDTH / 2.0), -(WATER_TANK_LENGTH / 2.0), WATER_TANK_HEIGHT);
+    glEnd();
+
+    glBegin(GL_LINE_LOOP);
+    glVertex3d(-(WATER_TANK_WIDTH / 2.0), (WATER_TANK_LENGTH / 2.0), 0.0);
+    glVertex3d((WATER_TANK_WIDTH / 2.0), (WATER_TANK_LENGTH / 2.0), 0.0);
+    glVertex3d((WATER_TANK_WIDTH / 2.0), (WATER_TANK_LENGTH / 2.0), WATER_TANK_HEIGHT);
+    glVertex3d(-(WATER_TANK_WIDTH / 2.0), (WATER_TANK_LENGTH / 2.0), WATER_TANK_HEIGHT);
     glEnd();
 
     glPopMatrix();
