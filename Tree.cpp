@@ -17,7 +17,7 @@
 /******************************
 *     FUNCTION DEFINITIONS    *
 *******************************/
-void renderTree(WcPt3D pos)
+void renderTree(WcPt3D position)
 {
     /* Tree stem parameters */
     static const RGBColor TREE_STEM_COLOR(RGB_COLOR_DARK_BROWN);
@@ -41,7 +41,7 @@ void renderTree(WcPt3D pos)
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
 
-    glTranslated(pos.getX(), pos.getY(), pos.getZ());  // move tree to pos
+    glTranslated(position.getX(), position.getY(), position.getZ());  // move tree to position
 
     /* Render tree stem */
     glColor3d(TREE_STEM_COLOR.getR(), TREE_STEM_COLOR.getG(), TREE_STEM_COLOR.getB());

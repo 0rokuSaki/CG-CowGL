@@ -1,10 +1,10 @@
 #pragma once
 /*****************************************************************//**
- * \file   Tree.h
+ * \file   WaterTank.h
  * \brief  
  * 
  * \author aaron
- * \date   May 2023
+ * \date   June 2023
  *********************************************************************/
 
 /******************************
@@ -15,4 +15,4 @@ class WcPt3D;
 /******************************
 *     FUNCTION PROTOTYPES     *
 *******************************/
-void renderTree(WcPt3D position);
+void renderWaterTank(WcPt3D position, GLdouble rotationAngle);
