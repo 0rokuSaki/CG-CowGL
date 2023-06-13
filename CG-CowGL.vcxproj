@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Background.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="HelpMenuScene.h" />
     <ClInclude Include="House.h" />
@@ -142,6 +143,7 @@
     <ClInclude Include="WcVector3D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="HelpMenuScene.cpp" />
     <ClCompile Include="House.cpp" />
@@ -151,7 +153,6 @@
     <ClCompile Include="TopMenuScene.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="WaterTank.cpp" />
-    <ClCompile Include="WcVector3D.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
