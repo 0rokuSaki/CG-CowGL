@@ -77,9 +77,6 @@
     <ClCompile Include="House.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WcVector3D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="WaterTank.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
