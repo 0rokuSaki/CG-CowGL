@@ -17,6 +17,7 @@
 
 #include "House.h"
 #include "Tree.h"
+#include "WaterTank.h"
 
 /******************************
 *          DEFINES            *
@@ -90,8 +91,8 @@ void renderMainScene(void)
     glPopMatrix();
 
 
-    renderHouse(WcPt3D(0,0,0.0), 0.0);
-    renderHouse(WcPt3D(25.0, 25.0, 7.0), -90.0);
+    //renderHouse(WcPt3D(0,0,0.0), 0.0);
+    renderWaterTank(WcPt3D(), 0.0);
     renderTree(WcPt3D(5, 5, 0));
     renderTree(WcPt3D(6, -4, 0));
     renderTree(WcPt3D(-6, -4, 0));
