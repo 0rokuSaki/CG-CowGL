@@ -102,7 +102,7 @@ void keyboardCallback(unsigned char key, int x, int y)
 
 void idleCallback(void)
 {
-    static GLdouble theta = 0.0;
+    static GLdouble theta = 270.0;
     static const GLdouble x = 15.0;
     static const GLdouble y = 15.0;
 
