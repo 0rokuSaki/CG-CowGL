@@ -27,7 +27,7 @@ void renderBackground(void)
     static const WcVector3D PLANE_NORMAL(0.0, 0.0, 1.0);
 
     /* Sky */
-    static const GLdouble SKY_SPHERE_RADIUS = 86.0;
+    static const GLdouble SKY_SPHERE_RADIUS = 70.0;
     static const GLint SKY_SPHERE_NUM_SLICES = 50;
     static const GLint SKY_SPHERE_NUM_STACKS = 50;
 
@@ -35,7 +35,7 @@ void renderBackground(void)
     static const GLdouble SUN_SPHERE_RADIUS = 2.0;
     static const GLint SUN_SPHERE_NUM_SLICES = 20;
     static const GLint SUN_SPHERE_NUM_STACKS = 20;
-    static const WcPt3D SUN_POSITION(50.0, 50.0, 50.0);
+    static const WcPt3D SUN_POSITION(40.0, 40.0, 40.0);
 
     /* Lighting */
     static const GLfloat sunLightPosType[] = { SUN_POSITION.getX(), SUN_POSITION.getY(), SUN_POSITION.getZ(), 1.0 };
@@ -80,8 +80,8 @@ void renderBackground(void)
     glLightfv(GL_LIGHT0, GL_POSITION, sunLightPosType);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, whiteColor);
     glLightfv(GL_LIGHT0, GL_AMBIENT, whiteColor);
-    glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.5);
-    glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.01);
+    glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 2.25);
+    glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.0001);
     glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.0);
     glEnable(GL_LIGHT0);
 
