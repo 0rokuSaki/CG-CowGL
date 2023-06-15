@@ -140,7 +140,8 @@ void renderHouse(WcPt3D position, GLdouble rotationAngle)
     /* Door */
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, brownColor);
     glMaterialfv(GL_FRONT, GL_EMISSION, blackColor);
-    glMaterialfv(GL_FRONT, GL_SPECULAR, blackColor);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, whiteColor);
+    glMaterialf(GL_FRONT, GL_SHININESS, 5.0);
 
     glBegin(GL_POLYGON);
     glNormal3f(1.0, 0.0, 0.0);

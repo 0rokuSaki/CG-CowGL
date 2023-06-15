@@ -47,7 +47,7 @@ void renderShed(WcPt3D position, GLdouble rotationAngle)
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, mediumGrayColor);
     glMaterialfv(GL_FRONT, GL_EMISSION, blackColor);
     glMaterialfv(GL_FRONT, GL_SPECULAR, whiteColor);
-    glMaterialf(GL_FRONT, GL_SHININESS, 7.5);
+    glMaterialf(GL_FRONT, GL_SHININESS, 9.5);
 
     glBegin(GL_POLYGON);
     glNormal3f(0.0, -1.0, 0.0);
