@@ -154,7 +154,7 @@ void renderHouse(WcPt3D position, GLdouble rotationAngle)
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, lightBlueColor);
     glMaterialfv(GL_FRONT, GL_EMISSION, blackColor);
     glMaterialfv(GL_FRONT, GL_SPECULAR, whiteColor);
-    glMaterialf(GL_FRONT, GL_SHININESS, 50.0);
+    glMaterialf(GL_FRONT, GL_SHININESS, 10.0);
 
     glBegin(GL_POLYGON);
     glNormal3f(1.0, 0.0, 0.0);

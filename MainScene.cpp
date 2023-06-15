@@ -35,8 +35,8 @@
 /******************************
 *       GLOBAL VARIABLES      *
 *******************************/
-WcPt3D viewOrigin(10.0, 10.0, 12.0);
-WcPt3D lookAtPoint(0.0, 0.0, 10.0);
+WcPt3D viewOrigin(20.0, 20.0, 10.0);
+WcPt3D lookAtPoint(0.0, 0.0, 2.0);
 WcVector3D upVector(0.0, 0.0, 1.0);
 
 /******************************
@@ -66,10 +66,7 @@ void renderMainScene(void)
 
     /* Render temporary WC axes */
     /* RED = X, GREEN = Y, BLUE = Z */
-    if (1)
-    {
-        renderAxes(2.0);
-    }
+    //renderAxes(2.0);
 
     renderBackground();
     renderHouse(WcPt3D(-5, 0, 0), 0.0);
