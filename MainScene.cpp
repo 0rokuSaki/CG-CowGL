@@ -49,6 +49,10 @@ void renderMainScene(void)
 
     glViewport(0, 0, windowWidth, windowHeight - TOP_MENU_HEIGHT);
 
+    glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
+    GLfloat globalAmbient[] = { 0.75, 0.75, 0.75, 1.0 };
+    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbient);
+
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     

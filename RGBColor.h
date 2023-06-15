@@ -34,6 +34,7 @@
 #define RGB_COLOR_SKY_BLUE 0.53, 0.81, 1.0
 #define RGB_COLOR_SUN_YELLOW 0.98, 0.99, 0.06
 #define RGB_COLOR_CLAY 0.71, 0.13, 0.13
+#define RGB_COLOR_BROWN 0.55, 0.27, 0.07
 
 /**
  * Represents an RGB triplet (r,g,b).

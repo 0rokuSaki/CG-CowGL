@@ -79,9 +79,8 @@ void renderBackground(void)
 
     glLightfv(GL_LIGHT0, GL_POSITION, sunLightPosType);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, whiteColor);
-    glLightfv(GL_LIGHT0, GL_AMBIENT, whiteColor);
-    glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 2.25);
-    glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.0001);
+    glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 1.0);
+    glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.005);
     glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.0);
     glEnable(GL_LIGHT0);
 

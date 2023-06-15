@@ -30,6 +30,6 @@ public:
     void setY(GLdouble y) { _y = y; }
     void setZ(GLdouble z) { _z = z; }
 
-private:
+protected:
     GLdouble _x, _y, _z;
 };
