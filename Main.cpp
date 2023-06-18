@@ -19,6 +19,7 @@
 #include <iostream>
 #include "TopMenuScene.h"
 #include "HelpMenuScene.h"
+#include "AdjustAmbientLightMenuScene.h"
 #include "MainScene.h"
 
 #include <chrono>
@@ -84,6 +85,10 @@ void displayCallback(void)
     {
         renderHelpMenuScene();
     }
+    if (displayAdjustAmbientLightMenu)
+    {
+        renderAdjustAmbientLightScene();
+    }
     
     glFlush();
 }
@@ -98,6 +103,7 @@ void mouseCallback(int button, int state, int x, int y)
 void keyboardCallback(unsigned char key, int x, int y)
 {
     handleKeyboardEventHelpMenu(key, x, y);
+    handleKeyboardEventAdjustAmbientLightMenu(key, x, y);
 }
 
 void idleCallback(void)

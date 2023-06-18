@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AdjustAmbientLightMenuScene.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Utilities.h" />
@@ -144,6 +145,7 @@
     <ClInclude Include="WcVector3D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AdjustAmbientLightMenuScene.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="HelpMenuScene.cpp" />
