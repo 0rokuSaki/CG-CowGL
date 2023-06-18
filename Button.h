@@ -21,6 +21,7 @@
 class Button : public SceneObject
 {
 public:
+    Button();
     Button(PixelPt pos, GLint w, GLint h, std::string label);
     Button(GLint x, GLint y, GLint w, GLint h, std::string label);
     Button(PixelPt pos, GLint w, GLint h, std::string label, RGBColor bgColor, RGBColor frameColor, RGBColor labelColor);

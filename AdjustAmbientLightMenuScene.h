@@ -25,4 +25,5 @@ extern bool displayAdjustAmbientLightMenu;
 *******************************/
 void renderAdjustAmbientLightScene(void);
 void handleKeyboardEventAdjustAmbientLightMenu(unsigned char key, int x, int y);
+void handleMouseEventAdjustAmbientLightMenu(int button, int state, int x, int y);
 void resetProjectionAndModelviewMatrices(void);

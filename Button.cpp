@@ -21,6 +21,18 @@
 /******************************
 *          METHODS            *
 *******************************/
+Button::Button() :
+    _pos(0, 0),
+    _width(0),
+    _height(0),
+    _label(""),
+    _bgColor(RGB_COLOR_WHITE),
+    _frameColor(RGB_COLOR_BLACK),
+    _labelColor(RGB_COLOR_BLACK)
+{
+}
+
+
 Button::Button(PixelPt pos, GLint w, GLint h, std::string label) :
     _pos(pos),
     _width(w),

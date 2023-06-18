@@ -11,36 +11,50 @@
  *******************************/
 #include <GL/glut.h>
 #include <string>
+#include <iostream>
 
 #include "AdjustAmbientLightMenuScene.h"
 #include "PixelPt.h"
 #include "RGBColor.h"
 #include "WcPt3D.h"
+#include "Button.h"
 
 /******************************
 *       GLOBAL VARIABLES      *
 *******************************/
 bool displayAdjustAmbientLightMenu = false;
+Button decreaseAmbientLightBtn;
+Button increaseAmbientLightBtn;
+Button decreaseSunLightBtn;
+Button increaseSunLightBtn;
+Button moveSunCcwBtn;
+Button moveSunCwBtn;
 
 /******************************
 *     FUNCTION DEFINITIONS    *
 *******************************/
 void renderAdjustAmbientLightScene(void)
 {
+    /* Dimensions */
     static const GLint MENU_WIDTH = 375;
     static const GLint MENU_HEIGHT = 300;
     static const GLfloat MENU_FRAME_WIDTH = 7.0;
-    static const WcPt3D MENU_HEADER_POS(20.0, 260.0, 0.0);
+
+    /* Header & footer */
+    static const WcPt3D MENU_HEADER_POS(30.0, 260.0, 0.0);
     static const WcPt3D MENU_FOOTER_POS(40.0, 20.0, 0.0);
     static const std::string MENU_HEADER = "Adjust Ambient Light Menu - CowGL";
     static const std::string MENU_FOOTER = "Press ENTER to close this window.";
+
+    /* Buttons */
+    static const GLint btnWidth = 30;
+    static const GLint btnHeight = 30;
 
     const GLint windowWidth = glutGet(GLUT_WINDOW_WIDTH);
     const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
 
     /* Render the window for the menu */
-    PixelPt pos((windowWidth - MENU_WIDTH) / 2, (windowHeight - MENU_HEIGHT) / 2);
-    glViewport(pos.getX(), pos.getY(), MENU_WIDTH, MENU_HEIGHT);
+    glViewport((windowWidth - MENU_WIDTH) / 2, (windowHeight - MENU_HEIGHT) / 2, MENU_WIDTH, MENU_HEIGHT);
 
     resetProjectionAndModelviewMatrices();
 
@@ -67,6 +81,30 @@ void renderAdjustAmbientLightScene(void)
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, c);
     }
 
+    GLint btnX = (windowWidth - MENU_WIDTH) / 2 + 70;
+    GLint btnY = (windowHeight - MENU_HEIGHT) / 2 + 200;
+
+    decreaseAmbientLightBtn = Button(btnX, btnY, btnWidth, btnHeight, "-");
+    increaseAmbientLightBtn = Button(btnX + 200, btnY, btnWidth, btnHeight, "+");
+    
+    btnY -= 2 * btnHeight;
+
+    decreaseSunLightBtn = Button(btnX, btnY, btnWidth, btnHeight, "-");
+    increaseSunLightBtn = Button(btnX + 200, btnY, btnWidth, btnHeight, "+");
+    
+    btnY -= 2 * btnHeight;
+
+    moveSunCcwBtn = Button(btnX, btnY, btnWidth, btnHeight, "-");
+    moveSunCwBtn = Button(btnX + 200, btnY, btnWidth, btnHeight, "+");
+
+    decreaseAmbientLightBtn.render();
+    increaseAmbientLightBtn.render();
+    decreaseSunLightBtn.render();
+    increaseSunLightBtn.render();
+    moveSunCcwBtn.render();
+    moveSunCwBtn.render();
+
+
     /* Render footer */
     glRasterPos2d(MENU_FOOTER_POS.getX(), MENU_FOOTER_POS.getY());
     for (const auto &c : MENU_FOOTER)
@@ -83,5 +121,14 @@ void handleKeyboardEventAdjustAmbientLightMenu(unsigned char key, int x, int y)
     {
         displayAdjustAmbientLightMenu = false;
         glutPostRedisplay();
+    }
+}
+
+
+void handleMouseEventAdjustAmbientLightMenu(int button, int state, int x, int y)
+{
+    if (increaseAmbientLightBtn.clicked(x, y))
+    {
+        std::cout << "clicked" << std::endl;
     }
 }

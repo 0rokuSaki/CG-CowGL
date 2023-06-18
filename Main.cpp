@@ -97,6 +97,7 @@ void displayCallback(void)
 void mouseCallback(int button, int state, int x, int y)
 {
     handleMouseEventTopMenu(button, state, x, y);
+    handleMouseEventAdjustAmbientLightMenu(button, state, x, y);
 }
 
 
