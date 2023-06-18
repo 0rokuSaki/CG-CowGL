@@ -46,9 +46,17 @@ void renderAdjustAmbientLightScene(void)
     static const std::string MENU_HEADER = "Adjust Ambient Light Menu - CowGL";
     static const std::string MENU_FOOTER = "Press ENTER to close this window.";
 
+    /* Adjustment text */
+    static const WcPt3D ADJ_AMB_LIGHT_TEXT_POS(150.0, 210.0, 0.0);
+    static const WcPt3D ADJ_SUN_LIGHT_TEXT_POS(150.0, 150.0, 0.0);
+    static const WcPt3D ADJ_SUN_POS_TEXT_POS(150.0, 90.0, 0.0);
+    static const std::string ADJ_AMB_LIGHT_TEXT = "Ambient Light";
+    static const std::string ADJ_SUN_LIGHT_TEXT = "Sun Light";
+    static const std::string ADJ_SUN_POS_TEXT = "Sun Position";
+
     /* Buttons */
-    static const GLint btnWidth = 30;
-    static const GLint btnHeight = 30;
+    static const GLint BTN_WIDTH = 30;
+    static const GLint BTN_HEIGHT = 30;
 
     const GLint windowWidth = glutGet(GLUT_WINDOW_WIDTH);
     const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
@@ -81,29 +89,24 @@ void renderAdjustAmbientLightScene(void)
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, c);
     }
 
-    GLint btnX = (windowWidth - MENU_WIDTH) / 2 + 70;
-    GLint btnY = (windowHeight - MENU_HEIGHT) / 2 + 200;
+    /* Render adjustment text */
+    glRasterPos2d(ADJ_AMB_LIGHT_TEXT_POS.getX(), ADJ_AMB_LIGHT_TEXT_POS.getY());
+    for (const auto& c : ADJ_AMB_LIGHT_TEXT)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, c);
+    }
 
-    decreaseAmbientLightBtn = Button(btnX, btnY, btnWidth, btnHeight, "-");
-    increaseAmbientLightBtn = Button(btnX + 200, btnY, btnWidth, btnHeight, "+");
-    
-    btnY -= 2 * btnHeight;
+    glRasterPos2d(ADJ_SUN_LIGHT_TEXT_POS.getX(), ADJ_SUN_LIGHT_TEXT_POS.getY());
+    for (const auto& c : ADJ_SUN_LIGHT_TEXT)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, c);
+    }
 
-    decreaseSunLightBtn = Button(btnX, btnY, btnWidth, btnHeight, "-");
-    increaseSunLightBtn = Button(btnX + 200, btnY, btnWidth, btnHeight, "+");
-    
-    btnY -= 2 * btnHeight;
-
-    moveSunCcwBtn = Button(btnX, btnY, btnWidth, btnHeight, "-");
-    moveSunCwBtn = Button(btnX + 200, btnY, btnWidth, btnHeight, "+");
-
-    decreaseAmbientLightBtn.render();
-    increaseAmbientLightBtn.render();
-    decreaseSunLightBtn.render();
-    increaseSunLightBtn.render();
-    moveSunCcwBtn.render();
-    moveSunCwBtn.render();
-
+    glRasterPos2d(ADJ_SUN_POS_TEXT_POS.getX(), ADJ_SUN_POS_TEXT_POS.getY());
+    for (const auto& c : ADJ_SUN_POS_TEXT)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, c);
+    }
 
     /* Render footer */
     glRasterPos2d(MENU_FOOTER_POS.getX(), MENU_FOOTER_POS.getY());
@@ -111,6 +114,31 @@ void renderAdjustAmbientLightScene(void)
     {
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, c);
     }
+
+    /* Render buttons */
+    GLint btnX1 = (windowWidth - MENU_WIDTH) / 2 + 100;
+    GLint btnX2 = (windowWidth - MENU_WIDTH) / 2 + 250;
+    GLint btnY = (windowHeight - MENU_HEIGHT) / 2 + 200;
+
+    decreaseAmbientLightBtn = Button(btnX1, btnY, BTN_WIDTH, BTN_HEIGHT, "-");
+    increaseAmbientLightBtn = Button(btnX2, btnY, BTN_WIDTH, BTN_HEIGHT, "+");
+
+    btnY -= 2 * BTN_HEIGHT;
+
+    decreaseSunLightBtn = Button(btnX1, btnY, BTN_WIDTH, BTN_HEIGHT, "-");
+    increaseSunLightBtn = Button(btnX2, btnY, BTN_WIDTH, BTN_HEIGHT, "+");
+
+    btnY -= 2 * BTN_HEIGHT;
+
+    moveSunCcwBtn = Button(btnX1, btnY, BTN_WIDTH, BTN_HEIGHT, "-");
+    moveSunCwBtn = Button(btnX2, btnY, BTN_WIDTH, BTN_HEIGHT, "+");
+
+    decreaseAmbientLightBtn.render();
+    increaseAmbientLightBtn.render();
+    decreaseSunLightBtn.render();
+    increaseSunLightBtn.render();
+    moveSunCcwBtn.render();
+    moveSunCwBtn.render();
 }
 
 
