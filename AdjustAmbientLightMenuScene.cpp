@@ -14,6 +14,7 @@
 #include <iostream>
 
 #include "AdjustAmbientLightMenuScene.h"
+#include "MainScene.h"
 #include "Background.h"
 #include "PixelPt.h"
 #include "RGBColor.h"
@@ -157,6 +158,7 @@ void handleKeyboardEventAdjustAmbientLightMenu(unsigned char key, int x, int y)
 void handleMouseEventAdjustAmbientLightMenu(int button, int state, int x, int y)
 {
     static const GLdouble SUN_ANGLE_DIFF = 5.0;
+    static const GLfloat GLOBAL_AMB_DIFF = 0.05;
 
     const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
     y = windowHeight - y;
@@ -165,11 +167,21 @@ void handleMouseEventAdjustAmbientLightMenu(int button, int state, int x, int y)
     {
         if (decreaseAmbientLightBtn.clicked(x, y))
         {
-            std::cout << "1" << std::endl;
+            if (globalAmbient[0] - GLOBAL_AMB_DIFF >= 0)
+            {
+                globalAmbient[0] -= GLOBAL_AMB_DIFF;
+                globalAmbient[1] -= GLOBAL_AMB_DIFF;
+                globalAmbient[2] -= GLOBAL_AMB_DIFF;
+            }
         }
         else if (increaseAmbientLightBtn.clicked(x, y))
         {
-            std::cout << "2" << std::endl;
+            if (globalAmbient[0] + GLOBAL_AMB_DIFF <= 1.0)
+            {
+                globalAmbient[0] += GLOBAL_AMB_DIFF;
+                globalAmbient[1] += GLOBAL_AMB_DIFF;
+                globalAmbient[2] += GLOBAL_AMB_DIFF;
+            }
         }
         else if (decreaseSunLightBtn.clicked(x, y))
         {

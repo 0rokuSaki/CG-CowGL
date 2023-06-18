@@ -19,6 +19,7 @@
 extern WcPt3D viewOrigin;
 extern WcPt3D lookAtPoint;
 extern WcVector3D upVector;
+extern GLfloat globalAmbient[];
 
 /******************************
 *     FUNCTION PROTOTYPES     *
