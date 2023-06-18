@@ -98,6 +98,7 @@ void mouseCallback(int button, int state, int x, int y)
 {
     handleMouseEventTopMenu(button, state, x, y);
     handleMouseEventAdjustAmbientLightMenu(button, state, x, y);
+    glutPostRedisplay();
 }
 
 
@@ -105,6 +106,7 @@ void keyboardCallback(unsigned char key, int x, int y)
 {
     handleKeyboardEventHelpMenu(key, x, y);
     handleKeyboardEventAdjustAmbientLightMenu(key, x, y);
+    glutPostRedisplay();
 }
 
 void idleCallback(void)

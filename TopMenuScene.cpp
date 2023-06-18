@@ -61,26 +61,24 @@ void renderTopMenuScene(void)
 
 void handleMouseEventTopMenu(int button, int state, int x, int y)
 {
-    const GLint windowWidth = glutGet(GLUT_WINDOW_WIDTH);
     const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
+    y = windowHeight - y;
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
-        if (exitBtn.clicked(x, windowHeight - y))
+        if (exitBtn.clicked(x, y))
         {
             exit(0);
         }
-        else if (helpBtn.clicked(x, windowHeight - y))
+        else if (helpBtn.clicked(x, y))
         {
             displayHelpMenu = true;
             displayAdjustAmbientLightMenu = false;
-            glutPostRedisplay();
         }
-        else if (adjAmbLightBtn.clicked(x, windowHeight - y))
+        else if (adjAmbLightBtn.clicked(x, y))
         {
             displayHelpMenu = false;
             displayAdjustAmbientLightMenu = true;
-            glutPostRedisplay();
         }
     }
 }

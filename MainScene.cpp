@@ -66,7 +66,7 @@ void renderMainScene(void)
 
     /* Render temporary WC axes */
     /* RED = X, GREEN = Y, BLUE = Z */
-    //renderAxes(2.0);
+    renderAxes(2.0);
 
     renderBackground();
     renderHouse(WcPt3D(-5, 0, 0), 0.0);

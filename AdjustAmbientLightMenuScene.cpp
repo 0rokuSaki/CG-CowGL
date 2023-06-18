@@ -14,6 +14,7 @@
 #include <iostream>
 
 #include "AdjustAmbientLightMenuScene.h"
+#include "Background.h"
 #include "PixelPt.h"
 #include "RGBColor.h"
 #include "WcPt3D.h"
@@ -155,8 +156,42 @@ void handleKeyboardEventAdjustAmbientLightMenu(unsigned char key, int x, int y)
 
 void handleMouseEventAdjustAmbientLightMenu(int button, int state, int x, int y)
 {
-    if (increaseAmbientLightBtn.clicked(x, y))
+    static const GLdouble SUN_ANGLE_DIFF = 5.0;
+
+    const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
+    y = windowHeight - y;
+
+    if (displayAdjustAmbientLightMenu && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
-        std::cout << "clicked" << std::endl;
+        if (decreaseAmbientLightBtn.clicked(x, y))
+        {
+            std::cout << "1" << std::endl;
+        }
+        else if (increaseAmbientLightBtn.clicked(x, y))
+        {
+            std::cout << "2" << std::endl;
+        }
+        else if (decreaseSunLightBtn.clicked(x, y))
+        {
+            std::cout << "3" << std::endl;
+        }
+        else if (increaseSunLightBtn.clicked(x, y))
+        {
+            std::cout << "4" << std::endl;
+        }
+        else if (moveSunCcwBtn.clicked(x, y))
+        {
+            if (sunAngle + SUN_ANGLE_DIFF <= 180.0)
+            {
+                sunAngle += SUN_ANGLE_DIFF;
+            }
+        }
+        else if (moveSunCwBtn.clicked(x, y))
+        {
+            if (sunAngle - SUN_ANGLE_DIFF >= 0.0)
+            {
+                sunAngle -= SUN_ANGLE_DIFF;
+            }
+        }
     }
 }
