@@ -36,7 +36,7 @@
 *       GLOBAL VARIABLES      *
 *******************************/
 WcPt3D viewOrigin(20.0, 20.0, 10.0);
-WcPt3D lookAtPoint(0.0, 0.0, 10.0);
+WcPt3D lookAtPoint(0.0, 0.0, 1.0);
 WcVector3D upVector(0.0, 0.0, 1.0);
 
 /******************************

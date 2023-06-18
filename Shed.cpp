@@ -35,6 +35,7 @@ void renderShed(WcPt3D position, GLdouble rotationAngle)
     static const GLfloat lightGrayColor[] = { RGB_COLOR_LIGHT_GRAY, 1.0 };
     static const GLfloat blackColor[] = { RGB_COLOR_BLACK, 1.0 };
     static const GLfloat whiteColor[] = { RGB_COLOR_WHITE, 1.0 };
+    static const GLfloat shedShinness = 25.0;
 
     glEnable(GL_LIGHTING);
     glMatrixMode(GL_MODELVIEW);
@@ -47,7 +48,7 @@ void renderShed(WcPt3D position, GLdouble rotationAngle)
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, mediumGrayColor);
     glMaterialfv(GL_FRONT, GL_EMISSION, blackColor);
     glMaterialfv(GL_FRONT, GL_SPECULAR, whiteColor);
-    glMaterialf(GL_FRONT, GL_SHININESS, 9.5);
+    glMaterialf(GL_FRONT, GL_SHININESS, shedShinness);
 
     glBegin(GL_POLYGON);
     glNormal3f(0.0, -1.0, 0.0);
@@ -134,7 +135,7 @@ void renderShed(WcPt3D position, GLdouble rotationAngle)
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, lightGrayColor);
     glMaterialfv(GL_FRONT, GL_EMISSION, blackColor);
     glMaterialfv(GL_FRONT, GL_SPECULAR, whiteColor);
-    glMaterialf(GL_FRONT, GL_SHININESS, 5.0);
+    glMaterialf(GL_FRONT, GL_SHININESS, shedShinness);
 
     glBegin(GL_POLYGON);
     glVertex3d(-(SHED_DOOR_WIDTH / 2.0), (SHED_LENGTH / 2.0) + SHED_EPSILON, SHED_EPSILON);

@@ -63,6 +63,7 @@ void renderTree(WcPt3D position)
     glMaterialfv(GL_FRONT, GL_SPECULAR, blackColor);
 
     glTranslatef(0.0, 0.0, LEAF_HEIGHT_FROM_GROUND);
+    glNormal3f(0.0, 0.0, -1.0);
     gluDisk(disk, 0.0, LEAF_BASE_WIDTH1, LEAF_NUM_SLICES, LEAF_NUM_STACKS);
     glutSolidCone(LEAF_BASE_WIDTH1, LEAF_HEIGHT, LEAF_NUM_SLICES, LEAF_NUM_STACKS);
 
@@ -72,6 +73,7 @@ void renderTree(WcPt3D position)
     glMaterialfv(GL_FRONT, GL_SPECULAR, blackColor);
 
     glTranslatef(0.0, 0.0, LEAF_HEIGHT_FROM_GROUND);
+    glNormal3f(0.0, 0.0, -1.0);
     gluDisk(disk, 0.0, LEAF_BASE_WIDTH2, LEAF_NUM_SLICES, LEAF_NUM_STACKS);
     glutSolidCone(LEAF_BASE_WIDTH2, LEAF_HEIGHT, LEAF_NUM_SLICES, LEAF_NUM_STACKS);
 
@@ -81,6 +83,7 @@ void renderTree(WcPt3D position)
     glMaterialfv(GL_FRONT, GL_SPECULAR, blackColor);
 
     glTranslatef(0.0, 0.0, LEAF_HEIGHT_FROM_GROUND);
+    glNormal3f(0.0, 0.0, -1.0);
     gluDisk(disk, 0.0, LEAF_BASE_WIDTH3, LEAF_NUM_SLICES, LEAF_NUM_STACKS);
     glutSolidCone(LEAF_BASE_WIDTH3, LEAF_HEIGHT, LEAF_NUM_SLICES, LEAF_NUM_STACKS);
 
