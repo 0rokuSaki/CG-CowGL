@@ -158,6 +158,7 @@ void handleKeyboardEventAdjustAmbientLightMenu(unsigned char key, int x, int y)
 void handleMouseEventAdjustAmbientLightMenu(int button, int state, int x, int y)
 {
     static const GLdouble SUN_ANGLE_DIFF = 5.0;
+    static const GLfloat SUN_CONST_ATTEN_DIFF = 0.2;
     static const GLfloat GLOBAL_AMB_DIFF = 0.05;
 
     const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
@@ -167,7 +168,7 @@ void handleMouseEventAdjustAmbientLightMenu(int button, int state, int x, int y)
     {
         if (decreaseAmbientLightBtn.clicked(x, y))
         {
-            if (globalAmbient[0] - GLOBAL_AMB_DIFF >= 0)
+            if (globalAmbient[0] - GLOBAL_AMB_DIFF >= 0.0)
             {
                 globalAmbient[0] -= GLOBAL_AMB_DIFF;
                 globalAmbient[1] -= GLOBAL_AMB_DIFF;
@@ -185,11 +186,17 @@ void handleMouseEventAdjustAmbientLightMenu(int button, int state, int x, int y)
         }
         else if (decreaseSunLightBtn.clicked(x, y))
         {
-            std::cout << "3" << std::endl;
+            if (sunConstAttenuation + SUN_CONST_ATTEN_DIFF <= 1.0)
+            {
+                sunConstAttenuation += SUN_CONST_ATTEN_DIFF;
+            }
         }
         else if (increaseSunLightBtn.clicked(x, y))
         {
-            std::cout << "4" << std::endl;
+            if (sunConstAttenuation - SUN_CONST_ATTEN_DIFF >= 0.0)
+            {
+                sunConstAttenuation -= SUN_CONST_ATTEN_DIFF;
+            }
         }
         else if (moveSunCcwBtn.clicked(x, y))
         {

@@ -16,6 +16,7 @@
 *      EXTERNAL VARIABLES     *
 *******************************/
 extern GLdouble sunAngle;
+extern GLfloat sunConstAttenuation;
 
 /******************************
 *     FUNCTION PROTOTYPES     *

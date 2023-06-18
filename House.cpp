@@ -91,8 +91,8 @@ void renderHouse(WcPt3D position, GLdouble rotationAngle)
     if (calculateRoofNormals)
     {
         WcPt3D v1(-(HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT);
-        WcPt3D v2(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT);
-        WcPt3D v3(0.0, (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT);
+        WcPt3D v2(0.0, (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT + HOUSE_ROOF_HEIGHT);
+        WcPt3D v3(-(HOUSE_WIDTH / 2.0), (HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT);
         roofNormal1 = getNormalVector(v1, v2, v3);
 
         WcPt3D v4((HOUSE_WIDTH / 2.0), -(HOUSE_LENGTH / 2.0), HOUSE_WALL_HEIGHT);
