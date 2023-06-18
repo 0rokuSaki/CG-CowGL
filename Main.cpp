@@ -121,7 +121,7 @@ void idleCallback(void)
     renderMainScene();
     glutPostRedisplay();
 
-    theta += 0.01;
+    theta += 0.005;
     
     if (theta >= 360.0)
     {
