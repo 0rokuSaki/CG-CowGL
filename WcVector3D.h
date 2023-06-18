@@ -18,5 +18,6 @@ class WcVector3D :
 public:
     WcVector3D() : WcPt3D(0.0, 0.0, 0.0) {}
     WcVector3D(GLdouble x, GLdouble y, GLdouble z) : WcPt3D(x, y, z) {}
+    void normalize();
 };
 
