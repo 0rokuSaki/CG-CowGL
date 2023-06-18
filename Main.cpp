@@ -19,6 +19,7 @@
 #include <iostream>
 #include "TopMenuScene.h"
 #include "HelpMenuScene.h"
+#include "AdjustAmbientLightMenuScene.h"
 #include "MainScene.h"
 
 #include <chrono>
@@ -84,6 +85,10 @@ void displayCallback(void)
     {
         renderHelpMenuScene();
     }
+    if (displayAdjustAmbientLightMenu)
+    {
+        renderAdjustAmbientLightScene();
+    }
     
     glFlush();
 }
@@ -92,12 +97,16 @@ void displayCallback(void)
 void mouseCallback(int button, int state, int x, int y)
 {
     handleMouseEventTopMenu(button, state, x, y);
+    handleMouseEventAdjustAmbientLightMenu(button, state, x, y);
+    glutPostRedisplay();
 }
 
 
 void keyboardCallback(unsigned char key, int x, int y)
 {
     handleKeyboardEventHelpMenu(key, x, y);
+    handleKeyboardEventAdjustAmbientLightMenu(key, x, y);
+    glutPostRedisplay();
 }
 
 void idleCallback(void)
@@ -112,7 +121,7 @@ void idleCallback(void)
     renderMainScene();
     glutPostRedisplay();
 
-    theta += 0.01;
+    theta += 0.005;
     
     if (theta >= 360.0)
     {

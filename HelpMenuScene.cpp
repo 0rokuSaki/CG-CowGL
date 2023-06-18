@@ -86,6 +86,5 @@ void handleKeyboardEventHelpMenu(unsigned char key, int x, int y)
     if ((int)key == HELP_MENU_ENTER_KEY_VAL)
     {
         displayHelpMenu = false;
-        glutPostRedisplay();
     }
 }

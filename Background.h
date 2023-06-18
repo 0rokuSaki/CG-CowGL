@@ -8,6 +8,17 @@
 *********************************************************************/
 
 /******************************
+*          INCLUDES           *
+*******************************/
+#include <GL/glut.h>
+
+/******************************
+*      EXTERNAL VARIABLES     *
+*******************************/
+extern GLdouble sunAngle;
+extern GLfloat sunConstAttenuation;
+
+/******************************
 *     FUNCTION PROTOTYPES     *
 *******************************/
 void renderBackground(void);

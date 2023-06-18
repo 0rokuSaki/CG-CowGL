@@ -138,6 +138,7 @@ void renderShed(WcPt3D position, GLdouble rotationAngle)
     glMaterialf(GL_FRONT, GL_SHININESS, shedShinness);
 
     glBegin(GL_POLYGON);
+    glNormal3f(0.0, 1.0, 0.0);
     glVertex3d(-(SHED_DOOR_WIDTH / 2.0), (SHED_LENGTH / 2.0) + SHED_EPSILON, SHED_EPSILON);
     glVertex3d((SHED_DOOR_WIDTH / 2.0), (SHED_LENGTH / 2.0) + SHED_EPSILON, SHED_EPSILON);
     glVertex3d((SHED_DOOR_WIDTH / 2.0), (SHED_LENGTH / 2.0) + SHED_EPSILON, SHED_DOOR_HEIGHT);

@@ -1,30 +1,29 @@
 #pragma once
 /*****************************************************************//**
- * \file   MainScene.h
+ * \file   AdjustAmbientLightMenuScene.h
  * \brief  
  * 
  * \author aaron
- * \date   May 2023
+ * \date   June 2023
  *********************************************************************/
 
 /******************************
 *          INCLUDES           *
 *******************************/
-#include "WcPt3D.h"
-#include "WcVector3D.h"
+
+/******************************
+*          DEFINES            *
+*******************************/
 
 /******************************
 *      EXTERNAL VARIABLES     *
 *******************************/
-extern WcPt3D viewOrigin;
-extern WcPt3D lookAtPoint;
-extern WcVector3D upVector;
-extern GLfloat globalAmbient[];
+extern bool displayAdjustAmbientLightMenu;
 
 /******************************
 *     FUNCTION PROTOTYPES     *
 *******************************/
-void renderMainScene(void);
-void renderAxes(GLdouble height);
-void handleKeyboardEventMain(unsigned char key, int x, int y);
+void renderAdjustAmbientLightScene(void);
+void handleKeyboardEventAdjustAmbientLightMenu(unsigned char key, int x, int y);
+void handleMouseEventAdjustAmbientLightMenu(int button, int state, int x, int y);
 void resetProjectionAndModelviewMatrices(void);

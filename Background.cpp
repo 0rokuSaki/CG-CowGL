@@ -10,9 +10,18 @@
 *          INCLUDES           *
 *******************************/
 #include <GL/glut.h>
+#include <cmath>
+
 #include "RGBColor.h"
 #include "WcPt3D.h"
 #include "WcVector3D.h"
+
+/******************************
+*       GLOBAL VARIABLES      *
+*******************************/
+GLdouble sunAngle = 15.0;
+GLfloat sunConstAttenuation = 1.0;
+const GLfloat PI = 3.14159265358979323846;
 
 /******************************
 *     FUNCTION DEFINITIONS    *
@@ -35,10 +44,8 @@ void renderBackground(void)
     static const GLdouble SUN_SPHERE_RADIUS = 2.0;
     static const GLint SUN_SPHERE_NUM_SLICES = 20;
     static const GLint SUN_SPHERE_NUM_STACKS = 20;
-    static const WcPt3D SUN_POSITION(40.0, 40.0, 40.0);
 
     /* Lighting */
-    static const GLfloat sunLightPosType[] = { SUN_POSITION.getX(), SUN_POSITION.getY(), SUN_POSITION.getZ(), 1.0 };
     static const GLfloat grassGreenColor[] = { RGB_COLOR_GRASS_GREEN, 1.0 };
     static const GLfloat skyBlueColor[] = { RGB_COLOR_SKY_BLUE, 1.0 };
     static const GLfloat sunYellowColor[] = { RGB_COLOR_SUN_YELLOW , 1.0 };
@@ -70,17 +77,20 @@ void renderBackground(void)
     glutSolidSphere(SKY_SPHERE_RADIUS, SKY_SPHERE_NUM_SLICES, SKY_SPHERE_NUM_STACKS);
 
     /* Render sun */
+    const WcPt3D sunPosition(0.0, SKY_SPHERE_RADIUS * cos(sunAngle / 180.0 * PI), SKY_SPHERE_RADIUS * sin(sunAngle / 180.0 * PI));
+    const GLfloat sunLightPosType[] = { sunPosition.getX(), sunPosition.getY(), sunPosition.getZ(), 1.0 };
+
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, whiteColor);
     glMaterialfv(GL_FRONT, GL_EMISSION, sunYellowColor);
     glMaterialfv(GL_FRONT, GL_SPECULAR, blackColor);
 
-    glTranslated(SUN_POSITION.getX(), SUN_POSITION.getY(), SUN_POSITION.getZ());
+    glTranslated(sunPosition.getX(), sunPosition.getY(), sunPosition.getZ());
     glutSolidSphere(SUN_SPHERE_RADIUS, SUN_SPHERE_NUM_SLICES, SUN_SPHERE_NUM_STACKS);
 
     glLightfv(GL_LIGHT0, GL_POSITION, sunLightPosType);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, whiteColor);
     glLightfv(GL_LIGHT0, GL_SPECULAR, whiteColor);
-    glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 1.0);
+    glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, sunConstAttenuation);
     glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.005);
     glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.0);
     glEnable(GL_LIGHT0);
