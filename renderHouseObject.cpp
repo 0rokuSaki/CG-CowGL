@@ -18,7 +18,7 @@
 /******************************
 *     FUNCTION DEFINITIONS    *
 *******************************/
-void renderHouseObject(WcPt3D position, GLfloat rotationAngle)
+void renderHouseObject(const WcPt3D& position, const GLfloat rotationAngle)
 {
     /* Dimensions */
     static const GLfloat HOUSE_WIDTH = 5.0;

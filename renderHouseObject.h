@@ -20,4 +20,4 @@ class WcPt3D;
 /******************************
 *     FUNCTION PROTOTYPES     *
 *******************************/
-void renderHouseObject(WcPt3D position, GLfloat rotationAngle);
+void renderHouseObject(const WcPt3D& position, const GLfloat rotationAngle);

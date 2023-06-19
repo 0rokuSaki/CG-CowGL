@@ -1,11 +1,16 @@
 #pragma once
 /*****************************************************************//**
- * \file   Shed.h
- * \brief  
+ * \file   renderShedObject.h
+ * \brief  Declaration of renderShedObject function.
  * 
  * \author aaron
  * \date   June 2023
  *********************************************************************/
+
+/******************************
+*          INCLUDES           *
+*******************************/
+#include <GL/glut.h>
 
 /******************************
 *    FORWARD DECLARATIONS     *
@@ -15,5 +20,5 @@ class WcPt3D;
 /******************************
 *     FUNCTION PROTOTYPES     *
 *******************************/
-void renderShed(WcPt3D position, GLdouble rotationAngle);
+void renderShedObject(const WcPt3D& position, const GLfloat rotationAngle);
 
