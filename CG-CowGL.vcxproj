@@ -140,7 +140,7 @@
     <ClInclude Include="renderShedObject.h" />
     <ClInclude Include="TopMenuScene.h" />
     <ClInclude Include="Tree.h" />
-    <ClInclude Include="WaterTank.h" />
+    <ClInclude Include="renderWaterTankObject.h" />
     <ClInclude Include="WcPt3D.h" />
     <ClInclude Include="WcVector3D.h" />
   </ItemGroup>
@@ -156,7 +156,7 @@
     <ClCompile Include="TopMenuScene.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="Utilities.cpp" />
-    <ClCompile Include="WaterTank.cpp" />
+    <ClCompile Include="renderWaterTankObject.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

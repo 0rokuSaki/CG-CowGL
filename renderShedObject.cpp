@@ -9,7 +9,6 @@
 /******************************
 *          INCLUDES           *
 *******************************/
-#include <GL/glut.h>
 #include "renderShedObject.h"
 #include "WcPt3D.h"
 #include "WcVector3D.h"
@@ -21,14 +20,14 @@
 *******************************/
 void renderShed(const WcPt3D& position, const GLfloat rotationAngle)
 {
-    static const GLdouble SHED_WIDTH = 3.0;
-    static const GLdouble SHED_LENGTH = 4.0;
-    static const GLdouble SHED_WALL_HEIGHT = 2.5;
-    static const GLdouble SHED_ROOF_HEIGHT = 1.0;
-    static const GLdouble SHED_DOOR_WIDTH = 1.5;
-    static const GLdouble SHED_DOOR_HEIGHT = 2.5;
-    static const GLdouble SHED_EPSILON = 0.025;
-    static const GLdouble SHED_LINE_WIDTH = 1.0;
+    static const GLfloat SHED_WIDTH = 3.0;
+    static const GLfloat SHED_LENGTH = 4.0;
+    static const GLfloat SHED_WALL_HEIGHT = 2.5;
+    static const GLfloat SHED_ROOF_HEIGHT = 1.0;
+    static const GLfloat SHED_DOOR_WIDTH = 1.5;
+    static const GLfloat SHED_DOOR_HEIGHT = 2.5;
+    static const GLfloat SHED_EPSILON = 0.025;
+    static const GLfloat SHED_LINE_WIDTH = 1.0;
 
     /* Lighting */
     static const GLfloat mediumGrayColor[] = { RGB_COLOR_MEDIUM_GRAY, 1.0 };

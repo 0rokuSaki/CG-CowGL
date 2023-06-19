@@ -48,7 +48,7 @@
     <ClInclude Include="WcVector3D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WaterTank.h">
+    <ClInclude Include="renderWaterTankObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="renderShedObject.h">
@@ -86,7 +86,7 @@
     <ClCompile Include="renderHouseObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WaterTank.cpp">
+    <ClCompile Include="renderWaterTankObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="renderShedObject.cpp">
