@@ -1,18 +1,24 @@
 #pragma once
 /*****************************************************************//**
- * \file   renderTreeObject.h
- * \brief  Declaration of renderTreeObject function.
+ * \file   renderSunObject.h
+ * \brief  Declaration of renderSunObject function.
  * 
  * \author aaron
  * \date   June 2023
  *********************************************************************/
 
 /******************************
-*    FORWARD DECLARATIONS     *
+*          INCLUDES           *
 *******************************/
-class WcPt3D;
+#include <GL/glut.h>
+
+/******************************
+*      EXTERNAL VARIABLES     *
+*******************************/
+extern GLfloat sunAngle;
+extern GLfloat sunConstAttenuation;
 
 /******************************
 *     FUNCTION PROTOTYPES     *
 *******************************/
-void renderTreeObject(const WcPt3D& position);
+void renderSunObject(void);

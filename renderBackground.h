@@ -1,11 +1,11 @@
 #pragma once
 /*****************************************************************//**
- * \file   Background.h
- * \brief  
+ * \file   renderBackground.h
+ * \brief  Declaration of renderBackground function.
  * 
  * \author aaron
  * \date   June 2023
-*********************************************************************/
+ *********************************************************************/
 
 /******************************
 *          INCLUDES           *
@@ -15,8 +15,9 @@
 /******************************
 *      EXTERNAL VARIABLES     *
 *******************************/
-extern GLdouble sunAngle;
-extern GLfloat sunConstAttenuation;
+extern GLfloat worldMinCoord;
+extern GLfloat worldMaxCoord;
+extern GLfloat SKY_SPHERE_RADIUS;
 
 /******************************
 *     FUNCTION PROTOTYPES     *

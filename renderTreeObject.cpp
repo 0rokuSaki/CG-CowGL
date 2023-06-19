@@ -17,7 +17,7 @@
 /******************************
 *     FUNCTION DEFINITIONS    *
 *******************************/
-void renderTree(const WcPt3D& position)
+void renderTreeObject(const WcPt3D& position)
 {
     /* Tree stem parameters */
     static const GLfloat TREE_STEM_BASE_RADIUS = 0.5;
