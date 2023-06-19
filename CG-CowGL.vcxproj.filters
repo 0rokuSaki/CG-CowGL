@@ -36,22 +36,7 @@
     <ClInclude Include="MainScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="renderHouseObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="renderTreeObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="WcVector3D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="renderWaterTankObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="renderShedObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="renderBackground.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Utilities.h">
@@ -60,7 +45,7 @@
     <ClInclude Include="renderAdjustLightingMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="renderSunObject.h">
+    <ClInclude Include="SceneObjects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -80,28 +65,13 @@
     <ClCompile Include="MainScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="renderTreeObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="renderHouseObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="renderWaterTankObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="renderShedObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="renderBackground.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Utilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="renderAdjustLightingMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="renderSunObject.cpp">
+    <ClCompile Include="SceneObjects.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

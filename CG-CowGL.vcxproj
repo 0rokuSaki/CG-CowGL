@@ -128,36 +128,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="renderAdjustLightingMenu.h" />
-    <ClInclude Include="renderBackground.h" />
     <ClInclude Include="Button.h" />
-    <ClInclude Include="renderSunObject.h" />
+    <ClInclude Include="SceneObjects.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="renderHelpMenu.h" />
-    <ClInclude Include="renderHouseObject.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="PixelPt.h" />
     <ClInclude Include="RGBColor.h" />
-    <ClInclude Include="renderShedObject.h" />
     <ClInclude Include="renderTopMenu.h" />
-    <ClInclude Include="renderTreeObject.h" />
-    <ClInclude Include="renderWaterTankObject.h" />
     <ClInclude Include="WcPt3D.h" />
     <ClInclude Include="WcVector3D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="renderAdjustLightingMenu.cpp" />
-    <ClCompile Include="renderBackground.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="renderHelpMenu.cpp" />
-    <ClCompile Include="renderHouseObject.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainScene.cpp" />
-    <ClCompile Include="renderShedObject.cpp" />
-    <ClCompile Include="renderSunObject.cpp" />
     <ClCompile Include="renderTopMenu.cpp" />
-    <ClCompile Include="renderTreeObject.cpp" />
+    <ClCompile Include="SceneObjects.cpp" />
     <ClCompile Include="Utilities.cpp" />
-    <ClCompile Include="renderWaterTankObject.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
