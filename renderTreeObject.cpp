@@ -1,36 +1,36 @@
 /*****************************************************************//**
- * \file   Tree.cpp
- * \brief  
+ * \file   renderTreeObject.cpp
+ * \brief  Definition of renderTreeObject function.
  * 
  * \author aaron
- * \date   May 2023
+ * \date   June 2023
  *********************************************************************/
 
 /******************************
 *          INCLUDES           *
 *******************************/
 #include <GL/glut.h>
-#include "Tree.h"
+#include "renderTreeObject.h"
 #include "WcPt3D.h"
 #include "RGBColor.h"
 
 /******************************
 *     FUNCTION DEFINITIONS    *
 *******************************/
-void renderTree(WcPt3D position)
+void renderTree(const WcPt3D& position)
 {
     /* Tree stem parameters */
-    static const GLdouble TREE_STEM_BASE_RADIUS = 0.5;
-    static const GLdouble TREE_STEM_HEIGHT = 8.0;
+    static const GLfloat TREE_STEM_BASE_RADIUS = 0.5;
+    static const GLfloat TREE_STEM_HEIGHT = 8.0;
     static const GLint TREE_STEM_NUM_SLICES = 10;
     static const GLint TREE_STEM_NUM_STACKS = 10;
 
     /* Leaf parameters */
-    static const GLdouble LEAF_BASE_WIDTH1 = 1.5;
-    static const GLdouble LEAF_BASE_WIDTH2 = 1.25;
-    static const GLdouble LEAF_BASE_WIDTH3 = 1.0;
-    static const GLdouble LEAF_HEIGHT = 2.5;
-    static const GLdouble LEAF_HEIGHT_FROM_GROUND = 2.0;
+    static const GLfloat LEAF_BASE_WIDTH1 = 1.5;
+    static const GLfloat LEAF_BASE_WIDTH2 = 1.25;
+    static const GLfloat LEAF_BASE_WIDTH3 = 1.0;
+    static const GLfloat LEAF_HEIGHT = 2.5;
+    static const GLfloat LEAF_HEIGHT_FROM_GROUND = 2.0;
     static const GLint LEAF_NUM_SLICES = 25;
     static const GLint LEAF_NUM_STACKS = 25;
 
@@ -46,7 +46,7 @@ void renderTree(WcPt3D position)
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
 
-    glTranslated(position.getX(), position.getY(), position.getZ());  // move tree to position
+    glTranslatef(position.getX(), position.getY(), position.getZ());
 
     /* Render tree stem */
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, darkBrownColor);

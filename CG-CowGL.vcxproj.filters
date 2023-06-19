@@ -42,7 +42,7 @@
     <ClInclude Include="renderHouseObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tree.h">
+    <ClInclude Include="renderTreeObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WcVector3D.h">
@@ -80,7 +80,7 @@
     <ClCompile Include="MainScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tree.cpp">
+    <ClCompile Include="renderTreeObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="renderHouseObject.cpp">

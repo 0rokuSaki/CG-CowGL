@@ -1,10 +1,10 @@
 #pragma once
 /*****************************************************************//**
- * \file   Tree.h
- * \brief  
+ * \file   renderTreeObject.h
+ * \brief  Declaration of renderTreeObject function.
  * 
  * \author aaron
- * \date   May 2023
+ * \date   June 2023
  *********************************************************************/
 
 /******************************
@@ -15,4 +15,4 @@ class WcPt3D;
 /******************************
 *     FUNCTION PROTOTYPES     *
 *******************************/
-void renderTree(WcPt3D position);
+void renderTree(const WcPt3D& position);

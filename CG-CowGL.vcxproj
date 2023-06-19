@@ -139,7 +139,7 @@
     <ClInclude Include="SceneObject.h" />
     <ClInclude Include="renderShedObject.h" />
     <ClInclude Include="TopMenuScene.h" />
-    <ClInclude Include="Tree.h" />
+    <ClInclude Include="renderTreeObject.h" />
     <ClInclude Include="renderWaterTankObject.h" />
     <ClInclude Include="WcPt3D.h" />
     <ClInclude Include="WcVector3D.h" />
@@ -154,7 +154,7 @@
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="renderShedObject.cpp" />
     <ClCompile Include="TopMenuScene.cpp" />
-    <ClCompile Include="Tree.cpp" />
+    <ClCompile Include="renderTreeObject.cpp" />
     <ClCompile Include="Utilities.cpp" />
     <ClCompile Include="renderWaterTankObject.cpp" />
   </ItemGroup>
