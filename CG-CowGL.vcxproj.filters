@@ -39,7 +39,7 @@
     <ClInclude Include="MainScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="House.h">
+    <ClInclude Include="renderHouseObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tree.h">
@@ -83,7 +83,7 @@
     <ClCompile Include="Tree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="House.cpp">
+    <ClCompile Include="renderHouseObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WaterTank.cpp">
@@ -96,9 +96,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Utilities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WcVector3D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AdjustAmbientLightMenuScene.cpp">

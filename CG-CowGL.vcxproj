@@ -132,7 +132,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="HelpMenuScene.h" />
-    <ClInclude Include="House.h" />
+    <ClInclude Include="renderHouseObject.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="PixelPt.h" />
     <ClInclude Include="RGBColor.h" />
@@ -149,7 +149,7 @@
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="HelpMenuScene.cpp" />
-    <ClCompile Include="House.cpp" />
+    <ClCompile Include="renderHouseObject.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="Shed.cpp" />
@@ -157,7 +157,6 @@
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="Utilities.cpp" />
     <ClCompile Include="WaterTank.cpp" />
-    <ClCompile Include="WcVector3D.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

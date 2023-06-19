@@ -1,11 +1,16 @@
 #pragma once
 /*****************************************************************//**
- * \file   House.h
- * \brief  
+ * \file   renderHouseObject.h
+ * \brief  Declaration of renderHouseObject function.
  * 
  * \author aaron
- * \date   May 2023HOUSE_HOUSE_EPSILON
+ * \date   June 2023
  *********************************************************************/
+
+/******************************
+*          INCLUDES           *
+*******************************/
+#include <GL/glut.h>
 
 /******************************
 *    FORWARD DECLARATIONS     *
@@ -15,4 +20,4 @@ class WcPt3D;
 /******************************
 *     FUNCTION PROTOTYPES     *
 *******************************/
-void renderHouse(WcPt3D position, GLdouble rotationAngle);
+void renderHouseObject(WcPt3D position, GLfloat rotationAngle);
