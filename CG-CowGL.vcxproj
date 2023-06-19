@@ -137,7 +137,6 @@
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="PixelPt.h" />
     <ClInclude Include="RGBColor.h" />
-    <ClInclude Include="SceneObject.h" />
     <ClInclude Include="renderShedObject.h" />
     <ClInclude Include="TopMenuScene.h" />
     <ClInclude Include="renderTreeObject.h" />
