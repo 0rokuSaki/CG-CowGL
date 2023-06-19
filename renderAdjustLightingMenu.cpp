@@ -1,5 +1,5 @@
 /*****************************************************************//**
- * \file   AdjustAmbientLightMenuScene.cpp
+ * \file   renderAdjustLightingMenu.cpp
  * \brief  
  * 
  * \author aaron
@@ -13,9 +13,9 @@
 #include <string>
 #include <iostream>
 
-#include "AdjustAmbientLightMenuScene.h"
+#include "renderAdjustLightingMenu.h"
 #include "MainScene.h"
-#include "Background.h"
+#include "renderSunObject.h"
 #include "PixelPt.h"
 #include "RGBColor.h"
 #include "WcPt3D.h"
@@ -35,7 +35,7 @@ Button moveSunCwBtn;
 /******************************
 *     FUNCTION DEFINITIONS    *
 *******************************/
-void renderAdjustAmbientLightScene(void)
+void renderAdjustLightingMenu(void)
 {
     /* Dimensions */
     static const GLint MENU_WIDTH = 375;
@@ -144,7 +144,7 @@ void renderAdjustAmbientLightScene(void)
 }
 
 
-void handleKeyboardEventAdjustAmbientLightMenu(unsigned char key, int x, int y)
+void handleKeyboardEventAdjustLightingMenu(unsigned char key, int x, int y)
 {
     static const int ENTER_KEY_VAL = 13;
     if ((int)key == ENTER_KEY_VAL)
@@ -155,7 +155,7 @@ void handleKeyboardEventAdjustAmbientLightMenu(unsigned char key, int x, int y)
 }
 
 
-void handleMouseEventAdjustAmbientLightMenu(int button, int state, int x, int y)
+void handleMouseEventAdjustLightingMenu(int button, int state, int x, int y)
 {
     static const GLdouble SUN_ANGLE_DIFF = 5.0;
     static const GLfloat SUN_CONST_ATTEN_DIFF = 0.2;

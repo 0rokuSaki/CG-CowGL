@@ -27,10 +27,10 @@
     <ClInclude Include="PixelPt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TopMenuScene.h">
+    <ClInclude Include="renderTopMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HelpMenuScene.h">
+    <ClInclude Include="renderHelpMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MainScene.h">
@@ -57,7 +57,7 @@
     <ClInclude Include="Utilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AdjustAmbientLightMenuScene.h">
+    <ClInclude Include="renderAdjustLightingMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="renderSunObject.h">
@@ -71,10 +71,10 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TopMenuScene.cpp">
+    <ClCompile Include="renderTopMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HelpMenuScene.cpp">
+    <ClCompile Include="renderHelpMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MainScene.cpp">
@@ -98,7 +98,7 @@
     <ClCompile Include="Utilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AdjustAmbientLightMenuScene.cpp">
+    <ClCompile Include="renderAdjustLightingMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="renderSunObject.cpp">

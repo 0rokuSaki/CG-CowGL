@@ -1,30 +1,40 @@
 /*****************************************************************//**
- * \file   TopMenuScene.cpp
- * \brief  
+ * \file   renderTopMenu.cpp
+ * \brief  Function definitions for rendering top menu.
  * 
  * \author aaron
- * \date   May 2023
+ * \date   June 2023
  *********************************************************************/
 
 /******************************
 *          INCLUDES           *
 *******************************/
-#include "TopMenuScene.h"
-#include "HelpMenuScene.h"
+#include <GL/glut.h>
+#include "renderTopMenu.h"
+#include "renderHelpMenu.h"
 #include "AdjustAmbientLightMenuScene.h"
 
 /******************************
 *       GLOBAL VARIABLES      *
 *******************************/
+const GLint TOP_MENU_HEIGHT = 30;
+
+const GLint EXIT_BTN_WIDTH = 45;
+const GLint HELP_BTN_WIDTH = 50;
+const GLint ADJ_LIGHTING_BTN_WIDTH = 165;
+const GLint BTN_HEIGHT = TOP_MENU_HEIGHT;
+
 Button exitBtn(0, 0, EXIT_BTN_WIDTH, BTN_HEIGHT, "Exit");
 Button helpBtn(0, 0, HELP_BTN_WIDTH, BTN_HEIGHT, "Help");
-Button adjAmbLightBtn(0, 0, ADJ_AMB_LIGHT_BTN_WIDTH, BTN_HEIGHT, "Adj. Ambient Light");
+Button adjAmbLightBtn(0, 0, ADJ_LIGHTING_BTN_WIDTH, BTN_HEIGHT, "Adjust Lighting");
 
 /******************************
 *     FUNCTION DEFINITIONS    *
 *******************************/
-void renderTopMenuScene(void)
+void renderTopMenu(void)
 {
+    static const GLint TOP_MENU_FRAME_WIDTH = 3;
+
     const GLint windowWidth = glutGet(GLUT_WINDOW_WIDTH);
     const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
 
@@ -33,7 +43,9 @@ void renderTopMenuScene(void)
 
     resetProjectionAndModelviewMatrices();
 
-    gluOrtho2D(0.0, (GLdouble) windowWidth, (GLdouble)(windowHeight - TOP_MENU_HEIGHT), (GLdouble) windowHeight);
+    gluOrtho2D(0.0, windowWidth, windowHeight - TOP_MENU_HEIGHT, windowHeight);
+
+    glRectf(0.0, 0.0, windowWidth, TOP_MENU_HEIGHT);
     
     glColor3d(RGB_COLOR_BLACK);
     glLineWidth(TOP_MENU_FRAME_WIDTH);
@@ -48,10 +60,6 @@ void renderTopMenuScene(void)
     exitBtn.setPosition(0, windowHeight - BTN_HEIGHT);
     helpBtn.setPosition(EXIT_BTN_WIDTH, windowHeight - BTN_HEIGHT);
     adjAmbLightBtn.setPosition(EXIT_BTN_WIDTH + HELP_BTN_WIDTH, windowHeight - BTN_HEIGHT);
-
-    exitBtn.setBackgroundColor(RGBColor(RGB_COLOR_LIGHT_GRAY));
-    helpBtn.setBackgroundColor(RGBColor(RGB_COLOR_LIGHT_GRAY));
-    adjAmbLightBtn.setBackgroundColor(RGBColor(RGB_COLOR_LIGHT_GRAY));
 
     exitBtn.render();
     helpBtn.render();
