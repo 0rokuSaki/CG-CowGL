@@ -12,79 +12,36 @@
 #include "Button.h"
 
 /******************************
-*          DEFINES            *
-*******************************/
-#define FRAME_WIDTH 3.0
-#define LABEL_MARGIN_LEFT   5
-#define LABEL_MARGIN_BOTTOM 7
-
-/******************************
 *          METHODS            *
 *******************************/
 Button::Button() :
-    _pos(0, 0),
+    _x(0),
+    _y(0),
     _width(0),
     _height(0),
-    _label(""),
-    _bgColor(RGB_COLOR_WHITE),
-    _frameColor(RGB_COLOR_BLACK),
-    _labelColor(RGB_COLOR_BLACK)
-{
-}
-
-
-Button::Button(PixelPt pos, GLint w, GLint h, std::string label) :
-    _pos(pos),
-    _width(w),
-    _height(h),
-    _label(label),
-    _bgColor(RGB_COLOR_WHITE),
-    _frameColor(RGB_COLOR_BLACK),
-    _labelColor(RGB_COLOR_BLACK)
+    _label("")
 {
 }
 
 
 Button::Button(GLint x, GLint y, GLint w, GLint h, std::string label) :
-    _pos(x, y),
+    _x(x),
+    _y(y),
     _width(w),
     _height(h),
-    _label(label),
-    _bgColor(RGB_COLOR_WHITE),
-    _frameColor(RGB_COLOR_BLACK),
-    _labelColor(RGB_COLOR_BLACK)
-{
-}
-
-
-Button::Button(PixelPt pos, GLint w, GLint h, std::string label, RGBColor bgColor, RGBColor frameColor, RGBColor labelColor) :
-    _pos(pos),
-    _width(w),
-    _height(h),
-    _label(label),
-    _bgColor(bgColor),
-    _frameColor(frameColor),
-    _labelColor(labelColor)
-{
-}
-
-
-Button::Button(GLint x, GLint y, GLint w, GLint h, std::string label, RGBColor bgColor, RGBColor frameColor, RGBColor labelColor) :
-    _pos(x, y),
-    _width(w),
-    _height(h),
-    _label(label),
-    _bgColor(bgColor),
-    _frameColor(frameColor),
-    _labelColor(labelColor)
+    _label(label)
 {
 }
 
 
 void Button::render() const
 {
+    static const GLfloat FRAME_WIDTH = 3.0;
+    static const GLfloat LABEL_MARGIN_LEFT = 5.0;
+    static const GLfloat LABEL_MARGIN_BOTTOM = 7.0;
+
     /* Create viewport for button */
-    glViewport(_pos.getX(), _pos.getY(), _width, _height);
+    glViewport(_x, _y, _width, _height);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -92,20 +49,20 @@ void Button::render() const
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    gluOrtho2D(0.0, (GLdouble)_width, 0.0, (GLdouble)_height);
+    gluOrtho2D(0.0, _width, 0.0, _height);
 
     /* Add background color */
-    glColor3d(_bgColor.getR(), _bgColor.getG(), _bgColor.getB());
-    glRectd(0.0, 0.0, (GLdouble)_width, (GLdouble)_height);
+    glColor3f(RGB_COLOR_WHITE);
+    glRectf(0.0, 0.0, _width, _height);
 
     /* Add frame */
-    glColor3d(_frameColor.getR(), _frameColor.getG(), _frameColor.getB());
+    glColor3f(RGB_COLOR_BLACK);
     glLineWidth(FRAME_WIDTH);
     glBegin(GL_LINE_LOOP);
-    glVertex2d(1.0, 1.0);
-    glVertex2d(_width, 1.0);
-    glVertex2d(_width, _height);
-    glVertex2d(1.0, _height);
+    glVertex2f(1.0, 1.0);
+    glVertex2f(_width, 1.0);
+    glVertex2f(_width, _height);
+    glVertex2f(1.0, _height);
     glEnd();
 
     /* Add label */
@@ -117,25 +74,17 @@ void Button::render() const
 }
 
 
-bool Button::clicked(GLint x, GLint y)
+bool Button::clicked(GLint x, GLint y) const
 {
-    return (_pos.getX() <= x) && 
-           (x <= (_pos.getX() + _width)) && 
-           (_pos.getY() <= y) && 
-           (y <= (_pos.getY() + _height));
-}
-
-
-void Button::setPosition(PixelPt pos)
-{
-    _pos = pos;
+    return (_x <= x) && (x <= (_x + _width)) && 
+           (_y <= y) && (y <= (_y + _height));
 }
 
 
 void Button::setPosition(GLint x, GLint y)
 {
-    _pos.setX(x);
-    _pos.setY(y);
+    _x = x;
+    _y = y;
 }
 
 
@@ -148,22 +97,4 @@ void Button::setWidth(GLint w)
 void Button::setHeight(GLint h)
 {
     _height = h;
-}
-
-
-void Button::setBackgroundColor(RGBColor rgbColor)
-{
-    _bgColor = rgbColor;
-}
-
-
-void Button::setFrameColor(RGBColor rgbColor)
-{
-    _frameColor = rgbColor;
-}
-
-
-void Button::setLabelColor(RGBColor rgbColor)
-{
-    _labelColor = rgbColor;
 }

@@ -1,37 +1,36 @@
 #pragma once
 /*****************************************************************//**
- * \file   TopMenuScene.h
- * \brief  
+ * \file   Menus.h
+ * \brief  A collection of functions for rendering the menus
+ *         of CowGL.
  * 
  * \author aaron
- * \date   May 2023
+ * \date   June 2023
  *********************************************************************/
 
 /******************************
 *          INCLUDES           *
 *******************************/
-#include "Button.h"
-
-/******************************
-*          DEFINES            *
-*******************************/
-#define TOP_MENU_HEIGHT 30
-#define TOP_MENU_FRAME_WIDTH 3
-#define BTN_HEIGHT TOP_MENU_HEIGHT
-#define EXIT_BTN_WIDTH  45
-#define HELP_BTN_WIDTH 50
-#define ADJ_AMB_LIGHT_BTN_WIDTH 165
+#include <GL/glut.h>
 
 /******************************
 *      EXTERNAL VARIABLES     *
 *******************************/
-extern Button exitBtn;
-extern Button helpBtn;
-extern Button adjAmbLightBtn;
+extern const GLint TOP_MENU_HEIGHT;
 
 /******************************
 *     FUNCTION PROTOTYPES     *
 *******************************/
-void renderTopMenuScene(void);
+/* Menu rendering */
+void renderTopMenu(void);
+void renderHelpMenu(void);
+void renderAdjustLightingMenu(void);
+
+/* Event handling */
 void handleMouseEventTopMenu(int button, int state, int x, int y);
+void handleKeyboardEventHelpMenu(unsigned char key, int x, int y);
+void handleKeyboardEventAdjustLightingMenu(unsigned char key, int x, int y);
+void handleMouseEventAdjustLightingMenu(int button, int state, int x, int y);
+
+/* Various */
 void resetProjectionAndModelviewMatrices(void);

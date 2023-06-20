@@ -17,10 +17,8 @@
 #include <Windows.h>
 #include <GL/glut.h>
 #include <iostream>
-#include "TopMenuScene.h"
-#include "HelpMenuScene.h"
-#include "AdjustAmbientLightMenuScene.h"
 #include "MainScene.h"
+#include "Menus.h"
 
 #include <chrono>
 #include <thread>
@@ -78,17 +76,10 @@ void displayCallback(void)
     glClear(GL_COLOR_BUFFER_BIT);
     glClear(GL_DEPTH_BUFFER_BIT);
 
-    renderTopMenuScene();
+    renderTopMenu();
     renderMainScene();
-
-    if (displayHelpMenu)
-    {
-        renderHelpMenuScene();
-    }
-    if (displayAdjustAmbientLightMenu)
-    {
-        renderAdjustAmbientLightScene();
-    }
+    renderHelpMenu();
+    renderAdjustLightingMenu();
     
     glFlush();
 }
@@ -97,7 +88,7 @@ void displayCallback(void)
 void mouseCallback(int button, int state, int x, int y)
 {
     handleMouseEventTopMenu(button, state, x, y);
-    handleMouseEventAdjustAmbientLightMenu(button, state, x, y);
+    handleMouseEventAdjustLightingMenu(button, state, x, y);
     glutPostRedisplay();
 }
 
@@ -105,7 +96,7 @@ void mouseCallback(int button, int state, int x, int y)
 void keyboardCallback(unsigned char key, int x, int y)
 {
     handleKeyboardEventHelpMenu(key, x, y);
-    handleKeyboardEventAdjustAmbientLightMenu(key, x, y);
+    handleKeyboardEventAdjustLightingMenu(key, x, y);
     glutPostRedisplay();
 }
 

@@ -127,37 +127,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AdjustAmbientLightMenuScene.h" />
-    <ClInclude Include="Background.h" />
+    <ClInclude Include="Menus.h" />
     <ClInclude Include="Button.h" />
-    <ClInclude Include="Utilities.h" />
-    <ClInclude Include="HelpMenuScene.h" />
-    <ClInclude Include="House.h" />
+    <ClInclude Include="SceneObjects.h" />
     <ClInclude Include="MainScene.h" />
-    <ClInclude Include="PixelPt.h" />
     <ClInclude Include="RGBColor.h" />
-    <ClInclude Include="SceneObject.h" />
-    <ClInclude Include="Shed.h" />
-    <ClInclude Include="TopMenuScene.h" />
-    <ClInclude Include="Tree.h" />
-    <ClInclude Include="WaterTank.h" />
     <ClInclude Include="WcPt3D.h" />
     <ClInclude Include="WcVector3D.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AdjustAmbientLightMenuScene.cpp" />
-    <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Menus.cpp" />
     <ClCompile Include="Button.cpp" />
-    <ClCompile Include="HelpMenuScene.cpp" />
-    <ClCompile Include="House.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainScene.cpp" />
-    <ClCompile Include="Shed.cpp" />
-    <ClCompile Include="TopMenuScene.cpp" />
-    <ClCompile Include="Tree.cpp" />
-    <ClCompile Include="Utilities.cpp" />
-    <ClCompile Include="WaterTank.cpp" />
-    <ClCompile Include="WcVector3D.cpp" />
+    <ClCompile Include="SceneObjects.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
