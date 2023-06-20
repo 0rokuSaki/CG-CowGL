@@ -66,7 +66,7 @@ void Button::render() const
     glEnd();
 
     /* Add label */
-    glRasterPos2d(LABEL_MARGIN_LEFT, LABEL_MARGIN_BOTTOM);
+    glRasterPos2f(LABEL_MARGIN_LEFT, LABEL_MARGIN_BOTTOM);
     for (const char& c : _label)
     {
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, c);

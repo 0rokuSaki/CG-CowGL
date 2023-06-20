@@ -70,13 +70,13 @@ void renderTopMenu(void)
 
     glRectf(0.0, 0.0, windowWidth, TOP_MENU_HEIGHT);
 
-    glColor3d(RGB_COLOR_BLACK);
+    glColor3f(RGB_COLOR_BLACK);
     glLineWidth(TOP_MENU_FRAME_WIDTH);
     glBegin(GL_LINE_LOOP);
-    glVertex2d(1.0, windowHeight - TOP_MENU_HEIGHT + 1.0);
-    glVertex2d(windowWidth, windowHeight - TOP_MENU_HEIGHT + 1.0);
-    glVertex2d(windowWidth, windowHeight);
-    glVertex2d(1.0, windowHeight);
+    glVertex2f(1.0, windowHeight - TOP_MENU_HEIGHT + 1.0);
+    glVertex2f(windowWidth, windowHeight - TOP_MENU_HEIGHT + 1.0);
+    glVertex2f(windowWidth, windowHeight);
+    glVertex2f(1.0, windowHeight);
     glEnd();
 
     /* Render buttons */
@@ -120,20 +120,20 @@ void renderHelpMenu(void)
 
     resetProjectionAndModelviewMatrices();
 
-    gluOrtho2D(0.0, (GLdouble)HELP_MENU_WIDTH, 0.0, (GLdouble)HELP_MENU_HEIGHT);
+    gluOrtho2D(0.0, HELP_MENU_WIDTH, 0.0, HELP_MENU_HEIGHT);
 
     /* Render a background */
     glColor3f(RGB_COLOR_LIGHT_GRAY);
-    glRectf(0.0, 0.0, (GLdouble)HELP_MENU_WIDTH, (GLdouble)HELP_MENU_HEIGHT);
+    glRectf(0.0, 0.0, HELP_MENU_WIDTH, HELP_MENU_HEIGHT);
 
     /* Render a frame */
     glColor3f(RGB_COLOR_BLACK);
     glLineWidth(HELP_MENU_FRAME_WIDTH);
     glBegin(GL_LINE_LOOP);
     glVertex2f(1.0, 1.0);
-    glVertex2f((GLdouble)HELP_MENU_WIDTH, 1.0);
-    glVertex2f((GLdouble)HELP_MENU_WIDTH, (GLdouble)HELP_MENU_HEIGHT);
-    glVertex2f(1.0, (GLdouble)HELP_MENU_HEIGHT);
+    glVertex2f(HELP_MENU_WIDTH, 1.0);
+    glVertex2f(HELP_MENU_WIDTH, HELP_MENU_HEIGHT);
+    glVertex2f(1.0, HELP_MENU_HEIGHT);
     glEnd();
 
     /* Render help menu title */
@@ -203,11 +203,11 @@ void renderAdjustLightingMenu(void)
     gluOrtho2D(0.0, MENU_WIDTH, 0.0, MENU_HEIGHT);
 
     /* Render a background */
-    glColor3d(RGB_COLOR_LIGHT_GRAY);
+    glColor3f(RGB_COLOR_LIGHT_GRAY);
     glRectd(0.0, 0.0, MENU_WIDTH, MENU_HEIGHT);
 
     /* Render a frame */
-    glColor3d(RGB_COLOR_BLACK);
+    glColor3f(RGB_COLOR_BLACK);
     glLineWidth(MENU_FRAME_WIDTH);
     glBegin(GL_LINE_LOOP);
     glVertex2f(1.0, 1.0);
@@ -324,7 +324,7 @@ void handleKeyboardEventAdjustLightingMenu(unsigned char key, int x, int y)
 
 void handleMouseEventAdjustLightingMenu(int button, int state, int x, int y)
 {
-    static const GLdouble SUN_ANGLE_DIFF = 5.0;
+    static const GLfloat SUN_ANGLE_DIFF = 5.0;
     static const GLfloat SUN_CONST_ATTEN_DIFF = 0.2;
     static const GLfloat GLOBAL_AMB_DIFF = 0.05;
 
