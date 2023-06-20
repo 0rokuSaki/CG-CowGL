@@ -11,7 +11,6 @@
 *          INCLUDES           *
 *******************************/
 #include <string>
-#include "SceneObject.h"
 #include "PixelPt.h"
 #include "RGBColor.h"
 

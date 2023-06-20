@@ -9,12 +9,12 @@
 /******************************
 *          INCLUDES           *
 *******************************/
-#include <GL/glut.h>
 #include <vector>
 #include <string>
 
 #include "Menus.h"
 #include "SceneObjects.h"
+#include "MainScene.h"
 
 #include "PixelPt.h"
 #include "RGBColor.h"
@@ -29,7 +29,7 @@ const GLint TOP_MENU_HEIGHT = 30;
 
 const GLint EXIT_BTN_WIDTH = 45;
 const GLint HELP_BTN_WIDTH = 50;
-const GLint ADJ_LIGHTING_BTN_WIDTH = 165;
+const GLint ADJ_LIGHTING_BTN_WIDTH = 135;
 const GLint BTN_HEIGHT = TOP_MENU_HEIGHT;
 
 Button exitBtn(0, 0, EXIT_BTN_WIDTH, BTN_HEIGHT, "Exit");
@@ -54,11 +54,6 @@ Button moveSunCwBtn;
 void renderTopMenu(void)
 {
     static const GLint TOP_MENU_FRAME_WIDTH = 3;
-
-    if (!displayHelpMenu)
-    {
-        return;
-    }
 
     const GLint windowWidth = glutGet(GLUT_WINDOW_WIDTH);
     const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
@@ -133,6 +128,11 @@ void renderHelpMenu(void)
                         "Use TBD keys to move the cow's head.",\
                         "Press V to switch between first-person and third-person views.",\
                         "Use the left mouse button to click on menu buttons." });
+
+    if (!displayHelpMenu)
+    {
+        return;
+    }
 
     const GLint windowWidth = glutGet(GLUT_WINDOW_WIDTH);
     const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
@@ -333,7 +333,7 @@ void handleMouseEventAdjustLightingMenu(int button, int state, int x, int y)
     const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
     y = windowHeight - y;
 
-    if (displayAdjustAmbientLightMenu && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+    if (displayAdjustLightingMenu && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
         if (decreaseAmbientLightBtn.clicked(x, y))
         {

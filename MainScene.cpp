@@ -10,16 +10,13 @@
 *          INCLUDES           *
 *******************************/
 #include <GL/glut.h>
+
 #include "MainScene.h"
-#include "TopMenuScene.h"
+#include "Menus.h"
+#include "SceneObjects.h"
+
 #include "RGBColor.h"
 #include "WcPt3D.h"
-
-#include "Background.h"
-#include "House.h"
-#include "Shed.h"
-#include "Tree.h"
-#include "WaterTank.h"
 
 /******************************
 *          DEFINES            *
@@ -69,14 +66,14 @@ void renderMainScene(void)
     renderAxes(2.0);
 
     renderBackground();
-    renderHouse(WcPt3D(-5, 0, 0), 0.0);
-    renderShed(WcPt3D(0, 6, 0), 180.0);
+    renderSunObject();
+    renderHouseObject(WcPt3D(-5, 0, 0), 0.0);
+    renderShedObject(WcPt3D(0, 6, 0), 180.0);
     renderWaterTank(WcPt3D(2.5, 6, 0), 0.0);
-    renderTree(WcPt3D(-4, 6, 0));
-    renderTree(WcPt3D(0, -5, 0));
-    renderTree(WcPt3D(10, 10, 0));
-    renderTree(WcPt3D(10, -10, 0));
-    renderTree(WcPt3D(-10, -10, 0));
+    renderTreeObject(WcPt3D(-4, 6, 0));
+    renderTreeObject(WcPt3D(0, -5, 0));
+    renderTreeObject(WcPt3D(10, 10, 0));
+    renderTreeObject(WcPt3D(-10, -10, 0));
 
     glDisable(GL_DEPTH_TEST);
 }

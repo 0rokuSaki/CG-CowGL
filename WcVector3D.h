@@ -10,6 +10,7 @@
 /******************************
 *          INCLUDES           *
 *******************************/
+#include <cmath>
 #include "WcPt3D.h"
 
 class WcVector3D :
