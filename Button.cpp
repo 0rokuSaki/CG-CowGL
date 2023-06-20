@@ -15,7 +15,8 @@
 *          METHODS            *
 *******************************/
 Button::Button() :
-    _pos(0, 0),
+    _x(0),
+    _y(0),
     _width(0),
     _height(0),
     _label("")
@@ -23,17 +24,9 @@ Button::Button() :
 }
 
 
-Button::Button(PixelPt pos, GLint w, GLint h, std::string label) :
-    _pos(pos),
-    _width(w),
-    _height(h),
-    _label(label)
-{
-}
-
-
 Button::Button(GLint x, GLint y, GLint w, GLint h, std::string label) :
-    _pos(x, y),
+    _x(x),
+    _y(y),
     _width(w),
     _height(h),
     _label(label)
@@ -48,7 +41,7 @@ void Button::render() const
     static const GLfloat LABEL_MARGIN_BOTTOM = 7.0;
 
     /* Create viewport for button */
-    glViewport(_pos.getX(), _pos.getY(), _width, _height);
+    glViewport(_x, _y, _width, _height);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -83,23 +76,15 @@ void Button::render() const
 
 bool Button::clicked(GLint x, GLint y) const
 {
-    return (_pos.getX() <= x) && 
-           (x <= (_pos.getX() + _width)) && 
-           (_pos.getY() <= y) && 
-           (y <= (_pos.getY() + _height));
-}
-
-
-void Button::setPosition(PixelPt pos)
-{
-    _pos = pos;
+    return (_x <= x) && (x <= (_x + _width)) && 
+           (_y <= y) && (y <= (_y + _height));
 }
 
 
 void Button::setPosition(GLint x, GLint y)
 {
-    _pos.setX(x);
-    _pos.setY(y);
+    _x = x;
+    _y = y;
 }
 
 

@@ -16,7 +16,6 @@
 #include "SceneObjects.h"
 #include "MainScene.h"
 
-#include "PixelPt.h"
 #include "RGBColor.h"
 #include "WcPt3D.h"
 #include "Button.h"
@@ -138,8 +137,7 @@ void renderHelpMenu(void)
     const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
 
     /* Render the window for the menu */
-    PixelPt pos((windowWidth - HELP_MENU_WIDTH) / 2, (windowHeight - HELP_MENU_HEIGHT) / 2);
-    glViewport(pos.getX(), pos.getY(), HELP_MENU_WIDTH, HELP_MENU_HEIGHT);
+    glViewport((windowWidth - HELP_MENU_WIDTH) / 2, (windowHeight - HELP_MENU_HEIGHT) / 2, HELP_MENU_WIDTH, HELP_MENU_HEIGHT);
 
     resetProjectionAndModelviewMatrices();
 

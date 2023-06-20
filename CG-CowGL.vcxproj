@@ -131,7 +131,6 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="SceneObjects.h" />
     <ClInclude Include="MainScene.h" />
-    <ClInclude Include="PixelPt.h" />
     <ClInclude Include="RGBColor.h" />
     <ClInclude Include="WcPt3D.h" />
     <ClInclude Include="WcVector3D.h" />

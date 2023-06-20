@@ -24,9 +24,6 @@
     <ClInclude Include="Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PixelPt.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MainScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
