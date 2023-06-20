@@ -29,23 +29,27 @@ const GLint TOP_MENU_HEIGHT = 30;
 const GLint EXIT_BTN_WIDTH = 45;
 const GLint HELP_BTN_WIDTH = 50;
 const GLint ADJ_LIGHTING_BTN_WIDTH = 135;
-const GLint BTN_HEIGHT = TOP_MENU_HEIGHT;
+const GLint BTN_HEIGHT1 = TOP_MENU_HEIGHT;
 
-Button exitBtn(0, 0, EXIT_BTN_WIDTH, BTN_HEIGHT, "Exit");
-Button helpBtn(0, 0, HELP_BTN_WIDTH, BTN_HEIGHT, "Help");
-Button adjAmbLightBtn(0, 0, ADJ_LIGHTING_BTN_WIDTH, BTN_HEIGHT, "Adjust Lighting");
+Button exitBtn(0, 0, EXIT_BTN_WIDTH, BTN_HEIGHT1, "Exit");
+Button helpBtn(0, 0, HELP_BTN_WIDTH, BTN_HEIGHT1, "Help");
+Button adjAmbLightBtn(0, 0, ADJ_LIGHTING_BTN_WIDTH, BTN_HEIGHT1, "Adjust Lighting");
 
 /* Help menu */
 bool displayHelpMenu = false;
 
 /* Adjust Lighting menu */
 bool displayAdjustLightingMenu = false;
-Button decreaseAmbientLightBtn;
-Button increaseAmbientLightBtn;
-Button decreaseSunLightBtn;
-Button increaseSunLightBtn;
-Button moveSunCcwBtn;
-Button moveSunCwBtn;
+
+const GLint BTN_WIDTH = 30;
+const GLint BTN_HEIGHT2 = 30;
+
+Button decreaseAmbientLightBtn(0, 0, BTN_WIDTH, BTN_HEIGHT2, "-");
+Button increaseAmbientLightBtn(0, 0, BTN_WIDTH, BTN_HEIGHT2, "+");
+Button decreaseSunLightBtn(0, 0, BTN_WIDTH, BTN_HEIGHT2, "-");
+Button increaseSunLightBtn(0, 0, BTN_WIDTH, BTN_HEIGHT2, "+");
+Button moveSunCcwBtn(0, 0, BTN_WIDTH, BTN_HEIGHT2, "-");
+Button moveSunCwBtn(0, 0, BTN_WIDTH, BTN_HEIGHT2, "+");
 
 /******************************
 *     FUNCTION DEFINITIONS    *
@@ -76,38 +80,13 @@ void renderTopMenu(void)
     glEnd();
 
     /* Render buttons */
-    exitBtn.setPosition(0, windowHeight - BTN_HEIGHT);
-    helpBtn.setPosition(EXIT_BTN_WIDTH, windowHeight - BTN_HEIGHT);
-    adjAmbLightBtn.setPosition(EXIT_BTN_WIDTH + HELP_BTN_WIDTH, windowHeight - BTN_HEIGHT);
+    exitBtn.setPosition(0, windowHeight - BTN_HEIGHT1);
+    helpBtn.setPosition(EXIT_BTN_WIDTH, windowHeight - BTN_HEIGHT1);
+    adjAmbLightBtn.setPosition(EXIT_BTN_WIDTH + HELP_BTN_WIDTH, windowHeight - BTN_HEIGHT1);
 
     exitBtn.render();
     helpBtn.render();
     adjAmbLightBtn.render();
-}
-
-
-void handleMouseEventTopMenu(int button, int state, int x, int y)
-{
-    const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
-    y = windowHeight - y;
-
-    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-    {
-        if (exitBtn.clicked(x, y))
-        {
-            exit(0);
-        }
-        else if (helpBtn.clicked(x, y))
-        {
-            displayHelpMenu = true;
-            displayAdjustLightingMenu = false;
-        }
-        else if (adjAmbLightBtn.clicked(x, y))
-        {
-            displayHelpMenu = false;
-            displayAdjustLightingMenu = true;
-        }
-    }
 }
 
 
@@ -187,16 +166,6 @@ void renderHelpMenu(void)
 }
 
 
-void handleKeyboardEventHelpMenu(unsigned char key, int x, int y)
-{
-    static const int ENTER_KEY_VAL = 13;
-    if ((int)key == ENTER_KEY_VAL)
-    {
-        displayHelpMenu = false;
-    }
-}
-
-
 void renderAdjustLightingMenu(void)
 {
     /* Dimensions */
@@ -208,7 +177,7 @@ void renderAdjustLightingMenu(void)
     static const WcPt3D MENU_HEADER_POS(30.0, 260.0, 0.0);
     static const WcPt3D MENU_FOOTER_POS(40.0, 20.0, 0.0);
     static const std::string MENU_HEADER = "Adjust Ambient Light Menu - CowGL";
-    static const std::string MENU_FOOTER = "Press ENTER to close this window.";
+    static const std::string MENU_FOOTER = "Press ENTER to close this window";
 
     /* Adjustment text */
     static const WcPt3D ADJ_AMB_LIGHT_TEXT_POS(150.0, 210.0, 0.0);
@@ -217,10 +186,6 @@ void renderAdjustLightingMenu(void)
     static const std::string ADJ_AMB_LIGHT_TEXT = "Ambient Light";
     static const std::string ADJ_SUN_LIGHT_TEXT = "Sun Light";
     static const std::string ADJ_SUN_POS_TEXT = "Sun Position";
-
-    /* Buttons */
-    static const GLint BTN_WIDTH = 30;
-    static const GLint BTN_HEIGHT = 30;
 
     if (!displayAdjustLightingMenu)
     {
@@ -289,18 +254,18 @@ void renderAdjustLightingMenu(void)
     GLint btnX2 = (windowWidth - MENU_WIDTH) / 2 + 250;
     GLint btnY = (windowHeight - MENU_HEIGHT) / 2 + 200;
 
-    decreaseAmbientLightBtn = Button(btnX1, btnY, BTN_WIDTH, BTN_HEIGHT, "-");
-    increaseAmbientLightBtn = Button(btnX2, btnY, BTN_WIDTH, BTN_HEIGHT, "+");
+    decreaseAmbientLightBtn.setPosition(btnX1, btnY);
+    increaseAmbientLightBtn.setPosition(btnX2, btnY);
 
-    btnY -= 2 * BTN_HEIGHT;
+    btnY -= 2 * BTN_HEIGHT2;
 
-    decreaseSunLightBtn = Button(btnX1, btnY, BTN_WIDTH, BTN_HEIGHT, "-");
-    increaseSunLightBtn = Button(btnX2, btnY, BTN_WIDTH, BTN_HEIGHT, "+");
+    decreaseSunLightBtn.setPosition(btnX1, btnY);
+    increaseSunLightBtn.setPosition(btnX2, btnY);
 
-    btnY -= 2 * BTN_HEIGHT;
+    btnY -= 2 * BTN_HEIGHT2;
 
-    moveSunCcwBtn = Button(btnX1, btnY, BTN_WIDTH, BTN_HEIGHT, "-");
-    moveSunCwBtn = Button(btnX2, btnY, BTN_WIDTH, BTN_HEIGHT, "+");
+    moveSunCcwBtn.setPosition(btnX1, btnY);
+    moveSunCwBtn.setPosition(btnX2, btnY);
 
     decreaseAmbientLightBtn.render();
     increaseAmbientLightBtn.render();
@@ -308,6 +273,41 @@ void renderAdjustLightingMenu(void)
     increaseSunLightBtn.render();
     moveSunCcwBtn.render();
     moveSunCwBtn.render();
+}
+
+
+void handleMouseEventTopMenu(int button, int state, int x, int y)
+{
+    const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
+    y = windowHeight - y;
+
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+    {
+        if (exitBtn.clicked(x, y))
+        {
+            exit(0);
+        }
+        else if (helpBtn.clicked(x, y))
+        {
+            displayHelpMenu = true;
+            displayAdjustLightingMenu = false;
+        }
+        else if (adjAmbLightBtn.clicked(x, y))
+        {
+            displayHelpMenu = false;
+            displayAdjustLightingMenu = true;
+        }
+    }
+}
+
+
+void handleKeyboardEventHelpMenu(unsigned char key, int x, int y)
+{
+    static const int ENTER_KEY_VAL = 13;
+    if ((int)key == ENTER_KEY_VAL)
+    {
+        displayHelpMenu = false;
+    }
 }
 
 

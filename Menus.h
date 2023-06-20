@@ -21,18 +21,16 @@ extern const GLint TOP_MENU_HEIGHT;
 /******************************
 *     FUNCTION PROTOTYPES     *
 *******************************/
-/* Resets projection and modelview matrices. */
-void resetProjectionAndModelviewMatrices(void);
-
-/* Top menu */
+/* Menu rendering */
 void renderTopMenu(void);
-void handleMouseEventTopMenu(int button, int state, int x, int y);
-
-/* Help menu */
 void renderHelpMenu(void);
-void handleKeyboardEventHelpMenu(unsigned char key, int x, int y);
-
-/* Adjust Lighting menu */
 void renderAdjustLightingMenu(void);
+
+/* Event handling */
+void handleMouseEventTopMenu(int button, int state, int x, int y);
+void handleKeyboardEventHelpMenu(unsigned char key, int x, int y);
 void handleKeyboardEventAdjustLightingMenu(unsigned char key, int x, int y);
 void handleMouseEventAdjustLightingMenu(int button, int state, int x, int y);
+
+/* Various */
+void resetProjectionAndModelviewMatrices(void);
