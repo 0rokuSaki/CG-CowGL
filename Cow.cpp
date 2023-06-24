@@ -55,6 +55,7 @@ void Cow::render()
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 
+	glRotatef(90.0, 0.0, 0.0, 1.0); // TODO: Add rotation angle
 	glTranslatef(_pos.getX(), _pos.getY(), _pos.getZ());
 
 	GLUquadric* quadric = gluNewQuadric();
