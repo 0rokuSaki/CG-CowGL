@@ -37,8 +37,8 @@ Button::Button(GLint x, GLint y, GLint w, GLint h, std::string label) :
 void Button::render() const
 {
     static const GLfloat FRAME_WIDTH = 3.0;
-    static const GLfloat LABEL_MARGIN_LEFT = 5.0;
-    static const GLfloat LABEL_MARGIN_BOTTOM = 7.0;
+    static const GLfloat LABEL_MARGIN_LEFT = 6.0;
+    static const GLfloat LABEL_MARGIN_BOTTOM = 9.0;
 
     /* Create viewport for button */
     glViewport(_x, _y, _width, _height);

@@ -174,9 +174,9 @@ void renderAdjustLightingMenu(void)
     static const GLfloat MENU_FRAME_WIDTH = 7.0;
 
     /* Header & footer */
-    static const WcPt3D MENU_HEADER_POS(30.0, 260.0, 0.0);
+    static const WcPt3D MENU_HEADER_POS(50.0, 260.0, 0.0);
     static const WcPt3D MENU_FOOTER_POS(40.0, 20.0, 0.0);
-    static const std::string MENU_HEADER = "Adjust Ambient Light Menu - CowGL";
+    static const std::string MENU_HEADER = "Adjust Lighting Menu - CowGL";
     static const std::string MENU_FOOTER = "Press ENTER to close this window";
 
     /* Adjustment text */
