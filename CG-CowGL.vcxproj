@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Cow.h" />
     <ClInclude Include="Menus.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="SceneObjects.h" />
@@ -136,6 +137,7 @@
     <ClInclude Include="WcVector3D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Cow.cpp" />
     <ClCompile Include="Menus.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Main.cpp" />
