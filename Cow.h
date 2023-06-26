@@ -40,6 +40,7 @@ public:
 	void turnTailRight(void);
 
 private:
+	void _renderHead(void);
 	WcPt3D _pos;
 	GLfloat _directionAngle;
 	GLfloat _headAngleHorizontal, _headAngleVertical;

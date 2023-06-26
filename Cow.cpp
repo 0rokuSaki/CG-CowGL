@@ -9,7 +9,10 @@
 /******************************
 *          INCLUDES           *
 *******************************/
+#include <cmath>
+
 #include "Cow.h"
+#include "SceneObjects.h"
 #include "RGBColor.h"
 
 /******************************
@@ -32,8 +35,14 @@ static const GLfloat COW_UDDER_OFFSET_Z = 0.4;
 static const GLfloat cowBrownColor[] = { RGB_COLOR_COW_BROWN, 1.0 };
 static const GLfloat darkGrayColor[] = { RGB_COLOR_DARK_GRAY, 1.0 };
 static const GLfloat pinkColor[] = { RGB_COLOR_PINK, 1.0 };
+static const GLfloat ivoryColor[] = { RGB_COLOR_IVORY, 1.0 };
 static const GLfloat blackColor[] = { RGB_COLOR_BLACK, 1.0 };
 static const GLfloat whiteColor[] = { RGB_COLOR_WHITE, 1.0 };
+
+static const GLfloat MOVEMENT_DIFF = 0.25;
+static const GLfloat ROTATION_DIFF = 1.0;
+static const GLfloat HEAD_MOVEMENT_DIFF = 1.0;
+static const GLfloat TAIL_MOVEMENT_DIFF = 1.0;
 
 /******************************
 *     FUNCTION PROTOTYPES     *
@@ -95,9 +104,9 @@ void Cow::render()
 	glTranslatef(0.0, 0.0, COW_LEG_LENGTH);
 	glRotatef(90.0, 0.0, 1.0, 0.0);
 	glRotatef(180.0, 1.0, 0.0, 0.0);
-	gluDisk(quadric, 0.0, COW_BODY_RADIUS, TESSELLATION_RES, TESSELLATION_RES);
+	gluDisk(quadric, 0.0, COW_BODY_RADIUS, TESSELLATION_RES, TESSELLATION_RES);  // Butt
 	glRotatef(180.0, -1.0, 0.0, 0.0);
-	gluCylinder(quadric, COW_BODY_RADIUS, COW_BODY_RADIUS, COW_BODY_LENGTH, TESSELLATION_RES, TESSELLATION_RES);
+	gluCylinder(quadric, COW_BODY_RADIUS, COW_BODY_RADIUS, COW_BODY_LENGTH, TESSELLATION_RES, TESSELLATION_RES);  // Body cylinder
 	glTranslatef(0, 0, COW_BODY_LENGTH);
 	glutSolidSphere(COW_BODY_RADIUS, TESSELLATION_RES, TESSELLATION_RES);
 	glTranslatef(0, 0, -COW_BODY_LENGTH);
@@ -135,13 +144,92 @@ void Cow::render()
 	glPopMatrix();
 
 	/* Udder */
-	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, pinkColor);
-	glMaterialfv(GL_FRONT, GL_EMISSION, blackColor);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, blackColor);
-
 	glPushMatrix();
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, pinkColor);
 	glTranslatef(COW_UDDER_OFFSET_X, 0.0, COW_UDDER_OFFSET_Z);
 	glutSolidSphere(COW_UDDER_RADIUS, TESSELLATION_RES, TESSELLATION_RES);
+	glPopMatrix();
+
+	/* Head */
+	glPushMatrix();
+
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
+	glTranslatef(-0.3, 0.0, 1.8);
+	glutSolidSphere(0.4, 20, 20);  // Head sphere
+
+	/* Horns */
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, ivoryColor);
+	glPushMatrix();
+	glRotatef(-65.0, 0.0, 1.0, 0.0);
+	glPushMatrix();
+	glRotatef(20.0, 1.0, 0.0, 0.0);
+	glutSolidCone(0.15, 0.6, 20, 20);
+	glPopMatrix();
+	glPushMatrix();
+	glRotatef(-20.0, 1.0, 0.0, 0.0);
+	glutSolidCone(0.15, 0.6, 20, 20);
+	glPopMatrix();
+	glPopMatrix();
+
+	/* Ears */
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
+	glPushMatrix();
+	glRotatef(-85.0, 0.0, 1.0, 0.0);
+	glPushMatrix();
+	glRotatef(65.0, 1.0, 0.0, 0.0);
+	glTranslatef(0.0, 0.0, 0.4);
+	glRotatef(85.0, 0.0, 1.0, 0.0);
+	gluDisk(quadric, 0.0, 0.075, 20, 20);  // Ear disk
+	glPopMatrix();
+	glPushMatrix();
+	glRotatef(-65.0, 1.0, 0.0, 0.0);
+	glTranslatef(0.0, 0.0, 0.4);
+	glRotatef(-85.0, 0.0, 1.0, 0.0);
+	gluDisk(quadric, 0.0, 0.075, 20, 20);  // Ear disk
+	glPopMatrix();
+	glPopMatrix();
+
+	/* Nose */
+	glPushMatrix();
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, pinkColor);
+	glTranslatef(0.2, 0.0, 0.25);
+	glutSolidSphere(0.25, 20, 20);  // Nose sphere
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, darkGrayColor);
+	glRotatef(15.0, 0.0, 1.0, 0.0);
+	glPushMatrix();
+	glRotatef(25.0, 1.0, 0.0, 0.0);
+	glTranslatef(0.0, 0.0, 0.250001);
+	gluDisk(quadric, 0.0, 0.02, 20, 20);  // Nostril
+	glPopMatrix();
+	glPushMatrix();
+	glRotatef(-25.0, 1.0, 0.0, 0.0);
+	glTranslatef(0.0, 0.0, 0.250001);
+	gluDisk(quadric, 0.0, 0.02, 20, 20);  // Nostril
+	glPopMatrix();
+	glPopMatrix();
+
+	/* Eyes */
+	glPushMatrix();
+	glRotatef(-10.0, 0.0, 1.0, 0.0);
+	glPushMatrix();
+	glRotatef(15, 1.0, 0.0, 0.0);
+	glTranslatef(0.0, 0.0, 0.40001);
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, whiteColor);
+	gluDisk(quadric, 0.0, 0.04, 20, 20);  // Eyeball
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, blackColor);
+	glTranslatef(0.0, 0.0, 0.001);
+	gluDisk(quadric, 0.0, 0.025, 20, 20);  // Pupil
+	glPopMatrix();
+	glPushMatrix();
+	glRotatef(-15, 1.0, 0.0, 0.0);
+	glTranslatef(0.0, 0.0, 0.40001);
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, whiteColor);
+	gluDisk(quadric, 0.0, 0.04, 20, 20);  // Eyeball
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, blackColor);
+	glTranslatef(0.0, 0.0, 0.001);
+	gluDisk(quadric, 0.0, 0.025, 20, 20);  // Pupil
+	glPopMatrix();
+	glPopMatrix();
 	glPopMatrix();
 
 	gluDeleteQuadric(quadric);
