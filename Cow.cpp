@@ -34,11 +34,6 @@ static const GLfloat HEAD_MOVEMENT_DIFF = 1.0;
 static const GLfloat TAIL_MOVEMENT_DIFF = 1.0;
 
 /******************************
-*     FUNCTION PROTOTYPES     *
-*******************************/
-inline void renderHoof(void);
-
-/******************************
 *    FUNCTION DEFINITIONS     *
 *******************************/
 Cow::Cow() :

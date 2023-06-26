@@ -33,7 +33,7 @@
 /******************************
 *       GLOBAL VARIABLES      *
 *******************************/
-WcPt3D viewOrigin(20.0, 20.0, 2.0);
+WcPt3D viewOrigin(20.0, 20.0, 10.0);
 WcPt3D lookAtPoint(0.0, 0.0, 1.0);
 WcVector3D upVector(0.0, 0.0, 1.0);
 GLfloat globalAmbient[] = { 0.75, 0.75, 0.75, 1.0 };
@@ -66,20 +66,18 @@ void renderMainScene(void)
 
     /* Render temporary WC axes */
     /* RED = X, GREEN = Y, BLUE = Z */
-    renderAxes(3.0);
+    //renderAxes(3.0);
 
     renderBackground();
     renderSunObject();
-    //renderHouseObject(WcPt3D(-5, 0, 0), 0.0);
-    //renderShedObject(WcPt3D(0, 6, 0), 180.0);
-    //renderWaterTank(WcPt3D(2.5, 6, 0), 0.0);
-    //renderTreeObject(WcPt3D(-4, 6, 0));
-    //renderTreeObject(WcPt3D(0, -5, 0));
-    //renderTreeObject(WcPt3D(10, 10, 0));
-    //renderTreeObject(WcPt3D(-10, -10, 0));
+    renderHouseObject(WcPt3D(-5, 0, 0), 0.0);
+    renderShedObject(WcPt3D(0, 6, 0), 180.0);
+    renderWaterTank(WcPt3D(2.5, 6, 0), 0.0);
+    renderTreeObject(WcPt3D(-4, 6, 0));
+    renderTreeObject(WcPt3D(0, -5, 0));
+    renderTreeObject(WcPt3D(10, 10, 0));
+    renderTreeObject(WcPt3D(-10, -10, 0));
 
-    cow.setDirectionAngle(90);
-    cow.setPosition(WcPt3D(2, 2, 0));
     cow.render();
 
     glDisable(GL_DEPTH_TEST);
