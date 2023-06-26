@@ -7,6 +7,11 @@
  *********************************************************************/
 
 /******************************
+*          DEFINES            *
+*******************************/
+#define _USE_MATH_DEFINES
+
+/******************************
 *          INCLUDES           *
 *******************************/
 #include <cmath>
@@ -28,7 +33,7 @@ static const GLfloat walnutColor[] = { RGB_COLOR_WALNUT, 1.0 };
 static const GLfloat blackColor[] = { RGB_COLOR_BLACK, 1.0 };
 static const GLfloat whiteColor[] = { RGB_COLOR_WHITE, 1.0 };
 
-static const GLfloat MOVEMENT_DIFF = 0.25;
+static const GLfloat MOVEMENT_DIFF = 0.1;
 static const GLfloat ROTATION_DIFF = 1.0;
 static const GLfloat HEAD_MOVEMENT_DIFF = 1.0;
 static const GLfloat TAIL_MOVEMENT_DIFF = 1.0;
@@ -38,7 +43,7 @@ static const GLfloat TAIL_MOVEMENT_DIFF = 1.0;
 *******************************/
 Cow::Cow() :
 	_pos(0, 0, 0),
-	_directionAngle(0.0),
+	_directionAngle(45.0),
 	_headAngleHorizontal(0.0),
 	_headAngleVertical(0.0),
 	_tailAngleHorizontal(0.0),
@@ -103,21 +108,51 @@ void Cow::setDirectionAngle(GLfloat directionAngle)
 
 void Cow::moveForward(void)
 {
+	GLfloat newX = _pos.getX() + cos((_directionAngle * M_PI) / 180.0) * MOVEMENT_DIFF;
+	GLfloat newY = _pos.getY() + sin((_directionAngle * M_PI) / 180.0) * MOVEMENT_DIFF;
+
+	if ((WORLD_MIN_COORD <= newX && newX <= WORLD_MAX_COORD) &&
+		(WORLD_MIN_COORD <= newY && newY <= WORLD_MAX_COORD))
+	{
+		_pos.setX(newX);
+		_pos.setY(newY);
+	}
 }
 
 
 void Cow::moveBackward(void)
 {
+	GLfloat newX = _pos.getX() - cos((_directionAngle * M_PI) / 180.0) * MOVEMENT_DIFF;
+	GLfloat newY = _pos.getY() - sin((_directionAngle * M_PI) / 180.0) * MOVEMENT_DIFF;
+
+	if ((WORLD_MIN_COORD <= newX && newX <= WORLD_MAX_COORD) &&
+		(WORLD_MIN_COORD <= newY && newY <= WORLD_MAX_COORD))
+	{
+		_pos.setX(newX);
+		_pos.setY(newY);
+	}
 }
 
 
 void Cow::turnLeft(void)
 {
+	GLfloat newDirectionAngle = (_directionAngle + ROTATION_DIFF);
+	if (newDirectionAngle >= 360.0)
+	{
+		newDirectionAngle -= 360.0;
+	}
+	_directionAngle = newDirectionAngle;
 }
 
 
 void Cow::turnRight(void)
 {
+	GLfloat newDirectionAngle = (_directionAngle - ROTATION_DIFF);
+	if (newDirectionAngle <= 0.0)
+	{
+		newDirectionAngle += 360.0;
+	}
+	_directionAngle = newDirectionAngle;
 }
 
 
@@ -172,8 +207,8 @@ void Cow::_renderBody(void)
 
 	/* Body */
 	glPushMatrix();
-	glTranslatef(0.0, -0.7, 1.0);
-	glRotatef(-90.0, 1.0, 0.0, 0.0);
+	glTranslatef(-0.7, 0.0, 1.0);
+	glRotatef(90.0, 0.0, 1.0, 0.0);
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
 	gluCylinder(quadric, 0.5, 0.5, 1.4, 20, 20);  // Main body
 	glRotatef(180.0, 1.0, 0.0, 0.0);
@@ -184,14 +219,14 @@ void Cow::_renderBody(void)
 
 	/* Udder */
 	glPushMatrix();
-	glTranslatef(0.0, -0.25, 0.5);
+	glTranslatef(-0.25, 0.0, 0.5);
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, pinkColor);
 	glutSolidSphere(0.35, 20, 20);
 	glPopMatrix();
 
 	/* Leg - rear left */
 	glPushMatrix();
-	glTranslatef(-0.4, -0.6, 0.0);
+	glTranslatef(-0.6, 0.4, 0.0);
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
 	gluCylinder(quadric, 0.1, 0.1, 1.0, 20, 20);  // Leg
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, darkGrayColor);
@@ -200,7 +235,7 @@ void Cow::_renderBody(void)
 
 	/* Leg - rear right */
 	glPushMatrix();
-	glTranslatef(0.4, -0.6, 0.0);
+	glTranslatef(-0.6, -0.4, 0.0);
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
 	gluCylinder(quadric, 0.1, 0.1, 1.0, 20, 20);  // Leg
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, darkGrayColor);
@@ -209,7 +244,7 @@ void Cow::_renderBody(void)
 
 	/* Leg - front left */
 	glPushMatrix();
-	glTranslatef(-0.4, 0.6, 0.0);
+	glTranslatef(0.6, 0.4, 0.0);
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
 	gluCylinder(quadric, 0.1, 0.1, 1.0, 20, 20);  // Leg
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, darkGrayColor);
@@ -218,7 +253,7 @@ void Cow::_renderBody(void)
 
 	/* Leg - front right */
 	glPushMatrix();
-	glTranslatef(0.4, 0.6, 0.0);
+	glTranslatef(0.6, -0.4, 0.0);
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
 	gluCylinder(quadric, 0.1, 0.1, 1.0, 20, 20);  // Leg
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, darkGrayColor);
@@ -239,7 +274,7 @@ void Cow::_renderHead(void)
 
 	glTranslatef(_pos.getX(), _pos.getY(), _pos.getZ());  // Translate modeling coordinates
 	glRotatef(_directionAngle, 0.0, 0.0, 1.0);
-	glTranslatef(0.0, 1.1, 1.3);  // Move head relative to cow's body
+	glTranslatef(1.1, 0.0, 1.3);  // Move head relative to cow's body
 	glRotatef(_headAngleHorizontal, 0.0, 0.0, 1.0);
 	glRotatef(_headAngleVertical, 1.0, 0.0, 0.0);
 
@@ -252,13 +287,13 @@ void Cow::_renderHead(void)
 	/* Horns */
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, ivoryColor);
 	glPushMatrix();
-	glRotatef(20.0, -1.0, 0.0, 0.0);
-	glPushMatrix();
 	glRotatef(20.0, 0.0, 1.0, 0.0);
+	glPushMatrix();
+	glRotatef(20.0, 1.0, 0.0, 0.0);
 	glutSolidCone(0.15, 0.6, 20, 20);
 	glPopMatrix();
 	glPushMatrix();
-	glRotatef(20.0, 0.0, -1.0, 0.0);
+	glRotatef(20.0, -1.0, 0.0, 0.0);
 	glutSolidCone(0.15, 0.6, 20, 20);
 	glPopMatrix();
 	glPopMatrix();
@@ -267,31 +302,31 @@ void Cow::_renderHead(void)
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
 	glPushMatrix();
 	glPushMatrix();
-	glTranslatef(0.34, 0.0, 0.2);
-	glRotatef(90, 1.0, 0.0, 0.0);
+	glTranslatef(0.0, 0.34, 0.2);
+	glRotatef(90, 0.0, 1.0, 0.0);
 	gluDisk(quadric, 0.0, 0.1, 20, 20);  // Ear disk
 	glPopMatrix();
 	glPushMatrix();
-	glTranslatef(-0.34, 0.0, 0.2);
-	glRotatef(90, 1.0, 0.0, 0.0);
+	glTranslatef(0.0, -0.34, 0.2);
+	glRotatef(90, 0.0, 1.0, 0.0);
 	gluDisk(quadric, 0.0, 0.1, 20, 20);  // Ear disk
 	glPopMatrix();
 	glPopMatrix();
 
 	/* Nose */
 	glPushMatrix();
-	glTranslatef(0.0, 0.25, -0.2);
+	glTranslatef(0.25, 0.0, -0.2);
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, pinkColor);
 	glutSolidSphere(0.25, 20, 20);  // Nose sphere
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, darkGrayColor);
-	glRotatef(105.0, -1.0, 0.0, 0.0);
+	glRotatef(105.0, 0.0, 1.0, 0.0);
 	glPushMatrix();
-	glRotatef(25.0, 0.0, 1.0, 0.0);
+	glRotatef(25.0, 1.0, 0.0, 0.0);
 	glTranslatef(0.0, 0.0, 0.250001);
 	gluDisk(quadric, 0.0, 0.02, 20, 20);  // Nostril
 	glPopMatrix();
 	glPushMatrix();
-	glRotatef(25.0, 0.0, -1.0, 0.0);
+	glRotatef(25.0, -1.0, 0.0, 0.0);
 	glTranslatef(0.0, 0.0, 0.250001);
 	gluDisk(quadric, 0.0, 0.02, 20, 20);  // Nostril
 	glPopMatrix();
@@ -299,9 +334,9 @@ void Cow::_renderHead(void)
 
 	/* Eyes */
 	glPushMatrix();
-	glRotatef(80.0, -1.0, 0.0, 0.0);
+	glRotatef(80.0, 0.0, 1.0, 0.0);
 	glPushMatrix();
-	glRotatef(15, 0.0, 1.0, 0.0);
+	glRotatef(15, 1.0, 0.0, 0.0);
 	glTranslatef(0.0, 0.0, 0.40001);
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, whiteColor);
 	gluDisk(quadric, 0.0, 0.04, 20, 20);  // Eyeball
@@ -310,7 +345,7 @@ void Cow::_renderHead(void)
 	gluDisk(quadric, 0.0, 0.025, 20, 20);  // Pupil
 	glPopMatrix();
 	glPushMatrix();
-	glRotatef(15, 0.0, -1.0, 0.0);
+	glRotatef(15, -1.0, 0.0, 0.0);
 	glTranslatef(0.0, 0.0, 0.40001);
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, whiteColor);
 	gluDisk(quadric, 0.0, 0.04, 20, 20);  // Eyeball
@@ -334,11 +369,11 @@ void Cow::_renderTail(void)
 
 	glTranslatef(_pos.getX(), _pos.getY(), _pos.getZ());  // Translate modeling coordinates
 	glRotatef(_directionAngle, 0.0, 0.0, 1.0);
-	glTranslatef(0.0, -0.69, 1.45);  // Move tail relative to cow's body
+	glTranslatef(-0.69, 0.0, 1.45);  // Move tail relative to cow's body
 	glRotatef(_tailAngleHorizontal, 0.0, 0.0, 1.0);
-	glRotatef(_tailAngleVertical, -1.0, 0.0, 0.0);
+	glRotatef(_tailAngleVertical, 0.0, 1.0, 0.0);
 
-	glRotatef(90.0, 1.0, 0.0, 0.0);
+	glRotatef(90.0, 0.0, -1.0, 0.0);
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
 	glutSolidSphere(0.05, 20, 20);
 	gluCylinder(quadric, 0.05, 0.05, 0.75, 20, 20);

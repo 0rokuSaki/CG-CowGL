@@ -23,8 +23,8 @@ class WcVector3D;
 *      EXTERNAL VARIABLES     *
 *******************************/
 /* Background */
-extern GLfloat worldMinCoord;
-extern GLfloat worldMaxCoord;
+extern const GLfloat WORLD_MIN_COORD;
+extern const GLfloat WORLD_MAX_COORD;
 
 /* Sun */
 extern GLfloat sunAngle;             // Angle of the sun relative to the ground.
