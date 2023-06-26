@@ -1,9 +1,51 @@
+/*****************************************************************//**
+ * \file   Cow.cpp
+ * \brief  
+ * 
+ * \author aaron
+ * \date   June 2023
+ *********************************************************************/
+
+/******************************
+*          INCLUDES           *
+*******************************/
 #include "Cow.h"
 #include "RGBColor.h"
 
+/******************************
+*       GLOBAL VARIABLES      *
+*******************************/
+static const GLint TESSELLATION_RES = 30;
 
+static const GLfloat COW_BODY_LENGTH = 1.4;
+static const GLfloat COW_BODY_RADIUS = 0.5;
+
+static const GLfloat COW_LEG_LENGTH = 1.0;
+static const GLfloat COW_LEG_RADIUS = 0.1;
+static const GLfloat COW_HOOF_LENGTH = 0.15;
+static const GLfloat COW_HOOF_RADIUS = COW_LEG_RADIUS + 0.005;
+
+static const GLfloat COW_UDDER_RADIUS = 0.3;
+static const GLfloat COW_UDDER_OFFSET_X = 0.5;
+static const GLfloat COW_UDDER_OFFSET_Z = 0.4;
+
+static const GLfloat cowBrownColor[] = { RGB_COLOR_COW_BROWN, 1.0 };
+static const GLfloat darkGrayColor[] = { RGB_COLOR_DARK_GRAY, 1.0 };
+static const GLfloat pinkColor[] = { RGB_COLOR_PINK, 1.0 };
+static const GLfloat blackColor[] = { RGB_COLOR_BLACK, 1.0 };
+static const GLfloat whiteColor[] = { RGB_COLOR_WHITE, 1.0 };
+
+/******************************
+*     FUNCTION PROTOTYPES     *
+*******************************/
+inline void renderHoof(void);
+
+/******************************
+*    FUNCTION DEFINITIONS     *
+*******************************/
 Cow::Cow() :
 	_pos(0, 0, 0),
+	_directionAngle(0.0),
 	_headAngleHorizontal(0.0),
 	_headAngleVertical(0.0),
 	_tailAngleHorizontal(0.0),
@@ -14,6 +56,7 @@ Cow::Cow() :
 
 Cow::Cow(GLfloat x, GLfloat y, GLfloat z) :
 	_pos(x, y, z),
+	_directionAngle(0.0),
 	_headAngleHorizontal(0.0),
 	_headAngleVertical(0.0),
 	_tailAngleHorizontal(0.0),
@@ -24,6 +67,7 @@ Cow::Cow(GLfloat x, GLfloat y, GLfloat z) :
 
 Cow::Cow(WcPt3D pos) :
 	_pos(pos),
+	_directionAngle(0.0),
 	_headAngleHorizontal(0.0),
 	_headAngleVertical(0.0),
 	_tailAngleHorizontal(0.0),
@@ -34,37 +78,20 @@ Cow::Cow(WcPt3D pos) :
 
 void Cow::render()
 {
-	static const GLint TESSELLATION_RES = 30;
-
-	static const GLfloat COW_BODY_LENGTH = 1.7;
-	static const GLfloat COW_BODY_RADIUS = 0.5;
-
-	static const GLfloat COW_LEG_LENGTH = 1.0;
-	static const GLfloat COW_LEG_RADIUS = 0.1;
-
-	static const GLfloat COW_UDDER_RADIUS = 0.3;
-	static const GLfloat COW_UDDER_OFFSET_X = 0.5;
-	static const GLfloat COW_UDDER_OFFSET_Z = 0.6;
-
-	static const GLfloat cowBrownColor[] = { RGB_COLOR_COW_BROWN, 1.0 };
-	static const GLfloat pinkColor[] = { RGB_COLOR_PINK, 1.0 };
-	static const GLfloat blackColor[] = { RGB_COLOR_BLACK, 1.0 };
-	static const GLfloat whiteColor[] = { RGB_COLOR_WHITE, 1.0 };
-
 	glEnable(GL_LIGHTING);
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 
-	glRotatef(90.0, 0.0, 0.0, 1.0); // TODO: Add rotation angle
+	/* Common */
+	glRotatef(_directionAngle, 0.0, 0.0, 1.0);
 	glTranslatef(_pos.getX(), _pos.getY(), _pos.getZ());
+	glMaterialfv(GL_FRONT, GL_EMISSION, blackColor);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, blackColor);
 
 	GLUquadric* quadric = gluNewQuadric();
 
 	/* Body */
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
-	glMaterialfv(GL_FRONT, GL_EMISSION, blackColor);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, blackColor);
-
 	glTranslatef(0.0, 0.0, COW_LEG_LENGTH);
 	glRotatef(90.0, 0.0, 1.0, 0.0);
 	glRotatef(180.0, 1.0, 0.0, 0.0);
@@ -72,26 +99,39 @@ void Cow::render()
 	glRotatef(180.0, -1.0, 0.0, 0.0);
 	gluCylinder(quadric, COW_BODY_RADIUS, COW_BODY_RADIUS, COW_BODY_LENGTH, TESSELLATION_RES, TESSELLATION_RES);
 	glTranslatef(0, 0, COW_BODY_LENGTH);
-	gluDisk(quadric, 0.0, COW_BODY_RADIUS, TESSELLATION_RES, TESSELLATION_RES);
+	glutSolidSphere(COW_BODY_RADIUS, TESSELLATION_RES, TESSELLATION_RES);
 	glTranslatef(0, 0, -COW_BODY_LENGTH);
 
-	/* Legs */
-	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
-	glMaterialfv(GL_FRONT, GL_EMISSION, blackColor);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, blackColor);
-
+	/* Legs & hooves */
 	glPushMatrix();
+
+	/* Back - left */
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
 	glTranslatef(0.0, COW_BODY_RADIUS - COW_LEG_RADIUS, COW_LEG_RADIUS);
 	glRotatef(90.0, 0.0, 1.0, 0.0);
 	gluCylinder(quadric, COW_LEG_RADIUS, COW_LEG_RADIUS, COW_LEG_LENGTH, TESSELLATION_RES, TESSELLATION_RES);
-	glTranslatef(0.0, (- 2 * COW_BODY_RADIUS) + (2 * COW_LEG_RADIUS), 0.0);
+	renderHoof();
+	
+	/* Back - right */
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
+	glTranslatef(0.0, (-2 * COW_BODY_RADIUS) + (2 * COW_LEG_RADIUS), 0.0);
 	gluCylinder(quadric, COW_LEG_RADIUS, COW_LEG_RADIUS, COW_LEG_LENGTH, TESSELLATION_RES, TESSELLATION_RES);
+	renderHoof();
+
+	/* Front - right */
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
 	glRotatef(90.0, 0.0, -1.0, 0.0);
 	glTranslatef(0.0, 0.0, COW_BODY_LENGTH - (2 * COW_LEG_RADIUS));
 	glRotatef(90.0, 0.0, 1.0, 0.0);
 	gluCylinder(quadric, COW_LEG_RADIUS, COW_LEG_RADIUS, COW_LEG_LENGTH, TESSELLATION_RES, TESSELLATION_RES);
+	renderHoof();
+
+	/* Front - left */
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
 	glTranslatef(0.0, 2 * COW_BODY_RADIUS - 2 * COW_LEG_RADIUS, 0.0);
 	gluCylinder(quadric, COW_LEG_RADIUS, COW_LEG_RADIUS, COW_LEG_LENGTH, TESSELLATION_RES, TESSELLATION_RES);
+	renderHoof();
+
 	glPopMatrix();
 
 	/* Udder */
@@ -168,4 +208,17 @@ void Cow::turnTailLeft(void)
 
 void Cow::turnTailRight(void)
 {
+}
+
+
+void renderHoof(void)
+{
+	GLUquadric* quadric = gluNewQuadric();
+
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, darkGrayColor);
+	glTranslatef(0.0, 0.0, COW_LEG_LENGTH - COW_HOOF_LENGTH);
+	gluCylinder(quadric, COW_HOOF_RADIUS, COW_HOOF_RADIUS, COW_HOOF_LENGTH, TESSELLATION_RES, TESSELLATION_RES);
+	glTranslatef(0.0, 0.0, -(COW_LEG_LENGTH - COW_HOOF_LENGTH));
+
+	gluDeleteQuadric(quadric);
 }

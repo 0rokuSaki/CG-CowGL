@@ -41,6 +41,7 @@ public:
 
 private:
 	WcPt3D _pos;
+	GLfloat _directionAngle;
 	GLfloat _headAngleHorizontal, _headAngleVertical;
 	GLfloat _tailAngleHorizontal, _tailAngleVertical;
 };
