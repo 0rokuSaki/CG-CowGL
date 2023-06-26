@@ -66,7 +66,7 @@ void renderMainScene(void)
 
     /* Render temporary WC axes */
     /* RED = X, GREEN = Y, BLUE = Z */
-    //renderAxes(3.0);
+    renderAxes(3.0);
 
     renderBackground();
     renderSunObject();
@@ -78,6 +78,8 @@ void renderMainScene(void)
     //renderTreeObject(WcPt3D(10, 10, 0));
     //renderTreeObject(WcPt3D(-10, -10, 0));
 
+    cow.setDirectionAngle(90);
+    cow.setPosition(WcPt3D(2, 2, 0));
     cow.render();
 
     glDisable(GL_DEPTH_TEST);

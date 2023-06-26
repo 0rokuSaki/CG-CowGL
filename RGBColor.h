@@ -34,3 +34,4 @@
 #define RGB_COLOR_PINK         1.0, 0.75, 0.79
 #define RGB_COLOR_COW_BROWN    0.42, 0.18, 0.12
 #define RGB_COLOR_IVORY        1.0, 1.0, 0.94
+#define RGB_COLOR_WALNUT       0.26, 0.15, 0.06
