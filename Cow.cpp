@@ -92,147 +92,11 @@ void Cow::render()
 	glPushMatrix();
 
 	/* Common */
-	glRotatef(_directionAngle, 0.0, 0.0, 1.0);
-	glTranslatef(_pos.getX(), _pos.getY(), _pos.getZ());
 	glMaterialfv(GL_FRONT, GL_EMISSION, blackColor);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, blackColor);
 
-	GLUquadric* quadric = gluNewQuadric();
-
-	/* Body */
-	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
-	glTranslatef(0.0, 0.0, COW_LEG_LENGTH);
-	glRotatef(90.0, 0.0, 1.0, 0.0);
-	glRotatef(180.0, 1.0, 0.0, 0.0);
-	gluDisk(quadric, 0.0, COW_BODY_RADIUS, TESSELLATION_RES, TESSELLATION_RES);  // Butt
-	glRotatef(180.0, -1.0, 0.0, 0.0);
-	gluCylinder(quadric, COW_BODY_RADIUS, COW_BODY_RADIUS, COW_BODY_LENGTH, TESSELLATION_RES, TESSELLATION_RES);  // Body cylinder
-	glTranslatef(0, 0, COW_BODY_LENGTH);
-	glutSolidSphere(COW_BODY_RADIUS, TESSELLATION_RES, TESSELLATION_RES);
-	glTranslatef(0, 0, -COW_BODY_LENGTH);
-
-	/* Legs & hooves */
-	glPushMatrix();
-
-	/* Back - left */
-	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
-	glTranslatef(0.0, COW_BODY_RADIUS - COW_LEG_RADIUS, COW_LEG_RADIUS);
-	glRotatef(90.0, 0.0, 1.0, 0.0);
-	gluCylinder(quadric, COW_LEG_RADIUS, COW_LEG_RADIUS, COW_LEG_LENGTH, TESSELLATION_RES, TESSELLATION_RES);
-	renderHoof();
-	
-	/* Back - right */
-	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
-	glTranslatef(0.0, (-2 * COW_BODY_RADIUS) + (2 * COW_LEG_RADIUS), 0.0);
-	gluCylinder(quadric, COW_LEG_RADIUS, COW_LEG_RADIUS, COW_LEG_LENGTH, TESSELLATION_RES, TESSELLATION_RES);
-	renderHoof();
-
-	/* Front - right */
-	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
-	glRotatef(90.0, 0.0, -1.0, 0.0);
-	glTranslatef(0.0, 0.0, COW_BODY_LENGTH - (2 * COW_LEG_RADIUS));
-	glRotatef(90.0, 0.0, 1.0, 0.0);
-	gluCylinder(quadric, COW_LEG_RADIUS, COW_LEG_RADIUS, COW_LEG_LENGTH, TESSELLATION_RES, TESSELLATION_RES);
-	renderHoof();
-
-	/* Front - left */
-	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
-	glTranslatef(0.0, 2 * COW_BODY_RADIUS - 2 * COW_LEG_RADIUS, 0.0);
-	gluCylinder(quadric, COW_LEG_RADIUS, COW_LEG_RADIUS, COW_LEG_LENGTH, TESSELLATION_RES, TESSELLATION_RES);
-	renderHoof();
-
-	glPopMatrix();
-
-	/* Udder */
-	glPushMatrix();
-	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, pinkColor);
-	glTranslatef(COW_UDDER_OFFSET_X, 0.0, COW_UDDER_OFFSET_Z);
-	glutSolidSphere(COW_UDDER_RADIUS, TESSELLATION_RES, TESSELLATION_RES);
-	glPopMatrix();
-
-	/* Head */
-	glPushMatrix();
-
-	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
-	glTranslatef(-0.3, 0.0, 1.8);
-	glutSolidSphere(0.4, 20, 20);  // Head sphere
-
-	/* Horns */
-	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, ivoryColor);
-	glPushMatrix();
-	glRotatef(-65.0, 0.0, 1.0, 0.0);
-	glPushMatrix();
-	glRotatef(20.0, 1.0, 0.0, 0.0);
-	glutSolidCone(0.15, 0.6, 20, 20);
-	glPopMatrix();
-	glPushMatrix();
-	glRotatef(-20.0, 1.0, 0.0, 0.0);
-	glutSolidCone(0.15, 0.6, 20, 20);
-	glPopMatrix();
-	glPopMatrix();
-
-	/* Ears */
-	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
-	glPushMatrix();
-	glRotatef(-85.0, 0.0, 1.0, 0.0);
-	glPushMatrix();
-	glRotatef(65.0, 1.0, 0.0, 0.0);
-	glTranslatef(0.0, 0.0, 0.4);
-	glRotatef(85.0, 0.0, 1.0, 0.0);
-	gluDisk(quadric, 0.0, 0.075, 20, 20);  // Ear disk
-	glPopMatrix();
-	glPushMatrix();
-	glRotatef(-65.0, 1.0, 0.0, 0.0);
-	glTranslatef(0.0, 0.0, 0.4);
-	glRotatef(-85.0, 0.0, 1.0, 0.0);
-	gluDisk(quadric, 0.0, 0.075, 20, 20);  // Ear disk
-	glPopMatrix();
-	glPopMatrix();
-
-	/* Nose */
-	glPushMatrix();
-	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, pinkColor);
-	glTranslatef(0.2, 0.0, 0.25);
-	glutSolidSphere(0.25, 20, 20);  // Nose sphere
-	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, darkGrayColor);
-	glRotatef(15.0, 0.0, 1.0, 0.0);
-	glPushMatrix();
-	glRotatef(25.0, 1.0, 0.0, 0.0);
-	glTranslatef(0.0, 0.0, 0.250001);
-	gluDisk(quadric, 0.0, 0.02, 20, 20);  // Nostril
-	glPopMatrix();
-	glPushMatrix();
-	glRotatef(-25.0, 1.0, 0.0, 0.0);
-	glTranslatef(0.0, 0.0, 0.250001);
-	gluDisk(quadric, 0.0, 0.02, 20, 20);  // Nostril
-	glPopMatrix();
-	glPopMatrix();
-
-	/* Eyes */
-	glPushMatrix();
-	glRotatef(-10.0, 0.0, 1.0, 0.0);
-	glPushMatrix();
-	glRotatef(15, 1.0, 0.0, 0.0);
-	glTranslatef(0.0, 0.0, 0.40001);
-	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, whiteColor);
-	gluDisk(quadric, 0.0, 0.04, 20, 20);  // Eyeball
-	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, blackColor);
-	glTranslatef(0.0, 0.0, 0.001);
-	gluDisk(quadric, 0.0, 0.025, 20, 20);  // Pupil
-	glPopMatrix();
-	glPushMatrix();
-	glRotatef(-15, 1.0, 0.0, 0.0);
-	glTranslatef(0.0, 0.0, 0.40001);
-	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, whiteColor);
-	gluDisk(quadric, 0.0, 0.04, 20, 20);  // Eyeball
-	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, blackColor);
-	glTranslatef(0.0, 0.0, 0.001);
-	gluDisk(quadric, 0.0, 0.025, 20, 20);  // Pupil
-	glPopMatrix();
-	glPopMatrix();
-	glPopMatrix();
-
-	gluDeleteQuadric(quadric);
+	_renderBody();
+	_renderHead();
 
 	glPopMatrix();
 	glDisable(GL_LIGHTING);
@@ -296,6 +160,168 @@ void Cow::turnTailLeft(void)
 
 void Cow::turnTailRight(void)
 {
+}
+
+
+void Cow::_renderBody(void)
+{
+	GLUquadric* quadric = gluNewQuadric();
+
+	glPushMatrix();
+
+	glRotatef(_directionAngle, 0.0, 0.0, 1.0);
+	glTranslatef(_pos.getX(), _pos.getY(), _pos.getZ());
+
+	/* Body */
+	glPushMatrix();
+	glTranslatef(0.0, -0.7, 1.0);
+	glRotatef(-90.0, 1.0, 0.0, 0.0);
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
+	gluCylinder(quadric, 0.5, 0.5, 1.4, 20, 20);  // Main body
+	glRotatef(180.0, 1.0, 0.0, 0.0);
+	gluDisk(quadric, 0.0, 0.5, 20, 20);  // Main body back end (butt)
+	glTranslatef(0.0, 0.0, -1.4);
+	glutSolidSphere(0.5, 20, 20);  // Neck
+	glPopMatrix();
+
+	/* Udder */
+	glPushMatrix();
+	glTranslatef(0.0, -0.25, 0.5);
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, pinkColor);
+	glutSolidSphere(0.35, 20, 20);
+	glPopMatrix();
+
+	/* Leg - rear left */
+	glPushMatrix();
+	glTranslatef(-0.4, -0.6, 0.0);
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
+	gluCylinder(quadric, 0.1, 0.1, 1.0, 20, 20);  // Leg
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, darkGrayColor);
+	gluCylinder(quadric, 0.10001, 0.10001, 0.15, 20, 20);  // Hoof
+	glPopMatrix();
+
+	/* Leg - rear right */
+	glPushMatrix();
+	glTranslatef(0.4, -0.6, 0.0);
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
+	gluCylinder(quadric, 0.1, 0.1, 1.0, 20, 20);  // Leg
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, darkGrayColor);
+	gluCylinder(quadric, 0.10001, 0.10001, 0.15, 20, 20);  // Hoof
+	glPopMatrix();
+
+	/* Leg - front left */
+	glPushMatrix();
+	glTranslatef(-0.4, 0.6, 0.0);
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
+	gluCylinder(quadric, 0.1, 0.1, 1.0, 20, 20);  // Leg
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, darkGrayColor);
+	gluCylinder(quadric, 0.10001, 0.10001, 0.15, 20, 20);  // Hoof
+	glPopMatrix();
+
+	/* Leg - front right */
+	glPushMatrix();
+	glTranslatef(0.4, 0.6, 0.0);
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
+	gluCylinder(quadric, 0.1, 0.1, 1.0, 20, 20);  // Leg
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, darkGrayColor);
+	gluCylinder(quadric, 0.10001, 0.10001, 0.15, 20, 20);  // Hoof
+	glPopMatrix();
+	
+	glPopMatrix();
+
+	gluDeleteQuadric(quadric);
+}
+
+
+void Cow::_renderHead(void)
+{
+	GLUquadric* quadric = gluNewQuadric();
+
+	glPushMatrix();
+
+	glRotatef(_directionAngle, 0.0, 0.0, 1.0);
+	glTranslatef(_pos.getX(), _pos.getY() + 1.1, _pos.getZ() + 1.3);
+	glRotatef(_headAngleHorizontal, 0.0, 0.0, 1.0);
+	glRotatef(_headAngleVertical, 1.0, 0.0, 0.0);
+
+	/* Head */
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
+	glPushMatrix();
+	glutSolidSphere(0.4, 20, 20);  // Head sphere
+	glPopMatrix();
+
+	/* Horns */
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, ivoryColor);
+	glPushMatrix();
+	glRotatef(20.0, -1.0, 0.0, 0.0);
+	glPushMatrix();
+	glRotatef(20.0, 0.0, 1.0, 0.0);
+	glutSolidCone(0.15, 0.6, 20, 20);
+	glPopMatrix();
+	glPushMatrix();
+	glRotatef(20.0, 0.0, -1.0, 0.0);
+	glutSolidCone(0.15, 0.6, 20, 20);
+	glPopMatrix();
+	glPopMatrix();
+
+	/* Ears */
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
+	glPushMatrix();
+	glPushMatrix();
+	glTranslatef(0.34, 0.0, 0.2);
+	glRotatef(90, 1.0, 0.0, 0.0);
+	gluDisk(quadric, 0.0, 0.1, 20, 20);  // Ear disk
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(-0.34, 0.0, 0.2);
+	glRotatef(90, 1.0, 0.0, 0.0);
+	gluDisk(quadric, 0.0, 0.1, 20, 20);  // Ear disk
+	glPopMatrix();
+	glPopMatrix();
+
+	/* Nose */
+	glPushMatrix();
+	glTranslatef(0.0, 0.25, -0.2);
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, pinkColor);
+	glutSolidSphere(0.25, 20, 20);  // Nose sphere
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, darkGrayColor);
+	glRotatef(105.0, -1.0, 0.0, 0.0);
+	glPushMatrix();
+	glRotatef(25.0, 0.0, 1.0, 0.0);
+	glTranslatef(0.0, 0.0, 0.250001);
+	gluDisk(quadric, 0.0, 0.02, 20, 20);  // Nostril
+	glPopMatrix();
+	glPushMatrix();
+	glRotatef(25.0, 0.0, -1.0, 0.0);
+	glTranslatef(0.0, 0.0, 0.250001);
+	gluDisk(quadric, 0.0, 0.02, 20, 20);  // Nostril
+	glPopMatrix();
+	glPopMatrix();
+
+	/* Eyes */
+	glPushMatrix();
+	glRotatef(80.0, -1.0, 0.0, 0.0);
+	glPushMatrix();
+	glRotatef(15, 0.0, 1.0, 0.0);
+	glTranslatef(0.0, 0.0, 0.40001);
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, whiteColor);
+	gluDisk(quadric, 0.0, 0.04, 20, 20);  // Eyeball
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, blackColor);
+	glTranslatef(0.0, 0.0, 0.001);
+	gluDisk(quadric, 0.0, 0.025, 20, 20);  // Pupil
+	glPopMatrix();
+	glPushMatrix();
+	glRotatef(15, 0.0, -1.0, 0.0);
+	glTranslatef(0.0, 0.0, 0.40001);
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, whiteColor);
+	gluDisk(quadric, 0.0, 0.04, 20, 20);  // Eyeball
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, blackColor);
+	glTranslatef(0.0, 0.0, 0.001);
+	gluDisk(quadric, 0.0, 0.025, 20, 20);  // Pupil
+	glPopMatrix();
+	glPopMatrix();
+
+	glPopMatrix();
 }
 
 
