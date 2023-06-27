@@ -51,17 +51,20 @@ public:
 	void TPCamDecreaseRadius(void);
 
 	/* Getters */
+	WcPt3D getPosition(void);
+	WcPt3D getTpCamLookAtPoint(void);
+	WcPt3D getFpCamLookAtPoint(void);
 	GLfloat getTpCamRadius(void);
 	GLfloat getTpCamVerticalAngle(void);
 	GLfloat getTpCamHorizontalAngle(void);
+	GLfloat getHeadAngleHorizontal(void);
+	GLfloat getHeadAngleVertical(void);
 
 private:
 	void _renderBody(void);
 	void _renderHead(void);
 	void _renderTail(void);
 
-	void _renderFirstPersonCamera(void);
-	void _renderThirdPersonCamera(void);
 	WcPt3D _pos;
 	GLfloat _directionAngle;
 	GLfloat _headAngleHorizontal, _headAngleVertical;

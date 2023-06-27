@@ -25,6 +25,8 @@ extern GLfloat globalAmbient[];
 *     FUNCTION PROTOTYPES     *
 *******************************/
 void renderMainScene(void);
+void renderFirstPersonCamera(void);
+void renderThirdPersonCamera(void);
 void renderAxes(GLdouble height);
 void handleKeyboardEventMain(unsigned char key, int x, int y);
 void resetProjectionAndModelviewMatrices(void);

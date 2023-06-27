@@ -7,9 +7,21 @@
  *********************************************************************/
 
 /******************************
+*          DEFINES            *
+*******************************/
+#define _USE_MATH_DEFINES
+#define XW_MIN -1
+#define XW_MAX 1
+#define YW_MIN -1
+#define YW_MAX 1
+#define Z_NEAR 1
+#define Z_FAR 175
+
+/******************************
 *          INCLUDES           *
 *******************************/
 #include <GL/glut.h>
+#include <cmath>
 
 #include "MainScene.h"
 #include "Menus.h"
@@ -19,16 +31,6 @@
 #include "RGBColor.h"
 #include "WcPt3D.h"
 
-/******************************
-*          DEFINES            *
-*******************************/
-
-#define XW_MIN -1
-#define XW_MAX 1
-#define YW_MIN -1
-#define YW_MAX 1
-#define Z_NEAR 1
-#define Z_FAR 175
 
 /******************************
 *       GLOBAL VARIABLES      *
@@ -58,15 +60,14 @@ void renderMainScene(void)
     
     resetProjectionAndModelviewMatrices();
 
-    glMatrixMode(GL_MODELVIEW);
-    gluLookAt(viewOrigin.getX(), viewOrigin.getY(), viewOrigin.getZ(), lookAtPoint.getX(), lookAtPoint.getY(), lookAtPoint.getZ(), upVector.getX(), upVector.getY(), upVector.getZ());
+    renderThirdPersonCamera();
 
     glMatrixMode(GL_PROJECTION);
     glFrustum(XW_MIN, XW_MAX, YW_MIN, YW_MAX, Z_NEAR, Z_FAR);
 
     /* Render temporary WC axes */
     /* RED = X, GREEN = Y, BLUE = Z */
-    renderAxes(3.0);
+    //renderAxes(3.0);
 
     renderBackground();
     renderSunObject();
@@ -78,25 +79,35 @@ void renderMainScene(void)
     //renderTreeObject(WcPt3D(10, 10, 0));
     //renderTreeObject(WcPt3D(-10, -10, 0));
 
-    static int cnt = 0;
-    static bool fwd = false;
-    if (cnt == -50)   fwd = true;
-    if (cnt == 50) fwd = false;
-    if (fwd)
-    {
-        //cow.moveTailUp();
-        cow.turnTailLeft();
-        ++cnt;
-    }
-    else
-    {
-        //cow.moveTailDown();
-        cow.turnTailRight();
-        --cnt;
-    }
     cow.render();
 
     glDisable(GL_DEPTH_TEST);
+}
+
+
+void renderFirstPersonCamera(void)
+{
+    WcPt3D viewOrigin;
+    WcPt3D lookAtPoint;
+    WcVector3D upVector(0.0, 0.0, 1.0);
+
+    glMatrixMode(GL_MODELVIEW);
+    gluLookAt(viewOrigin.getX(), viewOrigin.getY(), viewOrigin.getZ(), lookAtPoint.getX(), lookAtPoint.getY(), lookAtPoint.getZ(), upVector.getX(), upVector.getY(), upVector.getZ());
+}
+
+
+void renderThirdPersonCamera(void)
+{
+    WcPt3D viewOrigin(
+        cow.getPosition().getX() + cow.getTpCamRadius() * cos((cow.getTpCamHorizontalAngle() * M_PI) / 180.0),
+        cow.getPosition().getY() + cow.getTpCamRadius() * sin((cow.getTpCamHorizontalAngle() * M_PI) / 180.0),
+        cow.getPosition().getZ() + cow.getTpCamRadius() * tan((cow.getTpCamVerticalAngle() * M_PI) / 180.0)
+    );
+    WcPt3D lookAtPoint(cow.getTpCamLookAtPoint());
+    WcVector3D upVector(0.0, 0.0, 1.0);
+
+    glMatrixMode(GL_MODELVIEW);
+    gluLookAt(viewOrigin.getX(), viewOrigin.getY(), viewOrigin.getZ(), lookAtPoint.getX(), lookAtPoint.getY(), lookAtPoint.getZ(), upVector.getX(), upVector.getY(), upVector.getZ());
 }
 
 
