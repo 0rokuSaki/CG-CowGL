@@ -43,7 +43,6 @@ public:
 	void turnTailRight(void);
 
 	/* Camera controls */
-	void switchCameraMode(void);
 	void TPCamRotateCW(void);
 	void TPCamRotateCCW(void);
 	void TPCamRotateUp(void);
@@ -51,17 +50,15 @@ public:
 	void TPCamIncreaseRadius(void);
 	void TPCamDecreaseRadius(void);
 
+	/* Getters */
+	GLfloat getTpCamRadius(void);
+	GLfloat getTpCamVerticalAngle(void);
+	GLfloat getTpCamHorizontalAngle(void);
+
 private:
 	void _renderBody(void);
 	void _renderHead(void);
 	void _renderTail(void);
-
-	enum CameraMode
-	{
-		FIRST_PERSON = 0,
-		THIRD_PERSON,
-		LAST_OF_CAMERA_MODE
-	};
 
 	void _renderFirstPersonCamera(void);
 	void _renderThirdPersonCamera(void);
@@ -69,6 +66,5 @@ private:
 	GLfloat _directionAngle;
 	GLfloat _headAngleHorizontal, _headAngleVertical;
 	GLfloat _tailAngleHorizontal, _tailAngleVertical;
-	GLfloat _tpCameraRadius, _tpCamVerticalAngle, _tpCamHorizontalAngle;
-	CameraMode _cameraMode;
+	GLfloat _tpCamRadius, _tpCamVerticalAngle, _tpCamHorizontalAngle;
 };

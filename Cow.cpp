@@ -20,6 +20,7 @@
 #include "Cow.h"
 #include "SceneObjects.h"
 #include "RGBColor.h"
+#include "WcVector3D.h"
 
 /******************************
 *       GLOBAL VARIABLES      *
@@ -41,11 +42,17 @@ static const GLfloat MOVEMENT_DIFF = 0.1;
 static const GLfloat ROTATION_DIFF = 1.0;
 static const GLfloat HEAD_MOVEMENT_DIFF = 1.0;
 static const GLfloat TAIL_MOVEMENT_DIFF = 1.0;
+static const GLfloat TP_CAM_MOVEMENT_DIFF = 1.0;
+static const GLfloat TP_CAM_RADIUS_DIFF = 0.1;
 
 static const GLfloat HEAD_MAX_HORIZONTAL_ANGLE = 80.0;
 static const GLfloat HEAD_MAX_VERTICAL_ANGLE = 60.0;
 static const GLfloat TAIL_MAX_HORIZONTAL_ANGLE = 80.0;
 static const GLfloat TAIL_MAX_VERTICAL_ANGLE = 90.0;
+static const GLfloat TP_CAM_MAX_VERTICAL_ANGLE = 90.0;
+static const GLfloat TP_CAM_MIN_VERTICAL_ANGLE = 90.0;
+static const GLfloat TP_CAM_MAX_RADIUS = 10.0;
+static const GLfloat TP_CAM_MIN_RADIUS = 2.0;
 
 /******************************
 *    FUNCTION DEFINITIONS     *
@@ -57,10 +64,9 @@ Cow::Cow() :
 	_headAngleVertical(0.0),
 	_tailAngleHorizontal(0.0),
 	_tailAngleVertical(INIT_TAIL_VERTICAL_ANGLE),
-	_tpCameraRadius(INIT_TP_CAM_RADIUS),
+	_tpCamRadius(INIT_TP_CAM_RADIUS),
 	_tpCamVerticalAngle(INIT_TP_CAM_VERTICAL_ANGLE),
-	_tpCamHorizontalAngle(TAIL_MAX_HORIZONTAL_ANGLE),
-	_cameraMode(THIRD_PERSON)
+	_tpCamHorizontalAngle(TAIL_MAX_HORIZONTAL_ANGLE)
 {
 }
 
@@ -72,10 +78,9 @@ Cow::Cow(GLfloat x, GLfloat y, GLfloat z) :
 	_headAngleVertical(0.0),
 	_tailAngleHorizontal(0.0),
 	_tailAngleVertical(INIT_TAIL_VERTICAL_ANGLE),
-	_tpCameraRadius(INIT_TP_CAM_RADIUS),
+	_tpCamRadius(INIT_TP_CAM_RADIUS),
 	_tpCamVerticalAngle(INIT_TP_CAM_VERTICAL_ANGLE),
-	_tpCamHorizontalAngle(TAIL_MAX_HORIZONTAL_ANGLE),
-	_cameraMode(THIRD_PERSON)
+	_tpCamHorizontalAngle(TAIL_MAX_HORIZONTAL_ANGLE)
 {
 }
 
@@ -87,10 +92,9 @@ Cow::Cow(WcPt3D pos) :
 	_headAngleVertical(0.0),
 	_tailAngleHorizontal(0.0),
 	_tailAngleVertical(INIT_TAIL_VERTICAL_ANGLE),
-	_tpCameraRadius(INIT_TP_CAM_RADIUS),
+	_tpCamRadius(INIT_TP_CAM_RADIUS),
 	_tpCamVerticalAngle(INIT_TP_CAM_VERTICAL_ANGLE),
-	_tpCamHorizontalAngle(TAIL_MAX_HORIZONTAL_ANGLE),
-	_cameraMode(THIRD_PERSON)
+	_tpCamHorizontalAngle(TAIL_MAX_HORIZONTAL_ANGLE)
 {
 }
 
@@ -109,16 +113,6 @@ void Cow::render()
 	_renderBody();
 	_renderHead();
 	_renderTail();
-
-	/* Render camera */
-	if (_cameraMode == FIRST_PERSON)
-	{
-		_renderFirstPersonCamera();
-	}
-	else
-	{
-		_renderThirdPersonCamera();
-	}
 
 	glPopMatrix();
 	glDisable(GL_LIGHTING);
@@ -267,6 +261,110 @@ void Cow::turnTailRight(void)
 }
 
 
+void Cow::TPCamRotateCW(void)
+{
+	GLfloat newTpCamHorizontalAngle = _tpCamHorizontalAngle - TP_CAM_MOVEMENT_DIFF;
+	if (newTpCamHorizontalAngle <= 0)
+	{
+		newTpCamHorizontalAngle += 360.0;
+	}
+	_tpCamHorizontalAngle = newTpCamHorizontalAngle;
+}
+
+
+void Cow::TPCamRotateCCW(void)
+{
+	GLfloat newTpCamHorizontalAngle = _tpCamHorizontalAngle + TP_CAM_MOVEMENT_DIFF;
+	if (newTpCamHorizontalAngle >= 360.0)
+	{
+		newTpCamHorizontalAngle -= 360.0;
+	}
+	_tpCamHorizontalAngle = newTpCamHorizontalAngle;
+}
+
+
+void Cow::TPCamRotateUp(void)
+{
+	GLfloat newTpCamVerticalAngle = _tpCamVerticalAngle + TP_CAM_MOVEMENT_DIFF;
+	if (newTpCamVerticalAngle <= 90.0)
+	{
+		_tpCamVerticalAngle = newTpCamVerticalAngle;
+	}
+}
+
+
+void Cow::TPCamRotateDown(void)
+{
+	GLfloat newTpCamVerticalAngle = _tpCamVerticalAngle - TP_CAM_MOVEMENT_DIFF;
+	if (newTpCamVerticalAngle >= 0.0)
+	{
+		_tpCamVerticalAngle = newTpCamVerticalAngle;
+	}
+}
+
+
+void Cow::TPCamIncreaseRadius(void)
+{
+	GLfloat newTpCamRadius = _tpCamRadius + TP_CAM_RADIUS_DIFF;
+	if (newTpCamRadius <= TP_CAM_MAX_RADIUS)
+	{
+		_tpCamRadius = newTpCamRadius;
+	}
+}
+
+
+void Cow::TPCamDecreaseRadius(void)
+{
+	GLfloat newTpCamRadius = _tpCamRadius - TP_CAM_RADIUS_DIFF;
+	if (newTpCamRadius >= TP_CAM_MIN_RADIUS)
+	{
+		_tpCamRadius = newTpCamRadius;
+	}
+}
+
+
+GLfloat Cow::getTpCamRadius(void)
+{
+	return _tpCamRadius;
+}
+
+
+GLfloat Cow::getTpCamVerticalAngle(void)
+{
+	return _tpCamVerticalAngle;
+}
+
+
+GLfloat Cow::getTpCamHorizontalAngle(void)
+{
+	return _tpCamHorizontalAngle;
+}
+
+
+void Cow::_renderFirstPersonCamera(void)
+{
+	WcPt3D viewOrigin;
+	WcPt3D lookAtPoint;
+	WcVector3D upVector(0.0, 0.0, 1.0);
+
+	gluLookAt(viewOrigin.getX(), viewOrigin.getY(), viewOrigin.getZ(), lookAtPoint.getX(), lookAtPoint.getY(), lookAtPoint.getZ(), upVector.getX(), upVector.getY(), upVector.getZ());
+}
+
+
+void Cow::_renderThirdPersonCamera(void)
+{
+	WcPt3D viewOrigin(
+		_pos.getX() + _tpCameraRadius * cos((_tpCamHorizontalAngle * M_PI) / 180.0),
+		_pos.getY() + _tpCameraRadius * sin((_tpCamHorizontalAngle * M_PI) / 180.0),
+		_pos.getZ() + _tpCameraRadius * tan((_tpCamVerticalAngle * M_PI) / 180.0)
+	);
+	WcPt3D lookAtPoint(_pos.getX(), _pos.getY(), _pos.getZ() + 1.0);
+	WcVector3D upVector(0.0, 0.0, 1.0);
+
+	gluLookAt(viewOrigin.getX(), viewOrigin.getY(), viewOrigin.getZ(), lookAtPoint.getX(), lookAtPoint.getY(), lookAtPoint.getZ(), upVector.getX(), upVector.getY(), upVector.getZ());
+}
+
+
 void Cow::_renderBody(void)
 {
 	GLUquadric* quadric = gluNewQuadric();
@@ -330,7 +428,7 @@ void Cow::_renderBody(void)
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, darkGrayColor);
 	gluCylinder(quadric, 0.10002, 0.10002, 0.15, 20, 20);  // Hoof
 	glPopMatrix();
-	
+
 	glPopMatrix();
 
 	gluDeleteQuadric(quadric);
@@ -454,51 +552,4 @@ void Cow::_renderTail(void)
 	glPopMatrix();
 
 	gluDeleteQuadric(quadric);
-}
-
-
-void Cow::switchCameraMode(void)
-{
-}
-
-
-void Cow::TPCamRotateCW(void)
-{
-}
-
-
-void Cow::TPCamRotateCCW(void)
-{
-}
-
-
-void Cow::TPCamRotateUp(void)
-{
-}
-
-
-void Cow::TPCamRotateDown(void)
-{
-}
-
-
-void Cow::TPCamIncreaseRadius(void)
-{
-}
-
-
-void Cow::TPCamDecreaseRadius(void)
-{
-}
-
-
-void Cow::_renderFirstPersonCamera(void)
-{
-	
-}
-
-
-void Cow::_renderThirdPersonCamera(void)
-{
-
 }
