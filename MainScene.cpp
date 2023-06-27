@@ -84,14 +84,14 @@ void renderMainScene(void)
     if (cnt == 50) fwd = false;
     if (fwd)
     {
-        cow.turnLeft();
-        cow.moveForward();
+        //cow.moveTailUp();
+        cow.turnTailLeft();
         ++cnt;
     }
     else
     {
-        cow.turnRight();
-        cow.moveBackward();
+        //cow.moveTailDown();
+        cow.turnTailRight();
         --cnt;
     }
     cow.render();

@@ -102,7 +102,7 @@ void keyboardCallback(unsigned char key, int x, int y)
 
 void idleCallback(void)
 {
-    static GLdouble theta = 270.0;
+    static GLdouble theta = 180.0;
     static const GLdouble x = 5.0;
     static const GLdouble y = 5.0;
 
@@ -112,7 +112,7 @@ void idleCallback(void)
     renderMainScene();
     glutPostRedisplay();
 
-    theta += 0.005;
+    //theta += 0.005;
     
     if (theta >= 360.0)
     {

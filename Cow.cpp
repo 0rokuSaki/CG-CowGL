@@ -38,6 +38,11 @@ static const GLfloat ROTATION_DIFF = 1.0;
 static const GLfloat HEAD_MOVEMENT_DIFF = 1.0;
 static const GLfloat TAIL_MOVEMENT_DIFF = 1.0;
 
+static const GLfloat HEAD_MAX_HORIZONTAL_ANGLE = 80.0;
+static const GLfloat HEAD_MAX_VERTICAL_ANGLE = 60.0;
+static const GLfloat TAIL_MAX_HORIZONTAL_ANGLE = 80.0;
+static const GLfloat TAIL_MAX_VERTICAL_ANGLE = 90.0;
+
 /******************************
 *    FUNCTION DEFINITIONS     *
 *******************************/
@@ -158,41 +163,81 @@ void Cow::turnRight(void)
 
 void Cow::moveHeadUp(void)
 {
+	GLfloat newHeadAngleVertical = _headAngleVertical + HEAD_MOVEMENT_DIFF;
+	if (newHeadAngleVertical <= HEAD_MAX_VERTICAL_ANGLE)
+	{
+		_headAngleVertical = newHeadAngleVertical;
+	}
 }
 
 
 void Cow::moveHeadDown(void)
 {
+	GLfloat newHeadAngleVertical = _headAngleVertical - HEAD_MOVEMENT_DIFF;
+	if (newHeadAngleVertical >= -HEAD_MAX_VERTICAL_ANGLE)
+	{
+		_headAngleVertical = newHeadAngleVertical;
+	}
 }
 
 
 void Cow::turnHeadLeft(void)
 {
+	GLfloat newHeadAngleHorizontal = _headAngleHorizontal + HEAD_MOVEMENT_DIFF;
+	if (newHeadAngleHorizontal <= HEAD_MAX_HORIZONTAL_ANGLE)
+	{
+		_headAngleHorizontal = newHeadAngleHorizontal;
+	}
 }
 
 
 void Cow::turnHeadRight(void)
 {
+	GLfloat newHeadAngleHorizontal = _headAngleHorizontal - HEAD_MOVEMENT_DIFF;
+	if (newHeadAngleHorizontal >= -HEAD_MAX_HORIZONTAL_ANGLE)
+	{
+		_headAngleHorizontal = newHeadAngleHorizontal;
+	}
 }
 
 
 void Cow::moveTailUp(void)
 {
+	GLfloat newTailAngleVertical = _tailAngleVertical + TAIL_MOVEMENT_DIFF;
+	if (newTailAngleVertical <= TAIL_MAX_VERTICAL_ANGLE)
+	{
+		_tailAngleVertical = newTailAngleVertical;
+	}
 }
 
 
 void Cow::moveTailDown(void)
 {
+	GLfloat newTailAngleVertical = _tailAngleVertical - TAIL_MOVEMENT_DIFF;
+	if (newTailAngleVertical >= -TAIL_MAX_VERTICAL_ANGLE)
+	{
+		_tailAngleVertical = newTailAngleVertical;
+	}
 }
 
 
 void Cow::turnTailLeft(void)
 {
+	GLfloat newTailAngleHorizontal = _tailAngleHorizontal + TAIL_MOVEMENT_DIFF;
+	if (newTailAngleHorizontal <= TAIL_MAX_HORIZONTAL_ANGLE)
+	{
+		_tailAngleHorizontal = newTailAngleHorizontal;
+	}
 }
 
 
 void Cow::turnTailRight(void)
 {
+	GLfloat newTailAngleHorizontal = _tailAngleHorizontal - TAIL_MOVEMENT_DIFF;
+	if (newTailAngleHorizontal >= -TAIL_MAX_HORIZONTAL_ANGLE)
+	{
+		_tailAngleHorizontal = newTailAngleHorizontal;
+	}
 }
 
 
@@ -230,7 +275,7 @@ void Cow::_renderBody(void)
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
 	gluCylinder(quadric, 0.1, 0.1, 1.0, 20, 20);  // Leg
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, darkGrayColor);
-	gluCylinder(quadric, 0.10001, 0.10001, 0.15, 20, 20);  // Hoof
+	gluCylinder(quadric, 0.10002, 0.10002, 0.15, 20, 20);  // Hoof
 	glPopMatrix();
 
 	/* Leg - rear right */
@@ -239,7 +284,7 @@ void Cow::_renderBody(void)
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
 	gluCylinder(quadric, 0.1, 0.1, 1.0, 20, 20);  // Leg
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, darkGrayColor);
-	gluCylinder(quadric, 0.10001, 0.10001, 0.15, 20, 20);  // Hoof
+	gluCylinder(quadric, 0.10002, 0.10002, 0.15, 20, 20);  // Hoof
 	glPopMatrix();
 
 	/* Leg - front left */
@@ -248,7 +293,7 @@ void Cow::_renderBody(void)
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
 	gluCylinder(quadric, 0.1, 0.1, 1.0, 20, 20);  // Leg
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, darkGrayColor);
-	gluCylinder(quadric, 0.10001, 0.10001, 0.15, 20, 20);  // Hoof
+	gluCylinder(quadric, 0.10002, 0.10002, 0.15, 20, 20);  // Hoof
 	glPopMatrix();
 
 	/* Leg - front right */
@@ -257,7 +302,7 @@ void Cow::_renderBody(void)
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
 	gluCylinder(quadric, 0.1, 0.1, 1.0, 20, 20);  // Leg
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, darkGrayColor);
-	gluCylinder(quadric, 0.10001, 0.10001, 0.15, 20, 20);  // Hoof
+	gluCylinder(quadric, 0.10002, 0.10002, 0.15, 20, 20);  // Hoof
 	glPopMatrix();
 	
 	glPopMatrix();
@@ -276,7 +321,7 @@ void Cow::_renderHead(void)
 	glRotatef(_directionAngle, 0.0, 0.0, 1.0);
 	glTranslatef(1.1, 0.0, 1.3);  // Move head relative to cow's body
 	glRotatef(_headAngleHorizontal, 0.0, 0.0, 1.0);
-	glRotatef(_headAngleVertical, 1.0, 0.0, 0.0);
+	glRotatef(_headAngleVertical, 0.0, -1.0, 0.0);
 
 	/* Head */
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cowBrownColor);
@@ -370,7 +415,7 @@ void Cow::_renderTail(void)
 	glTranslatef(_pos.getX(), _pos.getY(), _pos.getZ());  // Translate modeling coordinates
 	glRotatef(_directionAngle, 0.0, 0.0, 1.0);
 	glTranslatef(-0.69, 0.0, 1.45);  // Move tail relative to cow's body
-	glRotatef(_tailAngleHorizontal, 0.0, 0.0, 1.0);
+	glRotatef(_tailAngleHorizontal, 0.0, 0.0, -1.0);
 	glRotatef(_tailAngleVertical, 0.0, 1.0, 0.0);
 
 	glRotatef(90.0, 0.0, -1.0, 0.0);
