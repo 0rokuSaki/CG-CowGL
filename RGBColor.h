@@ -31,3 +31,7 @@
 #define RGB_COLOR_SUN_YELLOW   0.98, 0.99, 0.06
 #define RGB_COLOR_CLAY         0.71, 0.13, 0.13
 #define RGB_COLOR_BROWN        0.55, 0.27, 0.07
+#define RGB_COLOR_PINK         1.0, 0.75, 0.79
+#define RGB_COLOR_COW_BROWN    0.42, 0.18, 0.12
+#define RGB_COLOR_IVORY        1.0, 1.0, 0.94
+#define RGB_COLOR_WALNUT       0.26, 0.15, 0.06
