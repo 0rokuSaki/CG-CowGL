@@ -14,6 +14,7 @@
 /******************************
 *          INCLUDES           *
 *******************************/
+#include <iostream>
 #include <cmath>
 
 #include "Cow.h"
@@ -23,8 +24,6 @@
 /******************************
 *       GLOBAL VARIABLES      *
 *******************************/
-static const GLfloat INIT_TAIL_VERTICAL_ANGLE = -70.0;
-
 static const GLfloat cowBrownColor[] = { RGB_COLOR_COW_BROWN, 1.0 };
 static const GLfloat darkGrayColor[] = { RGB_COLOR_DARK_GRAY, 1.0 };
 static const GLfloat pinkColor[] = { RGB_COLOR_PINK, 1.0 };
@@ -32,6 +31,11 @@ static const GLfloat ivoryColor[] = { RGB_COLOR_IVORY, 1.0 };
 static const GLfloat walnutColor[] = { RGB_COLOR_WALNUT, 1.0 };
 static const GLfloat blackColor[] = { RGB_COLOR_BLACK, 1.0 };
 static const GLfloat whiteColor[] = { RGB_COLOR_WHITE, 1.0 };
+
+static const GLfloat INIT_TAIL_VERTICAL_ANGLE = -70.0;
+static const GLfloat INIT_TP_CAM_RADIUS = 5.0;
+static const GLfloat INIT_TP_CAM_HORIZONTAL_ANGLE = 0.0;
+static const GLfloat INIT_TP_CAM_VERTICAL_ANGLE = 0.0;
 
 static const GLfloat MOVEMENT_DIFF = 0.1;
 static const GLfloat ROTATION_DIFF = 1.0;
@@ -52,7 +56,11 @@ Cow::Cow() :
 	_headAngleHorizontal(0.0),
 	_headAngleVertical(0.0),
 	_tailAngleHorizontal(0.0),
-	_tailAngleVertical(INIT_TAIL_VERTICAL_ANGLE)
+	_tailAngleVertical(INIT_TAIL_VERTICAL_ANGLE),
+	_tpCameraRadius(INIT_TP_CAM_RADIUS),
+	_tpCamVerticalAngle(INIT_TP_CAM_VERTICAL_ANGLE),
+	_tpCamHorizontalAngle(TAIL_MAX_HORIZONTAL_ANGLE),
+	_cameraMode(THIRD_PERSON)
 {
 }
 
@@ -63,7 +71,11 @@ Cow::Cow(GLfloat x, GLfloat y, GLfloat z) :
 	_headAngleHorizontal(0.0),
 	_headAngleVertical(0.0),
 	_tailAngleHorizontal(0.0),
-	_tailAngleVertical(INIT_TAIL_VERTICAL_ANGLE)
+	_tailAngleVertical(INIT_TAIL_VERTICAL_ANGLE),
+	_tpCameraRadius(INIT_TP_CAM_RADIUS),
+	_tpCamVerticalAngle(INIT_TP_CAM_VERTICAL_ANGLE),
+	_tpCamHorizontalAngle(TAIL_MAX_HORIZONTAL_ANGLE),
+	_cameraMode(THIRD_PERSON)
 {
 }
 
@@ -74,7 +86,11 @@ Cow::Cow(WcPt3D pos) :
 	_headAngleHorizontal(0.0),
 	_headAngleVertical(0.0),
 	_tailAngleHorizontal(0.0),
-	_tailAngleVertical(INIT_TAIL_VERTICAL_ANGLE)
+	_tailAngleVertical(INIT_TAIL_VERTICAL_ANGLE),
+	_tpCameraRadius(INIT_TP_CAM_RADIUS),
+	_tpCamVerticalAngle(INIT_TP_CAM_VERTICAL_ANGLE),
+	_tpCamHorizontalAngle(TAIL_MAX_HORIZONTAL_ANGLE),
+	_cameraMode(THIRD_PERSON)
 {
 }
 
@@ -93,6 +109,16 @@ void Cow::render()
 	_renderBody();
 	_renderHead();
 	_renderTail();
+
+	/* Render camera */
+	if (_cameraMode == FIRST_PERSON)
+	{
+		_renderFirstPersonCamera();
+	}
+	else
+	{
+		_renderThirdPersonCamera();
+	}
 
 	glPopMatrix();
 	glDisable(GL_LIGHTING);
@@ -428,4 +454,51 @@ void Cow::_renderTail(void)
 	glPopMatrix();
 
 	gluDeleteQuadric(quadric);
+}
+
+
+void Cow::switchCameraMode(void)
+{
+}
+
+
+void Cow::TPCamRotateCW(void)
+{
+}
+
+
+void Cow::TPCamRotateCCW(void)
+{
+}
+
+
+void Cow::TPCamRotateUp(void)
+{
+}
+
+
+void Cow::TPCamRotateDown(void)
+{
+}
+
+
+void Cow::TPCamIncreaseRadius(void)
+{
+}
+
+
+void Cow::TPCamDecreaseRadius(void)
+{
+}
+
+
+void Cow::_renderFirstPersonCamera(void)
+{
+	
+}
+
+
+void Cow::_renderThirdPersonCamera(void)
+{
+
 }

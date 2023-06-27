@@ -42,12 +42,33 @@ public:
 	void turnTailLeft(void);
 	void turnTailRight(void);
 
+	/* Camera controls */
+	void switchCameraMode(void);
+	void TPCamRotateCW(void);
+	void TPCamRotateCCW(void);
+	void TPCamRotateUp(void);
+	void TPCamRotateDown(void);
+	void TPCamIncreaseRadius(void);
+	void TPCamDecreaseRadius(void);
+
 private:
 	void _renderBody(void);
 	void _renderHead(void);
 	void _renderTail(void);
+
+	enum CameraMode
+	{
+		FIRST_PERSON = 0,
+		THIRD_PERSON,
+		LAST_OF_CAMERA_MODE
+	};
+
+	void _renderFirstPersonCamera(void);
+	void _renderThirdPersonCamera(void);
 	WcPt3D _pos;
 	GLfloat _directionAngle;
 	GLfloat _headAngleHorizontal, _headAngleVertical;
 	GLfloat _tailAngleHorizontal, _tailAngleVertical;
+	GLfloat _tpCameraRadius, _tpCamVerticalAngle, _tpCamHorizontalAngle;
+	CameraMode _cameraMode;
 };
