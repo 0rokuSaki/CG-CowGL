@@ -49,6 +49,7 @@ public:
 	void TPCamRotateDown(void);
 	void TPCamIncreaseRadius(void);
 	void TPCamDecreaseRadius(void);
+	void TPCamReset(void);
 
 	/* Getters */
 	WcPt3D getPosition(void);

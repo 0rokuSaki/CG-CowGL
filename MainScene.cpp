@@ -22,6 +22,7 @@
 *******************************/
 #include <GL/glut.h>
 #include <iostream>
+#include <cctype>
 #include <cmath>
 
 #include "MainScene.h"
@@ -42,11 +43,19 @@ enum CameraMode
     LAST_OF_CAMERA_MODE
 };
 
+enum OrganMode
+{
+    HEAD = 0,
+    TAIL,
+    LAST_OF_ORGAN_MODE
+};
+
 /******************************
 *       GLOBAL VARIABLES      *
 *******************************/
 GLfloat globalAmbient[] = { 0.75, 0.75, 0.75, 1.0 };
 CameraMode cameraMode = THIRD_PERSON;
+OrganMode organMode = HEAD;
 Cow cow;
 
 /******************************
@@ -74,7 +83,7 @@ void renderMainScene(void)
 
     /* Render temporary WC axes */
     /* RED = X, GREEN = Y, BLUE = Z */
-    //renderAxes(3.0);
+    renderAxes(3.0);
 
     renderBackground();
     renderSunObject();
@@ -85,7 +94,7 @@ void renderMainScene(void)
     //renderTreeObject(WcPt3D(0, -5, 0));
     //renderTreeObject(WcPt3D(10, 10, 0));
     //renderTreeObject(WcPt3D(-10, -10, 0));
-
+    cow.setPosition(WcPt3D(1.0, 1.0, 0.0));
     cow.render();
 
     glDisable(GL_DEPTH_TEST);
@@ -187,31 +196,90 @@ void renderAxes(GLdouble height)
 
 void handleKeyboardEventMainScene(unsigned char key, int x, int y)
 {
+    key = static_cast<unsigned char>(tolower(key));
+
     switch (key)
     {
+        /* Organ mode toggle (head / tail) */
+    case 't':
+        organMode = TAIL;
+        break;
+
+    case 'h':
+        organMode = HEAD;
+        break;
+
+        /* Camera mode toggle */
+    case 'v':
+        if (cameraMode == THIRD_PERSON)
+            cameraMode = FIRST_PERSON;
+        else
+            cameraMode = THIRD_PERSON;
+        break;
+
+        /* TP Camera controls */
     case '1':
-        cow.TPCamDecreaseRadius();
+        if (cameraMode == THIRD_PERSON)
+            cow.TPCamDecreaseRadius();
         break;
+
     case '2':
-        cow.TPCamRotateDown();
+        if (cameraMode == THIRD_PERSON)
+            cow.TPCamRotateDown();
         break;
-    case '3':
-        break;
+
     case '4':
-        cow.TPCamRotateCW();
+        if (cameraMode == THIRD_PERSON)
+            cow.TPCamRotateCW();
         break;
+
     case '5':
+        if (cameraMode == THIRD_PERSON)
+            cow.TPCamReset();
         break;
+
     case '6':
-        cow.TPCamRotateCCW();
+        if (cameraMode == THIRD_PERSON)
+            cow.TPCamRotateCCW();
         break;
+
     case '7':
-        cow.TPCamIncreaseRadius();
+        if (cameraMode == THIRD_PERSON)
+            cow.TPCamIncreaseRadius();
         break;
+
     case '8':
-        cow.TPCamRotateUp();
+        if (cameraMode == THIRD_PERSON)
+            cow.TPCamRotateUp();
         break;
-    case '9':
+
+        /* FP Camera and head controls */
+    case 'i':
+        if (organMode == HEAD)
+            cow.moveHeadUp();
+        else
+            cow.moveTailUp();
+        break;
+        
+    case 'k':
+        if (organMode == HEAD)
+            cow.moveHeadDown();
+        else
+            cow.moveTailDown();
+        break;
+
+    case 'j':
+        if (organMode == HEAD)
+            cow.turnHeadLeft();
+        else
+            cow.turnTailLeft();
+        break;
+
+    case 'l':
+        if (organMode == HEAD)
+            cow.turnHeadRight();
+        else
+            cow.turnTailRight();
         break;
     }
 }

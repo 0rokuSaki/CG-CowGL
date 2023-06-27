@@ -323,6 +323,14 @@ void Cow::TPCamDecreaseRadius(void)
 }
 
 
+void Cow::TPCamReset(void)
+{
+	_tpCamRadius = INIT_TP_CAM_RADIUS;
+	_tpCamHorizontalAngle = INIT_TP_CAM_HORIZONTAL_ANGLE;
+	_tpCamVerticalAngle = INIT_TP_CAM_VERTICAL_ANGLE;
+}
+
+
 WcPt3D Cow::getPosition(void)
 {
 	return _pos;
@@ -356,7 +364,7 @@ WcPt3D Cow::getFpCamLookAtPoint(void)
 	return WcPt3D(
 		_pos.getX() + 1.1 + cos(_headAngleHorizontal * (M_PI / 180.0)),
 		_pos.getY() + sin(_headAngleHorizontal * (M_PI / 180.0)),
-		_pos.getZ() + tan(_headAngleVertical * (M_PI / 180.0))
+		_pos.getZ() + 1.3 + tan(_headAngleVertical * (M_PI / 180.0))
 	);
 }
 
