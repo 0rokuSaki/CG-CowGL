@@ -52,7 +52,9 @@ public:
 
 	/* Getters */
 	WcPt3D getPosition(void);
+	WcPt3D getTpCamViewOrigin(void);
 	WcPt3D getTpCamLookAtPoint(void);
+	WcPt3D getFpCamViewOrigin(void);
 	WcPt3D getFpCamLookAtPoint(void);
 	GLfloat getTpCamRadius(void);
 	GLfloat getTpCamVerticalAngle(void);

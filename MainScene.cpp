@@ -21,6 +21,7 @@
 *          INCLUDES           *
 *******************************/
 #include <GL/glut.h>
+#include <iostream>
 #include <cmath>
 
 #include "MainScene.h"
@@ -31,15 +32,21 @@
 #include "RGBColor.h"
 #include "WcPt3D.h"
 
+/******************************
+*            ENUMS            *
+*******************************/
+enum CameraMode
+{
+    FIRST_PERSON = 0,
+    THIRD_PERSON,
+    LAST_OF_CAMERA_MODE
+};
 
 /******************************
 *       GLOBAL VARIABLES      *
 *******************************/
-WcPt3D viewOrigin(20.0, 20.0, 4.0);
-WcPt3D lookAtPoint(0.0, 0.0, 1.0);
-WcVector3D upVector(0.0, 0.0, 1.0);
 GLfloat globalAmbient[] = { 0.75, 0.75, 0.75, 1.0 };
-
+CameraMode cameraMode = THIRD_PERSON;
 Cow cow;
 
 /******************************
@@ -60,7 +67,7 @@ void renderMainScene(void)
     
     resetProjectionAndModelviewMatrices();
 
-    renderThirdPersonCamera();
+    renderCamera();
 
     glMatrixMode(GL_PROJECTION);
     glFrustum(XW_MIN, XW_MAX, YW_MIN, YW_MAX, Z_NEAR, Z_FAR);
@@ -85,26 +92,22 @@ void renderMainScene(void)
 }
 
 
-void renderFirstPersonCamera(void)
+void renderCamera(void)
 {
-    WcPt3D viewOrigin;
-    WcPt3D lookAtPoint;
-    WcVector3D upVector(0.0, 0.0, 1.0);
+    static const WcVector3D upVector(0.0, 0.0, 1.0);
+    static WcPt3D viewOrigin;
+    static WcPt3D lookAtPoint;
 
-    glMatrixMode(GL_MODELVIEW);
-    gluLookAt(viewOrigin.getX(), viewOrigin.getY(), viewOrigin.getZ(), lookAtPoint.getX(), lookAtPoint.getY(), lookAtPoint.getZ(), upVector.getX(), upVector.getY(), upVector.getZ());
-}
-
-
-void renderThirdPersonCamera(void)
-{
-    WcPt3D viewOrigin(
-        cow.getPosition().getX() + cow.getTpCamRadius() * cos((cow.getTpCamHorizontalAngle() * M_PI) / 180.0),
-        cow.getPosition().getY() + cow.getTpCamRadius() * sin((cow.getTpCamHorizontalAngle() * M_PI) / 180.0),
-        cow.getPosition().getZ() + cow.getTpCamRadius() * tan((cow.getTpCamVerticalAngle() * M_PI) / 180.0)
-    );
-    WcPt3D lookAtPoint(cow.getTpCamLookAtPoint());
-    WcVector3D upVector(0.0, 0.0, 1.0);
+    if (cameraMode == FIRST_PERSON)
+    {
+        viewOrigin = WcPt3D(cow.getFpCamViewOrigin());
+        lookAtPoint = WcPt3D(cow.getFpCamLookAtPoint());
+    }
+    else
+    {
+        viewOrigin = WcPt3D(cow.getTpCamViewOrigin());
+        lookAtPoint = WcPt3D(cow.getTpCamLookAtPoint());
+    }
 
     glMatrixMode(GL_MODELVIEW);
     gluLookAt(viewOrigin.getX(), viewOrigin.getY(), viewOrigin.getZ(), lookAtPoint.getX(), lookAtPoint.getY(), lookAtPoint.getZ(), upVector.getX(), upVector.getY(), upVector.getZ());
@@ -182,6 +185,33 @@ void renderAxes(GLdouble height)
 }
 
 
-void handleKeyboardEventMain(unsigned char key, int x, int y)
+void handleKeyboardEventMainScene(unsigned char key, int x, int y)
 {
+    switch (key)
+    {
+    case '1':
+        cow.TPCamDecreaseRadius();
+        break;
+    case '2':
+        cow.TPCamRotateDown();
+        break;
+    case '3':
+        break;
+    case '4':
+        cow.TPCamRotateCW();
+        break;
+    case '5':
+        break;
+    case '6':
+        cow.TPCamRotateCCW();
+        break;
+    case '7':
+        cow.TPCamIncreaseRadius();
+        break;
+    case '8':
+        cow.TPCamRotateUp();
+        break;
+    case '9':
+        break;
+    }
 }

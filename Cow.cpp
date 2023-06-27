@@ -49,10 +49,10 @@ static const GLfloat HEAD_MAX_HORIZONTAL_ANGLE = 80.0;
 static const GLfloat HEAD_MAX_VERTICAL_ANGLE = 60.0;
 static const GLfloat TAIL_MAX_HORIZONTAL_ANGLE = 80.0;
 static const GLfloat TAIL_MAX_VERTICAL_ANGLE = 90.0;
-static const GLfloat TP_CAM_MAX_VERTICAL_ANGLE = 90.0;
-static const GLfloat TP_CAM_MIN_VERTICAL_ANGLE = 90.0;
+static const GLfloat TP_CAM_MAX_VERTICAL_ANGLE = 55.0;
+static const GLfloat TP_CAM_MIN_VERTICAL_ANGLE = 22.5;
 static const GLfloat TP_CAM_MAX_RADIUS = 10.0;
-static const GLfloat TP_CAM_MIN_RADIUS = 2.0;
+static const GLfloat TP_CAM_MIN_RADIUS = 2.75;
 
 /******************************
 *    FUNCTION DEFINITIONS     *
@@ -286,7 +286,7 @@ void Cow::TPCamRotateCCW(void)
 void Cow::TPCamRotateUp(void)
 {
 	GLfloat newTpCamVerticalAngle = _tpCamVerticalAngle + TP_CAM_MOVEMENT_DIFF;
-	if (newTpCamVerticalAngle <= 90.0)
+	if (newTpCamVerticalAngle <= TP_CAM_MAX_VERTICAL_ANGLE)
 	{
 		_tpCamVerticalAngle = newTpCamVerticalAngle;
 	}
@@ -296,7 +296,7 @@ void Cow::TPCamRotateUp(void)
 void Cow::TPCamRotateDown(void)
 {
 	GLfloat newTpCamVerticalAngle = _tpCamVerticalAngle - TP_CAM_MOVEMENT_DIFF;
-	if (newTpCamVerticalAngle >= 0.0)
+	if (newTpCamVerticalAngle >= TP_CAM_MIN_VERTICAL_ANGLE)
 	{
 		_tpCamVerticalAngle = newTpCamVerticalAngle;
 	}
@@ -329,15 +329,35 @@ WcPt3D Cow::getPosition(void)
 }
 
 
+WcPt3D Cow::getTpCamViewOrigin(void)
+{
+	return WcPt3D(
+		_pos.getX() + _tpCamRadius * cos((_tpCamHorizontalAngle * M_PI) / 180.0),
+		_pos.getY() + _tpCamRadius * sin((_tpCamHorizontalAngle * M_PI) / 180.0),
+		_pos.getZ() + _tpCamRadius * tan((_tpCamVerticalAngle * M_PI) / 180.0)
+	);
+}
+
+
 WcPt3D Cow::getTpCamLookAtPoint(void)
 {
 	return WcPt3D(_pos.getX(), _pos.getY(), _pos.getZ() + 1.0);
 }
 
 
+WcPt3D Cow::getFpCamViewOrigin(void)
+{
+	return WcPt3D(_pos.getX() + 1.1, _pos.getY(), _pos.getZ() + 1.3);
+}
+
+
 WcPt3D Cow::getFpCamLookAtPoint(void)
 {
-	return WcPt3D();  // TODO: Implement
+	return WcPt3D(
+		_pos.getX() + 1.1 + cos(_headAngleHorizontal * (M_PI / 180.0)),
+		_pos.getY() + sin(_headAngleHorizontal * (M_PI / 180.0)),
+		_pos.getZ() + tan(_headAngleVertical * (M_PI / 180.0))
+	);
 }
 
 

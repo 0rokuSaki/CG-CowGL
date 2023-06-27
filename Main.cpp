@@ -97,27 +97,14 @@ void keyboardCallback(unsigned char key, int x, int y)
 {
     handleKeyboardEventHelpMenu(key, x, y);
     handleKeyboardEventAdjustLightingMenu(key, x, y);
+    handleKeyboardEventMainScene(key, x, y);
     glutPostRedisplay();
 }
 
 void idleCallback(void)
 {
-    static GLdouble theta = 180.0;
-    static const GLdouble x = 5.0;
-    static const GLdouble y = 5.0;
-
-    viewOrigin.setX(cos(theta) * x);
-    viewOrigin.setY(sin(theta) * y);
-
     renderMainScene();
     glutPostRedisplay();
-
-    //theta += 0.005;
-    
-    if (theta >= 360.0)
-    {
-        theta = 0.0;
-    }
 
     std::this_thread::sleep_for(std::chrono::milliseconds(1));
 }
