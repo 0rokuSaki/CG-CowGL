@@ -30,7 +30,8 @@ const GLfloat WORLD_MAX_COORD = 100.0;
 const GLfloat SKY_SPHERE_RADIUS = 141.4;
 
 /* Sun */
-GLfloat sunAngle = 155.0;
+GLfloat sunHorizontalAngle = 0.0;
+GLfloat sunVerticalAngle = 45.0;
 GLfloat sunConstAttenuation = 0.7;
 
 /******************************
@@ -403,8 +404,11 @@ void renderSunObject(void)
     glEnable(GL_LIGHTING);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-
-    const WcPt3D sunPosition(0.0, SKY_SPHERE_RADIUS * cos(sunAngle / 180.0 * M_PI), SKY_SPHERE_RADIUS * sin(sunAngle / 180.0 * M_PI));
+    const WcPt3D sunPosition(  // Spherical coordinates
+        SKY_SPHERE_RADIUS * sin((90.0 - sunVerticalAngle) * M_PI / 180.0) * cos(sunHorizontalAngle * M_PI / 180.0),
+        SKY_SPHERE_RADIUS * sin((90.0 - sunVerticalAngle) * M_PI / 180.0) * sin(sunHorizontalAngle * M_PI / 180.0),
+        SKY_SPHERE_RADIUS * cos((90.0 - sunVerticalAngle) * M_PI / 180.0)
+    );
     const GLfloat sunLightPosType[] = { sunPosition.getX(), sunPosition.getY(), sunPosition.getZ(), 1.0 };
 
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, whiteColor);

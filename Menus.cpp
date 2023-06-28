@@ -48,8 +48,10 @@ Button decreaseAmbientLightBtn(0, 0, BTN_WIDTH, BTN_HEIGHT2, "-");
 Button increaseAmbientLightBtn(0, 0, BTN_WIDTH, BTN_HEIGHT2, "+");
 Button decreaseSunLightBtn(0, 0, BTN_WIDTH, BTN_HEIGHT2, "-");
 Button increaseSunLightBtn(0, 0, BTN_WIDTH, BTN_HEIGHT2, "+");
-Button moveSunCcwBtn(0, 0, BTN_WIDTH, BTN_HEIGHT2, "-");
-Button moveSunCwBtn(0, 0, BTN_WIDTH, BTN_HEIGHT2, "+");
+Button rotateSunCw(0, 0, BTN_WIDTH, BTN_HEIGHT2, "-");
+Button rotateSunCcw(0, 0, BTN_WIDTH, BTN_HEIGHT2, "+");
+Button decreaseSunHeight(0, 0, BTN_WIDTH, BTN_HEIGHT2, "-");
+Button increaseSunHeight(0, 0, BTN_WIDTH, BTN_HEIGHT2, "+");
 
 /******************************
 *     FUNCTION DEFINITIONS    *
@@ -178,22 +180,24 @@ void renderAdjustLightingMenu(void)
 {
     /* Dimensions */
     static const GLint MENU_WIDTH = 375;
-    static const GLint MENU_HEIGHT = 300;
+    static const GLint MENU_HEIGHT = 350;
     static const GLfloat MENU_FRAME_WIDTH = 7.0;
 
     /* Header & footer */
-    static const WcPt3D MENU_HEADER_POS(50.0, 260.0, 0.0);
+    static const WcPt3D MENU_HEADER_POS(50.0, 310.0, 0.0);
     static const WcPt3D MENU_FOOTER_POS(40.0, 20.0, 0.0);
     static const std::string MENU_HEADER = "Adjust Lighting Menu - CowGL";
     static const std::string MENU_FOOTER = "Press ENTER to close this window";
 
     /* Adjustment text */
-    static const WcPt3D ADJ_AMB_LIGHT_TEXT_POS(150.0, 210.0, 0.0);
-    static const WcPt3D ADJ_SUN_LIGHT_TEXT_POS(150.0, 150.0, 0.0);
-    static const WcPt3D ADJ_SUN_POS_TEXT_POS(150.0, 90.0, 0.0);
+    static const WcPt3D ADJ_AMB_LIGHT_TEXT_POS(150.0, 260.0, 0.0);
+    static const WcPt3D ADJ_SUN_LIGHT_TEXT_POS(150.0, 200.0, 0.0);
+    static const WcPt3D ADJ_SUN_HORZ_TEXT_POS(150.0, 140.0, 0.0);
+    static const WcPt3D ADJ_SUN_VERT_TEXT_POS(150.0, 80.0, 0.0);
     static const std::string ADJ_AMB_LIGHT_TEXT = "Ambient Light";
     static const std::string ADJ_SUN_LIGHT_TEXT = "Sun Light";
-    static const std::string ADJ_SUN_POS_TEXT = "Sun Position";
+    static const std::string ADJ_SUN_HORZ_TEXT = "Sun Horizontal";
+    static const std::string ADJ_SUN_VERT_TEXT = "Sun Vertical";
 
     if (!displayAdjustLightingMenu)
     {
@@ -244,8 +248,14 @@ void renderAdjustLightingMenu(void)
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, c);
     }
 
-    glRasterPos2f(ADJ_SUN_POS_TEXT_POS.getX(), ADJ_SUN_POS_TEXT_POS.getY());
-    for (const auto& c : ADJ_SUN_POS_TEXT)
+    glRasterPos2f(ADJ_SUN_HORZ_TEXT_POS.getX(), ADJ_SUN_HORZ_TEXT_POS.getY());
+    for (const auto& c : ADJ_SUN_HORZ_TEXT)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, c);
+    }
+
+    glRasterPos2f(ADJ_SUN_VERT_TEXT_POS.getX(), ADJ_SUN_VERT_TEXT_POS.getY());
+    for (const auto& c : ADJ_SUN_VERT_TEXT)
     {
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, c);
     }
@@ -260,7 +270,7 @@ void renderAdjustLightingMenu(void)
     /* Render buttons */
     GLint btnX1 = (windowWidth - MENU_WIDTH) / 2 + 100;
     GLint btnX2 = (windowWidth - MENU_WIDTH) / 2 + 250;
-    GLint btnY = (windowHeight - MENU_HEIGHT) / 2 + 200;
+    GLint btnY = (windowHeight - MENU_HEIGHT) / 2 + 250;
 
     decreaseAmbientLightBtn.setPosition(btnX1, btnY);
     increaseAmbientLightBtn.setPosition(btnX2, btnY);
@@ -272,15 +282,22 @@ void renderAdjustLightingMenu(void)
 
     btnY -= 2 * BTN_HEIGHT2;
 
-    moveSunCcwBtn.setPosition(btnX1, btnY);
-    moveSunCwBtn.setPosition(btnX2, btnY);
+    rotateSunCw.setPosition(btnX1, btnY);
+    rotateSunCcw.setPosition(btnX2, btnY);
+
+    btnY -= 2 * BTN_HEIGHT2;
+
+    decreaseSunHeight.setPosition(btnX1, btnY);
+    increaseSunHeight.setPosition(btnX2, btnY);
 
     decreaseAmbientLightBtn.render();
     increaseAmbientLightBtn.render();
     decreaseSunLightBtn.render();
     increaseSunLightBtn.render();
-    moveSunCcwBtn.render();
-    moveSunCwBtn.render();
+    rotateSunCw.render();
+    rotateSunCcw.render();
+    decreaseSunHeight.render();
+    increaseSunHeight.render();
 }
 
 
@@ -373,18 +390,36 @@ void handleMouseEventAdjustLightingMenu(int button, int state, int x, int y)
                 sunConstAttenuation -= SUN_CONST_ATTEN_DIFF;
             }
         }
-        else if (moveSunCcwBtn.clicked(x, y))
+        else if (rotateSunCcw.clicked(x, y))
         {
-            if (sunAngle + SUN_ANGLE_DIFF <= 180.0)
+            GLfloat newSunHorizontalAngle = sunHorizontalAngle + SUN_ANGLE_DIFF;
+            if (newSunHorizontalAngle >= 360.0)
             {
-                sunAngle += SUN_ANGLE_DIFF;
+                newSunHorizontalAngle -= 360.0;
+            }
+            sunHorizontalAngle = newSunHorizontalAngle;
+        }
+        else if (rotateSunCw.clicked(x, y))
+        {
+            GLfloat newSunHorizontalAngle = sunHorizontalAngle - SUN_ANGLE_DIFF;
+            if (newSunHorizontalAngle <= 0.0)
+            {
+                newSunHorizontalAngle += 360.0;
+            }
+            sunHorizontalAngle = newSunHorizontalAngle;
+        }
+        else if (decreaseSunHeight.clicked(x, y))
+        {
+            if (sunVerticalAngle - SUN_ANGLE_DIFF >= 0.0)
+            {
+                sunVerticalAngle -= SUN_ANGLE_DIFF;
             }
         }
-        else if (moveSunCwBtn.clicked(x, y))
+        else if (increaseSunHeight.clicked(x, y))
         {
-            if (sunAngle - SUN_ANGLE_DIFF >= 0.0)
+            if (sunVerticalAngle + SUN_ANGLE_DIFF <= 90.0)
             {
-                sunAngle -= SUN_ANGLE_DIFF;
+                sunVerticalAngle += SUN_ANGLE_DIFF;
             }
         }
     }
