@@ -221,6 +221,13 @@ void Cow::turnHeadRight(void)
 }
 
 
+void Cow::resetHead(void)
+{
+	_headAngleHorizontal = 0.0;
+	_headAngleVertical = 0.0;
+}
+
+
 void Cow::moveTailUp(void)
 {
 	GLfloat newTailAngleVertical = _tailAngleVertical + TAIL_MOVEMENT_DIFF;
@@ -258,6 +265,13 @@ void Cow::turnTailRight(void)
 	{
 		_tailAngleHorizontal = newTailAngleHorizontal;
 	}
+}
+
+
+void Cow::resetTail(void)
+{
+	_tailAngleHorizontal = 0.0;
+	_tailAngleVertical = INIT_TAIL_VERTICAL_ANGLE;
 }
 
 

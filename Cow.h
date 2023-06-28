@@ -35,12 +35,14 @@ public:
 	void moveHeadDown(void);
 	void turnHeadLeft(void);
 	void turnHeadRight(void);
+	void resetHead(void);
 
 	/* Tail movement */
 	void moveTailUp(void);
 	void moveTailDown(void);
 	void turnTailLeft(void);
 	void turnTailRight(void);
+	void resetTail(void);
 
 	/* Camera controls */
 	void TPCamRotateCW(void);

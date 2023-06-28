@@ -235,7 +235,11 @@ void handleKeyboardEventMainScene(unsigned char key, int x, int y)
 
     case '5':
         if (cameraMode == THIRD_PERSON)
+        {
             cow.TPCamReset();
+            cow.resetTail();
+            cow.resetHead();
+        }
         break;
 
     case '6':
