@@ -7,23 +7,11 @@
  *********************************************************************/
 
 /******************************
-*          DEFINES            *
-*******************************/
-#define _USE_MATH_DEFINES
-#define XW_MIN -1
-#define XW_MAX 1
-#define YW_MIN -1
-#define YW_MAX 1
-#define Z_NEAR 1
-#define Z_FAR 175
-
-/******************************
 *          INCLUDES           *
 *******************************/
 #include <GL/glut.h>
 #include <vector>
 #include <cctype>
-#include <cmath>
 
 #include "MainScene.h"
 #include "Menus.h"
@@ -64,7 +52,16 @@ Cow cow;
 *******************************/
 void renderMainScene(void)
 {
-    static std::vector<WcPt3D> treeLocations(
+    static const GLint XW_MIN = -1;
+    static const GLint XW_MAX = 1;
+    static const GLint YW_MIN = -1;
+    static const GLint YW_MAX = 1;
+    static const GLint Z_NEAR = 1;
+    static const GLint Z_FAR = 175;
+    static const WcPt3D houseLocation(-10, 0, 0);
+    static const WcPt3D shedLocation(0, 8, 0);
+    static const WcPt3D waterTankLocation(2.5, 8, 0);
+    static const std::vector<WcPt3D> treeLocations(
         {
             WcPt3D(15, 15, 0),
             WcPt3D(-84, 47, 0),
@@ -108,20 +105,16 @@ void renderMainScene(void)
     
     resetProjectionAndModelviewMatrices();
 
-    renderCamera();
-
     glMatrixMode(GL_PROJECTION);
     glFrustum(XW_MIN, XW_MAX, YW_MIN, YW_MAX, Z_NEAR, Z_FAR);
 
-    /* Render WC axes */
-    /* RED = X, GREEN = Y, BLUE = Z */
-    //renderAxes(3.0);
+    renderCamera();
 
     renderBackground();
     renderSunObject();
-    renderHouseObject(WcPt3D(-10, 0, 0), 0.0);
-    renderShedObject(WcPt3D(0, 8, 0), 180.0);
-    renderWaterTank(WcPt3D(2.5, 8, 0), 0.0);
+    renderHouseObject(houseLocation, 0.0);
+    renderShedObject(shedLocation, 180.0);
+    renderWaterTank(waterTankLocation, 0.0);
 
     for (const auto& p : treeLocations)
     {
