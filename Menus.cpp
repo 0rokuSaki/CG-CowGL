@@ -93,19 +93,27 @@ void renderTopMenu(void)
 void renderHelpMenu(void)
 {
     static const GLint HELP_MENU_WIDTH = 375;
-    static const GLint HELP_MENU_HEIGHT = 300;
+    static const GLint HELP_MENU_HEIGHT = 350;
     static const GLint HELP_MENU_FRAME_WIDTH = 7;
-    static const GLfloat HELP_MENU_TITLE_POS[] = { 90.0, 260.0 };
+    static const GLfloat HELP_MENU_TITLE_POS[] = { 90.0, 310.0 };
     static const GLfloat HELP_MENU_FOOTER_POS[] = { 40.0, 20.0 };
-    static const GLfloat HELP_MENU_TEXT_POS[] = { 10.0, 225.0 };
+    static const GLfloat HELP_MENU_TEXT_POS[] = { 10.0, 275.0 };
     static const GLfloat HELP_MENU_TEXT_LINE_OFFSET = 20.0;
     static const std::string HELP_MENU_HEADER = "Help Menu - CowGL";
     static const std::string HELP_MENU_FOOTER = "Press ENTER to close this window";
-    static const std::vector<std::string> helpMenuTextLines({ "Use the arrow keys to move the cow around.",\
-                        "Use W,A,S,D keys to move the cow's tail.",\
-                        "Use TBD keys to move the cow's head.",\
-                        "Press V to switch between first-person and third-person views.",\
-                        "Use the left mouse button to click on menu buttons." });
+    static const std::vector<std::string> helpMenuTextLines({
+        "*** MAKE SURE KEYBOARD LANGUAGE IS ENGLISH ***",
+        "Cow Movement: W,A,S,D keys.",
+        "Head/Tail Movement: I,J,K,L keys.",
+        "Toggle tail movement: T key.",
+        "Toggle head movement : H key.",
+        "Switch between first-person and third-person cameras: V key.",
+        "Move third-person camera: 8, 4, 2, 6 keys",
+        "Zoom in third-person camera: 1",
+        "Zoom out third-person camera: 7",
+        "Reset head, tail and third-person camera: 5 (NUMPAD)",
+        "Use the left mouse button to click on menu buttons."
+        });
 
     if (!displayHelpMenu)
     {
