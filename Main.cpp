@@ -16,11 +16,9 @@
 *******************************/
 #include <Windows.h>
 #include <GL/glut.h>
-#include <iostream>
+
 #include "MainScene.h"
 #include "Menus.h"
-
-#include <chrono>
 
 /******************************
 *          DEFINES            *
