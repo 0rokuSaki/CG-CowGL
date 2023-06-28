@@ -38,11 +38,11 @@ static const GLfloat INIT_TP_CAM_RADIUS = 4.0;
 static const GLfloat INIT_TP_CAM_HORIZONTAL_ANGLE = 180.0;
 static const GLfloat INIT_TP_CAM_VERTICAL_ANGLE = 35.0;
 
-static const GLfloat MOVEMENT_DIFF = 0.1;
-static const GLfloat ROTATION_DIFF = 1.0;
-static const GLfloat HEAD_MOVEMENT_DIFF = 1.0;
-static const GLfloat TAIL_MOVEMENT_DIFF = 1.0;
-static const GLfloat TP_CAM_MOVEMENT_DIFF = 1.0;
+static const GLfloat MOVEMENT_DIFF = 0.25;
+static const GLfloat ROTATION_DIFF = 2.0;
+static const GLfloat HEAD_MOVEMENT_DIFF = 2.0;
+static const GLfloat TAIL_MOVEMENT_DIFF = 2.0;
+static const GLfloat TP_CAM_MOVEMENT_DIFF = 2.0;
 static const GLfloat TP_CAM_RADIUS_DIFF = 0.1;
 
 static const GLfloat HEAD_MAX_HORIZONTAL_ANGLE = 80.0;
@@ -167,6 +167,7 @@ void Cow::turnLeft(void)
 		newDirectionAngle -= 360.0;
 	}
 	_directionAngle = newDirectionAngle;
+	
 }
 
 
@@ -340,7 +341,7 @@ void Cow::TPCamDecreaseRadius(void)
 void Cow::TPCamReset(void)
 {
 	_tpCamRadius = INIT_TP_CAM_RADIUS;
-	_tpCamHorizontalAngle = INIT_TP_CAM_HORIZONTAL_ANGLE;
+	_tpCamHorizontalAngle = _directionAngle + 180.0;
 	_tpCamVerticalAngle = INIT_TP_CAM_VERTICAL_ANGLE;
 }
 
@@ -369,47 +370,22 @@ WcPt3D Cow::getTpCamLookAtPoint(void)
 
 WcPt3D Cow::getFpCamViewOrigin(void)
 {
-	return WcPt3D(_pos.getX() + 1.1, _pos.getY(), _pos.getZ() + 1.3);
+	//return WcPt3D(_pos.getX() + 1.1, _pos.getY(), _pos.getZ() + 1.3);
+	return WcPt3D(
+		_pos.getX() + 1.1 * cos(_directionAngle * (M_PI / 180.0)),
+		_pos.getY() + sin(_directionAngle * (M_PI / 180.0)),
+		_pos.getZ() + 1.3
+	);
 }
 
 
 WcPt3D Cow::getFpCamLookAtPoint(void)
 {
 	return WcPt3D(
-		_pos.getX() + 1.1 + cos(_headAngleHorizontal * (M_PI / 180.0)),
-		_pos.getY() + sin(_headAngleHorizontal * (M_PI / 180.0)),
+		_pos.getX() + 2.0 * 1.1 * cos((_headAngleHorizontal + _directionAngle) * (M_PI / 180.0)),
+		_pos.getY() + 2.0 * sin((_headAngleHorizontal + _directionAngle) * (M_PI / 180.0)),
 		_pos.getZ() + 1.3 + tan(_headAngleVertical * (M_PI / 180.0))
 	);
-}
-
-
-GLfloat Cow::getTpCamRadius(void)
-{
-	return _tpCamRadius;
-}
-
-
-GLfloat Cow::getTpCamVerticalAngle(void)
-{
-	return _tpCamVerticalAngle;
-}
-
-
-GLfloat Cow::getTpCamHorizontalAngle(void)
-{
-	return _tpCamHorizontalAngle;
-}
-
-
-GLfloat Cow::getHeadAngleHorizontal(void)
-{
-	return _headAngleHorizontal;
-}
-
-
-GLfloat Cow::getHeadAngleVertical(void)
-{
-	return _headAngleVertical;
 }
 
 

@@ -59,11 +59,6 @@ public:
 	WcPt3D getTpCamLookAtPoint(void);
 	WcPt3D getFpCamViewOrigin(void);
 	WcPt3D getFpCamLookAtPoint(void);
-	GLfloat getTpCamRadius(void);
-	GLfloat getTpCamVerticalAngle(void);
-	GLfloat getTpCamHorizontalAngle(void);
-	GLfloat getHeadAngleHorizontal(void);
-	GLfloat getHeadAngleVertical(void);
 
 private:
 	void _renderBody(void);
