@@ -7,9 +7,23 @@
  *********************************************************************/
 
 /******************************
+*          DEFINES            *
+*******************************/
+#define _USE_MATH_DEFINES
+#define XW_MIN -1
+#define XW_MAX 1
+#define YW_MIN -1
+#define YW_MAX 1
+#define Z_NEAR 1
+#define Z_FAR 175
+
+/******************************
 *          INCLUDES           *
 *******************************/
 #include <GL/glut.h>
+#include <iostream>
+#include <cctype>
+#include <cmath>
 
 #include "MainScene.h"
 #include "Menus.h"
@@ -20,24 +34,28 @@
 #include "WcPt3D.h"
 
 /******************************
-*          DEFINES            *
+*            ENUMS            *
 *******************************/
+enum CameraMode
+{
+    FIRST_PERSON = 0,
+    THIRD_PERSON,
+    LAST_OF_CAMERA_MODE
+};
 
-#define XW_MIN -1
-#define XW_MAX 1
-#define YW_MIN -1
-#define YW_MAX 1
-#define Z_NEAR 1
-#define Z_FAR 175
+enum OrganMode
+{
+    HEAD = 0,
+    TAIL,
+    LAST_OF_ORGAN_MODE
+};
 
 /******************************
 *       GLOBAL VARIABLES      *
 *******************************/
-WcPt3D viewOrigin(20.0, 20.0, 4.0);
-WcPt3D lookAtPoint(0.0, 0.0, 1.0);
-WcVector3D upVector(0.0, 0.0, 1.0);
 GLfloat globalAmbient[] = { 0.75, 0.75, 0.75, 1.0 };
-
+CameraMode cameraMode = THIRD_PERSON;
+OrganMode organMode = HEAD;
 Cow cow;
 
 /******************************
@@ -58,8 +76,7 @@ void renderMainScene(void)
     
     resetProjectionAndModelviewMatrices();
 
-    glMatrixMode(GL_MODELVIEW);
-    gluLookAt(viewOrigin.getX(), viewOrigin.getY(), viewOrigin.getZ(), lookAtPoint.getX(), lookAtPoint.getY(), lookAtPoint.getZ(), upVector.getX(), upVector.getY(), upVector.getZ());
+    renderCamera();
 
     glMatrixMode(GL_PROJECTION);
     glFrustum(XW_MIN, XW_MAX, YW_MIN, YW_MAX, Z_NEAR, Z_FAR);
@@ -77,26 +94,32 @@ void renderMainScene(void)
     //renderTreeObject(WcPt3D(0, -5, 0));
     //renderTreeObject(WcPt3D(10, 10, 0));
     //renderTreeObject(WcPt3D(-10, -10, 0));
-
-    static int cnt = 0;
-    static bool fwd = false;
-    if (cnt == -50)   fwd = true;
-    if (cnt == 50) fwd = false;
-    if (fwd)
-    {
-        //cow.moveTailUp();
-        cow.turnTailLeft();
-        ++cnt;
-    }
-    else
-    {
-        //cow.moveTailDown();
-        cow.turnTailRight();
-        --cnt;
-    }
+    cow.setPosition(WcPt3D(1.0, 1.0, 0.0));
     cow.render();
 
     glDisable(GL_DEPTH_TEST);
+}
+
+
+void renderCamera(void)
+{
+    static const WcVector3D upVector(0.0, 0.0, 1.0);
+    static WcPt3D viewOrigin;
+    static WcPt3D lookAtPoint;
+
+    if (cameraMode == FIRST_PERSON)
+    {
+        viewOrigin = WcPt3D(cow.getFpCamViewOrigin());
+        lookAtPoint = WcPt3D(cow.getFpCamLookAtPoint());
+    }
+    else
+    {
+        viewOrigin = WcPt3D(cow.getTpCamViewOrigin());
+        lookAtPoint = WcPt3D(cow.getTpCamLookAtPoint());
+    }
+
+    glMatrixMode(GL_MODELVIEW);
+    gluLookAt(viewOrigin.getX(), viewOrigin.getY(), viewOrigin.getZ(), lookAtPoint.getX(), lookAtPoint.getY(), lookAtPoint.getZ(), upVector.getX(), upVector.getY(), upVector.getZ());
 }
 
 
@@ -171,6 +194,96 @@ void renderAxes(GLdouble height)
 }
 
 
-void handleKeyboardEventMain(unsigned char key, int x, int y)
+void handleKeyboardEventMainScene(unsigned char key, int x, int y)
 {
+    key = static_cast<unsigned char>(tolower(key));
+
+    switch (key)
+    {
+        /* Organ mode toggle (head / tail) */
+    case 't':
+        organMode = TAIL;
+        break;
+
+    case 'h':
+        organMode = HEAD;
+        break;
+
+        /* Camera mode toggle */
+    case 'v':
+        if (cameraMode == THIRD_PERSON)
+            cameraMode = FIRST_PERSON;
+        else
+            cameraMode = THIRD_PERSON;
+        break;
+
+        /* TP Camera controls */
+    case '1':
+        if (cameraMode == THIRD_PERSON)
+            cow.TPCamDecreaseRadius();
+        break;
+
+    case '2':
+        if (cameraMode == THIRD_PERSON)
+            cow.TPCamRotateDown();
+        break;
+
+    case '4':
+        if (cameraMode == THIRD_PERSON)
+            cow.TPCamRotateCW();
+        break;
+
+    case '5':
+        if (cameraMode == THIRD_PERSON)
+        {
+            cow.TPCamReset();
+            cow.resetTail();
+            cow.resetHead();
+        }
+        break;
+
+    case '6':
+        if (cameraMode == THIRD_PERSON)
+            cow.TPCamRotateCCW();
+        break;
+
+    case '7':
+        if (cameraMode == THIRD_PERSON)
+            cow.TPCamIncreaseRadius();
+        break;
+
+    case '8':
+        if (cameraMode == THIRD_PERSON)
+            cow.TPCamRotateUp();
+        break;
+
+        /* FP Camera and head controls */
+    case 'i':
+        if (organMode == HEAD)
+            cow.moveHeadUp();
+        else
+            cow.moveTailUp();
+        break;
+        
+    case 'k':
+        if (organMode == HEAD)
+            cow.moveHeadDown();
+        else
+            cow.moveTailDown();
+        break;
+
+    case 'j':
+        if (organMode == HEAD)
+            cow.turnHeadLeft();
+        else
+            cow.turnTailLeft();
+        break;
+
+    case 'l':
+        if (organMode == HEAD)
+            cow.turnHeadRight();
+        else
+            cow.turnTailRight();
+        break;
+    }
 }

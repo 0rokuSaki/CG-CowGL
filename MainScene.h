@@ -16,15 +16,13 @@
 /******************************
 *      EXTERNAL VARIABLES     *
 *******************************/
-extern WcPt3D viewOrigin;
-extern WcPt3D lookAtPoint;
-extern WcVector3D upVector;
 extern GLfloat globalAmbient[];
 
 /******************************
 *     FUNCTION PROTOTYPES     *
 *******************************/
 void renderMainScene(void);
+void renderCamera(void);
 void renderAxes(GLdouble height);
-void handleKeyboardEventMain(unsigned char key, int x, int y);
+void handleKeyboardEventMainScene(unsigned char key, int x, int y);
 void resetProjectionAndModelviewMatrices(void);

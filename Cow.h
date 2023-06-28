@@ -35,19 +35,44 @@ public:
 	void moveHeadDown(void);
 	void turnHeadLeft(void);
 	void turnHeadRight(void);
+	void resetHead(void);
 
 	/* Tail movement */
 	void moveTailUp(void);
 	void moveTailDown(void);
 	void turnTailLeft(void);
 	void turnTailRight(void);
+	void resetTail(void);
+
+	/* Camera controls */
+	void TPCamRotateCW(void);
+	void TPCamRotateCCW(void);
+	void TPCamRotateUp(void);
+	void TPCamRotateDown(void);
+	void TPCamIncreaseRadius(void);
+	void TPCamDecreaseRadius(void);
+	void TPCamReset(void);
+
+	/* Getters */
+	WcPt3D getPosition(void);
+	WcPt3D getTpCamViewOrigin(void);
+	WcPt3D getTpCamLookAtPoint(void);
+	WcPt3D getFpCamViewOrigin(void);
+	WcPt3D getFpCamLookAtPoint(void);
+	GLfloat getTpCamRadius(void);
+	GLfloat getTpCamVerticalAngle(void);
+	GLfloat getTpCamHorizontalAngle(void);
+	GLfloat getHeadAngleHorizontal(void);
+	GLfloat getHeadAngleVertical(void);
 
 private:
 	void _renderBody(void);
 	void _renderHead(void);
 	void _renderTail(void);
+
 	WcPt3D _pos;
 	GLfloat _directionAngle;
 	GLfloat _headAngleHorizontal, _headAngleVertical;
 	GLfloat _tailAngleHorizontal, _tailAngleVertical;
+	GLfloat _tpCamRadius, _tpCamVerticalAngle, _tpCamHorizontalAngle;
 };
