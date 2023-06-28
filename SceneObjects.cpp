@@ -27,7 +27,7 @@
 /* Background */
 const GLfloat WORLD_MIN_COORD = -100.0;
 const GLfloat WORLD_MAX_COORD = 100.0;
-const GLfloat SKY_SPHERE_RADIUS = 70.0;
+const GLfloat SKY_SPHERE_RADIUS = 141.4;
 
 /* Sun */
 GLfloat sunAngle = 155.0;

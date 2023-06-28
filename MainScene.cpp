@@ -21,7 +21,7 @@
 *          INCLUDES           *
 *******************************/
 #include <GL/glut.h>
-#include <iostream>
+#include <vector>
 #include <cctype>
 #include <cmath>
 
@@ -56,6 +56,7 @@ enum OrganMode
 GLfloat globalAmbient[] = { 0.75, 0.75, 0.75, 1.0 };
 CameraMode cameraMode = THIRD_PERSON;
 OrganMode organMode = HEAD;
+
 Cow cow;
 
 /******************************
@@ -63,6 +64,37 @@ Cow cow;
 *******************************/
 void renderMainScene(void)
 {
+    static std::vector<WcPt3D> treeLocations(
+        {
+            WcPt3D(15, 15, 0),
+            WcPt3D(-84, 47, 0),
+            WcPt3D(25, 4, 0),
+            WcPt3D(19, -9, 0),
+            WcPt3D(-38, -7, 0),
+            WcPt3D(7, 2, 0),
+            WcPt3D(3, -52, 0),
+            WcPt3D(10, -30, 0),
+            WcPt3D(-17, -17, 0),
+            WcPt3D(-66, -55, 0),
+            WcPt3D(-5, 5, 0),
+            WcPt3D(-19, 2, 0),
+            WcPt3D(-14, 9, 0),
+            WcPt3D(20, -5, 0),
+            WcPt3D(32, 9, 0),
+            WcPt3D(1, 22, 0),
+            WcPt3D(6, 15, 0),
+            WcPt3D(-3, 29, 0),
+            WcPt3D(33, -33, 0),
+            WcPt3D(60, -77, 0),
+            WcPt3D(1, -10, 0),
+            WcPt3D(3, -44, 0),
+            WcPt3D(0, 90, 0),
+            WcPt3D(-8, -49, 0),
+            WcPt3D(-19, -40, 0),
+            WcPt3D(-80, -90, 0)
+        }
+    );
+
     const GLint windowWidth = glutGet(GLUT_WINDOW_WIDTH);
     const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
 
@@ -81,20 +113,21 @@ void renderMainScene(void)
     glMatrixMode(GL_PROJECTION);
     glFrustum(XW_MIN, XW_MAX, YW_MIN, YW_MAX, Z_NEAR, Z_FAR);
 
-    /* Render temporary WC axes */
+    /* Render WC axes */
     /* RED = X, GREEN = Y, BLUE = Z */
-    renderAxes(3.0);
+    //renderAxes(3.0);
 
     renderBackground();
     renderSunObject();
-    //renderHouseObject(WcPt3D(-5, 0, 0), 0.0);
-    //renderShedObject(WcPt3D(0, 6, 0), 180.0);
-    //renderWaterTank(WcPt3D(2.5, 6, 0), 0.0);
-    //renderTreeObject(WcPt3D(-4, 6, 0));
-    //renderTreeObject(WcPt3D(0, -5, 0));
-    //renderTreeObject(WcPt3D(10, 10, 0));
-    //renderTreeObject(WcPt3D(-10, -10, 0));
-    cow.setPosition(WcPt3D(1.0, 1.0, 0.0));
+    renderHouseObject(WcPt3D(-10, 0, 0), 0.0);
+    renderShedObject(WcPt3D(0, 8, 0), 180.0);
+    renderWaterTank(WcPt3D(2.5, 8, 0), 0.0);
+
+    for (const auto& p : treeLocations)
+    {
+        renderTreeObject(p);
+    }
+
     cow.render();
 
     glDisable(GL_DEPTH_TEST);
@@ -212,7 +245,10 @@ void handleKeyboardEventMainScene(unsigned char key, int x, int y)
         /* Camera mode toggle */
     case 'v':
         if (cameraMode == THIRD_PERSON)
+        {
             cameraMode = FIRST_PERSON;
+            organMode = HEAD;
+        }
         else
             cameraMode = THIRD_PERSON;
         break;
@@ -240,6 +276,8 @@ void handleKeyboardEventMainScene(unsigned char key, int x, int y)
             cow.resetTail();
             cow.resetHead();
         }
+        else
+            cow.resetHead();
         break;
 
     case '6':
@@ -257,7 +295,7 @@ void handleKeyboardEventMainScene(unsigned char key, int x, int y)
             cow.TPCamRotateUp();
         break;
 
-        /* FP Camera and head controls */
+        /* FP Camera and head controls / Tail controls */
     case 'i':
         if (organMode == HEAD)
             cow.moveHeadUp();
@@ -284,6 +322,23 @@ void handleKeyboardEventMainScene(unsigned char key, int x, int y)
             cow.turnHeadRight();
         else
             cow.turnTailRight();
+        break;
+
+        /* Movement controls */
+    case 'w':
+        cow.moveForward();
+        break;
+
+    case 's':
+        cow.moveBackward();
+        break;
+
+    case 'a':
+        cow.turnLeft();
+        break;
+
+    case 'd':
+        cow.turnRight();
         break;
     }
 }
