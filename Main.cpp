@@ -1,6 +1,6 @@
 /*****************************************************************//**
  * \file   Main.cpp
- * \brief  
+ * \brief  Main of CowGL.
  * 
  * *** BUILD INSTRUCTIONS (VS2019/VS2022 Windows 10/11) ***
  * 1. Setup OpenGL: https://www.geeksforgeeks.org/how-to-setup-opengl-with-visual-studio-2019-on-windows-10/.

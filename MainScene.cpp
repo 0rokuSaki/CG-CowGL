@@ -1,6 +1,6 @@
 /*****************************************************************//**
  * \file   MainScene.cpp
- * \brief  
+ * \brief  Function definitions for MainScene.h
  * 
  * \author aaron
  * \date   May 2023

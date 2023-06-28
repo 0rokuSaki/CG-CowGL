@@ -1,7 +1,7 @@
 #pragma once
 /*****************************************************************//**
  * \file   WcVector3D.h
- * \brief  
+ * \brief  Class WcVector3D declaration and definition.
  * 
  * \author aaron
  * \date   June 2023

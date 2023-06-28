@@ -1,6 +1,6 @@
 /*****************************************************************//**
  * \file   Cow.cpp
- * \brief  
+ * \brief  Cow class implementation.
  * 
  * \author aaron
  * \date   June 2023
