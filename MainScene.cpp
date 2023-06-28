@@ -56,6 +56,7 @@ enum OrganMode
 GLfloat globalAmbient[] = { 0.75, 0.75, 0.75, 1.0 };
 CameraMode cameraMode = THIRD_PERSON;
 OrganMode organMode = HEAD;
+
 Cow cow;
 
 /******************************
@@ -63,6 +64,37 @@ Cow cow;
 *******************************/
 void renderMainScene(void)
 {
+    static std::vector<WcPt3D> treeLocations(
+        {
+            WcPt3D(15, 15, 0),
+            WcPt3D(-84, 47, 0),
+            WcPt3D(25, 4, 0),
+            WcPt3D(19, -9, 0),
+            WcPt3D(-38, -7, 0),
+            WcPt3D(7, 2, 0),
+            WcPt3D(3, -52, 0),
+            WcPt3D(10, -30, 0),
+            WcPt3D(-17, -17, 0),
+            WcPt3D(-66, -55, 0),
+            WcPt3D(-5, 5, 0),
+            WcPt3D(-19, 2, 0),
+            WcPt3D(-14, 9, 0),
+            WcPt3D(20, -5, 0),
+            WcPt3D(32, 9, 0),
+            WcPt3D(1, 22, 0),
+            WcPt3D(6, 15, 0),
+            WcPt3D(-3, 29, 0),
+            WcPt3D(33, -33, 0),
+            WcPt3D(60, -77, 0),
+            WcPt3D(1, -10, 0),
+            WcPt3D(3, -44, 0),
+            WcPt3D(0, 90, 0),
+            WcPt3D(-8, -49, 0),
+            WcPt3D(-19, -40, 0),
+            WcPt3D(-80, -90, 0)
+        }
+    );
+
     const GLint windowWidth = glutGet(GLUT_WINDOW_WIDTH);
     const GLint windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
 
@@ -90,6 +122,11 @@ void renderMainScene(void)
     renderHouseObject(WcPt3D(-10, 0, 0), 0.0);
     renderShedObject(WcPt3D(0, 8, 0), 180.0);
     renderWaterTank(WcPt3D(2.5, 8, 0), 0.0);
+
+    for (const auto& p : treeLocations)
+    {
+        renderTreeObject(p);
+    }
 
     cow.render();
 
