@@ -27,8 +27,9 @@ extern const GLfloat WORLD_MIN_COORD;
 extern const GLfloat WORLD_MAX_COORD;
 
 /* Sun */
-extern GLfloat sunAngle;             // Angle of the sun relative to the ground.
-extern GLfloat sunConstAttenuation;  // Sun light source constant attenuation.
+extern GLfloat sunHorizontalAngle;
+extern GLfloat sunVerticalAngle;
+extern GLfloat sunConstAttenuation;
 
 /******************************
 *     FUNCTION PROTOTYPES     *

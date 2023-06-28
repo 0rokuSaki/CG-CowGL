@@ -1,7 +1,8 @@
 #pragma once
 /*****************************************************************//**
  * \file   MainScene.h
- * \brief  
+ * \brief  A collection of functions for rendering the main scene
+ *         of CowGL.
  * 
  * \author aaron
  * \date   May 2023

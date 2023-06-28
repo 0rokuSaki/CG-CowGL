@@ -1,6 +1,6 @@
 /*****************************************************************//**
  * \file   Main.cpp
- * \brief  
+ * \brief  Main of CowGL.
  * 
  * *** BUILD INSTRUCTIONS (VS2019/VS2022 Windows 10/11) ***
  * 1. Setup OpenGL: https://www.geeksforgeeks.org/how-to-setup-opengl-with-visual-studio-2019-on-windows-10/.
@@ -16,22 +16,18 @@
 *******************************/
 #include <Windows.h>
 #include <GL/glut.h>
-#include <iostream>
+
 #include "MainScene.h"
 #include "Menus.h"
-
-#include <chrono>
-#include <thread>
 
 /******************************
 *          DEFINES            *
 *******************************/
-
-/* Window */
 #define WINDOW_INIT_POS  100, 100
 #define WINDOW_INIT_SIZE 720, 480
 #define WINDOW_TITLE     "CG GowGL"
-#define WORLD_COORD       0.0, 100.0, 0.0, 100.0  // left right bottom top
+#define WORLD_COORD      0.0, 100.0, 0.0, 100.0  // left right bottom top
+#define REFRESH_PERIOD_MS  16.6666666666666666667
 
 /******************************
 *     FUNCTION PROTOTYPES     *
@@ -41,7 +37,7 @@ void registerCallbacks(void);
 void displayCallback(void);
 void mouseCallback(int button, int state, int x, int y);
 void keyboardCallback(unsigned char key, int x, int y);
-void idleCallback(void);
+void timerCallback(int value);
 void resetProjectionAndModelviewMatrices(void);
 int main(int argc, char** argv);
 
@@ -67,7 +63,7 @@ void registerCallbacks(void)
     glutDisplayFunc(displayCallback);
     glutMouseFunc(mouseCallback);
     glutKeyboardFunc(keyboardCallback);
-    glutIdleFunc(idleCallback);
+    glutTimerFunc(0.0, timerCallback, 0);
 }
 
 
@@ -101,12 +97,11 @@ void keyboardCallback(unsigned char key, int x, int y)
     glutPostRedisplay();
 }
 
-void idleCallback(void)
-{
-    renderMainScene();
-    glutPostRedisplay();
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(1));
+void timerCallback(int value)
+{
+    glutPostRedisplay();
+    glutTimerFunc(static_cast<unsigned int>(REFRESH_PERIOD_MS), timerCallback, 0);
 }
 
 

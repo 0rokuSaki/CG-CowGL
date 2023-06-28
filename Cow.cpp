@@ -1,6 +1,6 @@
 /*****************************************************************//**
  * \file   Cow.cpp
- * \brief  
+ * \brief  Cow class implementation.
  * 
  * \author aaron
  * \date   June 2023
@@ -49,8 +49,8 @@ static const GLfloat HEAD_MAX_HORIZONTAL_ANGLE = 80.0;
 static const GLfloat HEAD_MAX_VERTICAL_ANGLE = 60.0;
 static const GLfloat TAIL_MAX_HORIZONTAL_ANGLE = 80.0;
 static const GLfloat TAIL_MAX_VERTICAL_ANGLE = 90.0;
-static const GLfloat TP_CAM_MAX_VERTICAL_ANGLE = 55.0;
-static const GLfloat TP_CAM_MIN_VERTICAL_ANGLE = 22.5;
+static const GLfloat TP_CAM_MAX_VERTICAL_ANGLE = 89.0;
+static const GLfloat TP_CAM_MIN_VERTICAL_ANGLE = 15.0;
 static const GLfloat TP_CAM_MAX_RADIUS = 10.0;
 static const GLfloat TP_CAM_MIN_RADIUS = 2.75;
 
@@ -355,9 +355,9 @@ WcPt3D Cow::getPosition(void)
 WcPt3D Cow::getTpCamViewOrigin(void)
 {
 	return WcPt3D(
-		_pos.getX() + _tpCamRadius * cos((_tpCamHorizontalAngle * M_PI) / 180.0),
-		_pos.getY() + _tpCamRadius * sin((_tpCamHorizontalAngle * M_PI) / 180.0),
-		_pos.getZ() + _tpCamRadius * tan((_tpCamVerticalAngle * M_PI) / 180.0)
+		_pos.getX() + _tpCamRadius * sin((90.0 - _tpCamVerticalAngle) * M_PI / 180.0) * cos((_tpCamHorizontalAngle * M_PI) / 180.0),
+		_pos.getY() + _tpCamRadius * sin((90.0 - _tpCamVerticalAngle) * M_PI / 180.0) * sin((_tpCamHorizontalAngle * M_PI) / 180.0),
+		_pos.getZ() + _tpCamRadius * cos((90.0 - _tpCamVerticalAngle) * M_PI / 180.0)
 	);
 }
 

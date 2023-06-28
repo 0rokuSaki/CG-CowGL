@@ -1,7 +1,7 @@
 #pragma once
 /*****************************************************************//**
  * \file   Cow.h
- * \brief  
+ * \brief  Cow class declaration.
  * 
  * \author aaron
  * \date   June 2023
