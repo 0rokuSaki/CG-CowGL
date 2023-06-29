@@ -24,6 +24,5 @@ extern GLfloat globalAmbient[];
 *******************************/
 void renderMainScene(void);
 void renderCamera(void);
-void renderAxes(GLdouble height);
 void handleKeyboardEventMainScene(unsigned char key, int x, int y);
 void resetProjectionAndModelviewMatrices(void);
