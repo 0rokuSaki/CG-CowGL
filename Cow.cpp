@@ -71,20 +71,6 @@ Cow::Cow() :
 }
 
 
-Cow::Cow(GLfloat x, GLfloat y, GLfloat z) :
-	_pos(x, y, z),
-	_directionAngle(0.0),
-	_headAngleHorizontal(0.0),
-	_headAngleVertical(0.0),
-	_tailAngleHorizontal(0.0),
-	_tailAngleVertical(INIT_TAIL_VERTICAL_ANGLE),
-	_tpCamRadius(INIT_TP_CAM_RADIUS),
-	_tpCamVerticalAngle(INIT_TP_CAM_VERTICAL_ANGLE),
-	_tpCamHorizontalAngle(INIT_TP_CAM_HORIZONTAL_ANGLE)
-{
-}
-
-
 Cow::Cow(WcPt3D pos) :
 	_pos(pos),
 	_directionAngle(0.0),
@@ -116,18 +102,6 @@ void Cow::render()
 
 	glPopMatrix();
 	glDisable(GL_LIGHTING);
-}
-
-
-void Cow::setPosition(WcPt3D pos)
-{
-	_pos = pos;
-}
-
-
-void Cow::setDirectionAngle(GLfloat directionAngle)
-{
-	_directionAngle = directionAngle;
 }
 
 

@@ -18,11 +18,7 @@ class Cow
 public:
 	Cow();
 	Cow(WcPt3D pos);
-	Cow(GLfloat x, GLfloat y, GLfloat z);
 	void render(void);
-
-	void setPosition(WcPt3D pos);
-	void setDirectionAngle(GLfloat directionAngle);
 
 	/* Cow movement */
 	void moveForward(void);
